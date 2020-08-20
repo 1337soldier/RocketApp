@@ -14,12 +14,11 @@ const ListHeader = React.memo(({
 	queueSize,
 	inquiryEnabled
 }) => (
-	<>
-		<Directory searching={searching} goDirectory={goDirectory} />
-		<Sort searching={searching} sortBy={sortBy} toggleSort={toggleSort} />
-		<Queue searching={searching} goQueue={goQueue} queueSize={queueSize} inquiryEnabled={inquiryEnabled} />
-	</>
-));
+		<>
+			<Sort searching={searching} sortBy={sortBy} toggleSort={toggleSort} />
+			<Queue searching={searching} goQueue={goQueue} queueSize={queueSize} inquiryEnabled={inquiryEnabled} />
+		</>
+	));
 
 ListHeader.propTypes = {
 	searching: PropTypes.bool,
