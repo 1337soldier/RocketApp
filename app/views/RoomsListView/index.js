@@ -336,23 +336,20 @@ class RoomsListView extends React.Component {
 		const headerTitlePosition = getHeaderTitlePosition(insets);
 		return {
 			headerTitleAlign: 'left',
-			headerLeft: () => (searching ? (
-				<CustomHeaderButtons left>
-					<Item
-						title='cancel'
-						iconName='close'
-						onPress={this.cancelSearch}
-					/>
-				</CustomHeaderButtons>
-			) : (
-				<DrawerButton
-					navigation={navigation}
-					testID='rooms-list-view-sidebar'
-					onPress={isMasterDetail
-						? () => navigation.navigate('ModalStackNavigator', { screen: 'SettingsView' })
-						: () => navigation.toggleDrawer()}
+			headerLeft: () =>	<CustomHeaderButtons left>{searching ? (
+				<Item
+					title='cancel'
+					iconName='close'
+					onPress={this.cancelSearch}
 				/>
-			)),
+				) : (	<Item
+					buttonStyle = {{color:"white"}}
+					title='search'
+					iconName='search'
+					onPress={this.initSearching}
+					testID='rooms-list-view-search'
+				/>)}
+				</CustomHeaderButtons>,
 			headerTitle: () => <RoomsListHeaderView />,
 			headerTitleContainerStyle: {
 				left: headerTitlePosition.left,
@@ -361,16 +358,11 @@ class RoomsListView extends React.Component {
 			headerRight: () => (searching ? null : (
 				<CustomHeaderButtons>
 					<Item
-						title='new'
-						iconName='create'
+						title='add'
+						iconName='add'
+						buttonStyle = {{color:"white"}}
 						onPress={this.goToNewMessage}
 						testID='rooms-list-view-create-channel'
-					/>
-					<Item
-						title='search'
-						iconName='search'
-						onPress={this.initSearching}
-						testID='rooms-list-view-search'
 					/>
 				</CustomHeaderButtons>
 			))

@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 	headerIcon: {
 		textAlign: 'center',
 		fontSize: 20,
-		color: '#fff'
+		color: '#ccc'
 	},
 	customEmoji: {
 		height: 20,

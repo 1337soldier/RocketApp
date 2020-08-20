@@ -8,7 +8,7 @@ const ThemedTextInput = React.forwardRef(({ style, theme, ...props }, ref) => (
   <TextInput
     ref={ref}
     style={[{ color: themes[theme].titleText }, style]}
-    placeholderTextColor={themes[theme].auxiliaryText}
+    placeholderTextColor={themes[theme].headerTintColor}
     keyboardAppearance={theme === "light" ? "light" : "dark"}
     {...props}
   />
