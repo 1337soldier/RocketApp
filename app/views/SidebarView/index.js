@@ -36,9 +36,9 @@ class Sidebar extends Component {
 	static propTypes = {
 		baseUrl: PropTypes.string,
 		navigation: PropTypes.object,
-		Site_Name: PropTypes.string.isRequired,
+		Site_Name: PropTypes.oneOfType([ PropTypes.string,PropTypes.any]),
 		user: PropTypes.object,
-		state: PropTypes.string,
+		state: PropTypes.oneOfType([PropTypes.string,PropTypes.any]), 
 		theme: PropTypes.string,
 		loadingServer: PropTypes.bool,
 		useRealName: PropTypes.bool,

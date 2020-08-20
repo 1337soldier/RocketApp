@@ -72,7 +72,7 @@ Avatar.propTypes = {
 	children: PropTypes.object,
 	userId: PropTypes.string,
 	token: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string,PropTypes.object]) ,
 	onPress: PropTypes.func,
 	getCustomEmoji: PropTypes.func
 };
