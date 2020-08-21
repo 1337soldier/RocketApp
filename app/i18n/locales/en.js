@@ -457,6 +457,7 @@ export default {
 	Set_status: 'Set status',
 	Status_saved_successfully: 'Status saved successfully!',
 	Settings: 'Settings',
+	Setting: 'Setting',
 	Settings_succesfully_changed: 'Settings succesfully changed!',
 	Share: 'Share',
 	Share_Link: 'Share Link',
@@ -625,5 +626,5 @@ export default {
 	Dont_activate: 'Don\'t activate now',
 	Queued_chats: 'Queued chats',
 	Queue_is_empty: 'Queue is empty',
-    SearchPlaceHolder: 'Search friend, message...'
+	SearchPlaceHolder: 'Search friend, message...'
 };

@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 
 import I18n from '../../i18n';
 import StatusBar from '../../containers/StatusBar';
-import { DrawerButton } from '../../containers/HeaderButton';
 import { withTheme } from '../../theme';
 import { getUserSelector } from '../../selectors/login';
 import SafeAreaView from '../../containers/SafeAreaView';
 
 class AdminPanelView extends React.Component {
 	static navigationOptions = ({ navigation, isMasterDetail }) => ({
-		headerLeft: isMasterDetail ? undefined : () => <DrawerButton navigation={navigation} />,
 		title: I18n.t('Admin_Panel')
 	})
 
@@ -32,9 +30,9 @@ class AdminPanelView extends React.Component {
 				<StatusBar theme={theme} />
 				<WebView
 					// https://github.com/react-native-community/react-native-webview/issues/1311
-					onMessage={() => {}}
-					source={{ uri: `${ baseUrl }/admin/info?layout=embedded` }}
-					injectedJavaScript={`Meteor.loginWithToken('${ token }', function() { })`}
+					onMessage={() => { }}
+					source={{ uri: `${baseUrl}/admin/info?layout=embedded` }}
+					injectedJavaScript={`Meteor.loginWithToken('${token}', function() { })`}
 				/>
 			</SafeAreaView>
 		);

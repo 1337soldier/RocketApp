@@ -292,7 +292,7 @@ export default {
 	Message_unstarred: 'Message unstarred',
 	message: 'message',
 	messages: 'messages',
-	Message: 'Message',
+	Message: 'Tin nhắn',
 	Messages: 'Messages',
 	Message_Reported: 'Message reported',
 	Microphone_Permission_Message: 'Rocket.Chat needs access to your microphone so you can send audio message.',
@@ -370,7 +370,7 @@ export default {
 	Private: 'Private',
 	Processing: 'Processing...',
 	Profile_saved_successfully: 'Profile saved successfully!',
-	Profile: 'Profile',
+	Profile: 'Hồ sơ',
 	Public_Channel: 'Public Channel',
 	Public: 'Public',
 	PUSH_NOTIFICATIONS: 'PUSH NOTIFICATIONS',
@@ -456,7 +456,8 @@ export default {
 	Set_custom_status: 'Set custom status',
 	Set_status: 'Set status',
 	Status_saved_successfully: 'Status saved successfully!',
-	Settings: 'Settings',
+	Settings: 'Cài đặt',
+	Setting: 'Cài đặt',
 	Settings_succesfully_changed: 'Settings succesfully changed!',
 	Share: 'Share',
 	Share_Link: 'Share Link',
@@ -624,6 +625,6 @@ export default {
 	After_seconds_set_by_admin: 'After {{seconds}} seconds (set by admin)',
 	Dont_activate: 'Don\'t activate now',
 	Queued_chats: 'Queued chats',
-    Queue_is_empty: 'Queue is empty',
-    SearchPlaceHolder: 'Tìm bạn bè, tin nhắn...'
+	Queue_is_empty: 'Queue is empty',
+	SearchPlaceHolder: 'Tìm bạn bè, tin nhắn...'
 };

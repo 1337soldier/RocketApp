@@ -24,7 +24,6 @@ import Button from '../../containers/Button';
 import Avatar from '../../containers/Avatar';
 import { setUser as setUserAction } from '../../actions/login';
 import { CustomIcon } from '../../lib/Icons';
-import { DrawerButton } from '../../containers/HeaderButton';
 import StatusBar from '../../containers/StatusBar';
 import { themes } from '../../constants/colors';
 import { withTheme } from '../../theme';
@@ -36,9 +35,6 @@ class ProfileView extends React.Component {
 		const options = {
 			title: I18n.t('Profile')
 		};
-		if (!isMasterDetail) {
-			options.headerLeft = () => <DrawerButton navigation={navigation} />;
-		}
 		return options;
 	}
 
@@ -156,7 +152,7 @@ class ProfileView extends React.Component {
 		showErrorAlert(I18n.t('There_was_an_error_while_action', { action: I18n.t(action) }));
 	}
 
-	submit = async() => {
+	submit = async () => {
 		Keyboard.dismiss();
 
 		if (!this.formIsChanged()) {
@@ -203,7 +199,7 @@ class ProfileView extends React.Component {
 				I18n.t('Please_enter_your_password'),
 				I18n.t('For_your_security_you_must_enter_your_current_password_to_continue'),
 				[
-					{ text: I18n.t('Cancel'), onPress: () => {}, style: 'cancel' },
+					{ text: I18n.t('Cancel'), onPress: () => { }, style: 'cancel' },
 					{
 						text: I18n.t('Save'),
 						onPress: (p) => {
@@ -252,7 +248,7 @@ class ProfileView extends React.Component {
 		}
 	}
 
-	resetAvatar = async() => {
+	resetAvatar = async () => {
 		const { Accounts_AllowUserAvatarChange } = this.props;
 
 		if (!Accounts_AllowUserAvatarChange) {
@@ -269,7 +265,7 @@ class ProfileView extends React.Component {
 		}
 	}
 
-	pickImage = async() => {
+	pickImage = async () => {
 		const { Accounts_AllowUserAvatarChange } = this.props;
 
 		if (!Accounts_AllowUserAvatarChange) {
@@ -287,7 +283,7 @@ class ProfileView extends React.Component {
 		try {
 			logEvent(events.PROFILE_PICK_AVATAR);
 			const response = await ImagePicker.openPicker(options);
-			this.setAvatar({ url: response.path, data: `data:image/jpeg;base64,${ response.data }`, service: 'upload' });
+			this.setAvatar({ url: response.path, data: `data:image/jpeg;base64,${response.data}`, service: 'upload' });
 		} catch (error) {
 			logEvent(events.PROFILE_PICK_AVATAR_F);
 			console.warn(error);
@@ -329,7 +325,7 @@ class ProfileView extends React.Component {
 		return (
 			<View style={styles.avatarButtons}>
 				{this.renderAvatarButton({
-					child: <Avatar text={`@${ user.username }`} size={50} baseUrl={baseUrl} userId={user.id} token={user.token} />,
+					child: <Avatar text={`@${user.username}`} size={50} baseUrl={baseUrl} userId={user.id} token={user.token} />,
 					onPress: () => this.resetAvatar(),
 					disabled: !Accounts_AllowUserAvatarChange,
 					key: 'profile-view-reset-avatar'
@@ -350,7 +346,7 @@ class ProfileView extends React.Component {
 					const { url, blob, contentType } = avatarSuggestions[service];
 					return this.renderAvatarButton({
 						disabled: !Accounts_AllowUserAvatarChange,
-						key: `profile-view-avatar-${ service }`,
+						key: `profile-view-avatar-${service}`,
 						child: <Avatar avatar={url} size={50} baseUrl={baseUrl} userId={user.id} token={user.token} />,
 						onPress: () => this.setAvatar({
 							url, data: blob, service, contentType

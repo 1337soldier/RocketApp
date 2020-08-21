@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ThemeContext } from '../theme';
 import {
@@ -56,6 +57,9 @@ import JitsiMeetView from '../views/JitsiMeetView';
 import StatusView from '../views/StatusView';
 import ShareView from '../views/ShareView';
 import CreateDiscussionView from '../views/CreateDiscussionView';
+import { AntDesignIcon } from "../lib/Icons"
+import { themes } from '../../app/constants/colors'
+import I18n from '../i18n'
 
 // ChatsStackNavigator
 const ChatsStack = createStackNavigator();
@@ -255,6 +259,34 @@ const DrawerNavigator = () => (
 	</Drawer.Navigator>
 );
 
+// BottomTabNavigator
+const Tab = createBottomTabNavigator();
+const BottomTabNavigator = () => {
+	return (
+		<Tab.Navigator >
+			<Tab.Screen name='ChatsStackNavigator' component={ChatsStackNavigator} options={{
+				tabBarLabel: I18n.t('Message'),
+				tabBarIcon: ({ size, color }) => (
+					<AntDesignIcon name="message1" color={color} size={size} />
+				),
+			}} />
+			<Tab.Screen name='ProfileStackNavigator' component={ProfileStackNavigator} options={{
+				tabBarLabel: I18n.t('Profile'),
+				tabBarIcon: ({ size, color }) => (
+					<AntDesignIcon name="profile" color={color} size={size} />
+				),
+			}} />
+			<Tab.Screen name='SettingsStackNavigator' component={SettingsStackNavigator} options={{
+				tabBarLabel: I18n.t('Setting'),
+				tabBarIcon: ({ size, color }) => (
+					<AntDesignIcon name={'setting'} color={color} size={size} />
+				),
+
+			}} />
+		</Tab.Navigator>
+	)
+}
+
 // NewMessageStackNavigator
 const NewMessageStack = createStackNavigator();
 const NewMessageStackNavigator = () => {
@@ -293,7 +325,7 @@ const InsideStackNavigator = () => {
 		<InsideStack.Navigator mode='modal' screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...ModalAnimation }}>
 			<InsideStack.Screen
 				name='DrawerNavigator'
-				component={DrawerNavigator}
+				component={BottomTabNavigator}
 				options={{ headerShown: false }}
 			/>
 			<InsideStack.Screen
