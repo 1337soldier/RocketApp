@@ -97,10 +97,10 @@ class RoomView extends React.Component {
 		insets: PropTypes.object
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
-		console.time(`${ this.constructor.name } init`);
-		console.time(`${ this.constructor.name } mount`);
+		console.time(`${this.constructor.name} init`);
+		console.time(`${this.constructor.name} mount`);
 		this.rid = props.route.params?.rid;
 		this.t = props.route.params?.t;
 		this.tmid = props.route.params?.tmid;
@@ -150,7 +150,7 @@ class RoomView extends React.Component {
 		if (this.rid) {
 			this.sub = new RoomClass(this.rid);
 		}
-		console.timeEnd(`${ this.constructor.name } init`);
+		console.timeEnd(`${this.constructor.name} init`);
 	}
 
 	componentDidMount() {
@@ -175,7 +175,7 @@ class RoomView extends React.Component {
 			EventEmitter.addEventListener(KEY_COMMAND, this.handleCommands);
 		}
 		EventEmitter.addEventListener('ROOM_REMOVED', this.handleRoomRemoved);
-		console.timeEnd(`${ this.constructor.name } mount`);
+		console.timeEnd(`${this.constructor.name} mount`);
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -251,7 +251,7 @@ class RoomView extends React.Component {
 			}
 			if (obj) {
 				try {
-					await db.action(async() => {
+					await db.action(async () => {
 						await obj.update((r) => {
 							r.draftMessage = text;
 						});
@@ -279,7 +279,7 @@ class RoomView extends React.Component {
 			EventEmitter.removeListener(KEY_COMMAND, this.handleCommands);
 		}
 		EventEmitter.removeListener('ROOM_REMOVED', this.handleRoomRemoved);
-		console.countReset(`${ this.constructor.name }.render calls`);
+		console.countReset(`${this.constructor.name}.render calls`);
 	}
 
 	get isOmnichannel() {
@@ -374,14 +374,14 @@ class RoomView extends React.Component {
 		}
 	}
 
-	setReadOnly = async() => {
+	setReadOnly = async () => {
 		const { room } = this.state;
 		const { user } = this.props;
 		const readOnly = await isReadOnly(room, user);
 		this.setState({ readOnly });
 	}
 
-	updateRoom = async() => {
+	updateRoom = async () => {
 		const db = database.active;
 
 		try {
@@ -390,7 +390,7 @@ class RoomView extends React.Component {
 
 			const { room } = await RocketChat.getRoomInfo(this.rid);
 
-			await db.action(async() => {
+			await db.action(async () => {
 				await sub.update((s) => {
 					Object.assign(s, room);
 				});
@@ -400,7 +400,7 @@ class RoomView extends React.Component {
 		}
 	}
 
-	init = async() => {
+	init = async () => {
 		try {
 			this.setState({ loading: true });
 			const { room, joined } = this.state;
@@ -439,7 +439,7 @@ class RoomView extends React.Component {
 		}
 	}
 
-	getRoomMember = async() => {
+	getRoomMember = async () => {
 		const { room } = this.state;
 		const { t } = room;
 
@@ -460,7 +460,7 @@ class RoomView extends React.Component {
 		return {};
 	}
 
-	findAndObserveRoom = async(rid) => {
+	findAndObserveRoom = async (rid) => {
 		try {
 			const db = database.active;
 			const subCollection = await db.collections.get('subscriptions');
@@ -489,7 +489,7 @@ class RoomView extends React.Component {
 		}
 	}
 
-	unsubscribe = async() => {
+	unsubscribe = async () => {
 		if (this.sub && this.sub.unsubscribe) {
 			await this.sub.unsubscribe();
 		}
@@ -525,7 +525,7 @@ class RoomView extends React.Component {
 		this.setState({ selectedMessage: {}, editing: false });
 	}
 
-	onEditRequest = async(message) => {
+	onEditRequest = async (message) => {
 		this.setState({ selectedMessage: {}, editing: false });
 		try {
 			await RocketChat.editMessage(message);
@@ -561,7 +561,7 @@ class RoomView extends React.Component {
 		navigation.navigate('AttachmentView', { attachment });
 	}
 
-	onReactionPress = async(shortname, messageId) => {
+	onReactionPress = async (shortname, messageId) => {
 		try {
 			await RocketChat.setReaction(shortname, messageId);
 			this.onReactionClose();
@@ -588,7 +588,7 @@ class RoomView extends React.Component {
 	}, 1000, true)
 
 	// eslint-disable-next-line react/sort-comp
-	updateUnreadCount = async() => {
+	updateUnreadCount = async () => {
 		const db = database.active;
 		const observable = await db.collections
 			.get('subscriptions')
@@ -608,7 +608,7 @@ class RoomView extends React.Component {
 		});
 	};
 
-	onThreadPress = debounce(async(item) => {
+	onThreadPress = debounce(async (item) => {
 		const { navigation } = this.props;
 		if (item.tmid) {
 			if (!item.tmsg) {
@@ -683,7 +683,7 @@ class RoomView extends React.Component {
 
 	setLastOpen = lastOpen => this.setState({ lastOpen });
 
-	joinRoom = async() => {
+	joinRoom = async () => {
 		logEvent(events.ROOM_JOIN);
 		try {
 			const { room } = this.state;
@@ -702,7 +702,7 @@ class RoomView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	fetchThreadName = async(tmid, messageId) => {
+	fetchThreadName = async (tmid, messageId) => {
 		try {
 			const db = database.active;
 			const threadCollection = db.collections.get('threads');
@@ -715,14 +715,14 @@ class RoomView extends React.Component {
 				console.log('Thread not found. We have to search for it.');
 			}
 			if (threadRecord) {
-				await db.action(async() => {
+				await db.action(async () => {
 					await messageRecord.update((m) => {
 						m.tmsg = threadRecord.msg || (threadRecord.attachments && threadRecord.attachments.length && threadRecord.attachments[0].title);
 					});
 				});
 			} else {
 				const { message: thread } = await RocketChat.getSingleMessage(tmid);
-				await db.action(async() => {
+				await db.action(async () => {
 					await db.batch(
 						threadCollection.prepareCreate((t) => {
 							t._raw = sanitizedRaw({ id: thread._id }, threadCollection.schema);
@@ -740,7 +740,7 @@ class RoomView extends React.Component {
 		}
 	}
 
-	toggleFollowThread = async(isFollowingThread) => {
+	toggleFollowThread = async (isFollowingThread) => {
 		try {
 			await RocketChat.toggleFollowMessage(this.tmid, !isFollowingThread);
 			EventEmitter.emit(LISTENER, { message: isFollowingThread ? I18n.t('Unfollowed_thread') : I18n.t('Following_thread') });
@@ -751,7 +751,7 @@ class RoomView extends React.Component {
 
 	navToRoomInfo = (navParam) => {
 		const { navigation, user, isMasterDetail } = this.props;
-		logEvent(events[`ROOM_GO_${ navParam.t === 'd' ? 'USER' : 'ROOM' }_INFO`]);
+		logEvent(events[`ROOM_GO_${navParam.t === 'd' ? 'USER' : 'ROOM'}_INFO`]);
 		if (navParam.rid === user.id) {
 			return;
 		}
@@ -808,11 +808,11 @@ class RoomView extends React.Component {
 		}
 	});
 
-	closeBanner = async() => {
+	closeBanner = async () => {
 		const { room } = this.state;
 		try {
 			const db = database.active;
-			await db.action(async() => {
+			await db.action(async () => {
 				await room.update((r) => {
 					r.bannerClosed = true;
 				});
@@ -983,7 +983,7 @@ class RoomView extends React.Component {
 	setListRef = ref => this.flatList = ref;
 
 	render() {
-		console.count(`${ this.constructor.name }.render calls`);
+		console.count(`${this.constructor.name}.render calls`);
 		const {
 			room, reactionsModalVisible, selectedMessage, loading, reacting
 		} = this.state;
@@ -996,7 +996,7 @@ class RoomView extends React.Component {
 
 		return (
 			<SafeAreaView
-				style={{ backgroundColor: themes[theme].backgroundColor }}
+				style={{ backgroundColor: themes[theme].roomBackgroundColor }}
 				testID='room-view'
 				theme={theme}
 			>

@@ -19,12 +19,12 @@ import Discussion from './Discussion';
 import Content from './Content';
 import ReadReceipt from './ReadReceipt';
 import CallButton from './CallButton';
-
+import { themes } from '../../constants/colors'
 const MessageInner = React.memo((props) => {
 	if (props.type === 'discussion-created') {
 		return (
 			<>
-				<User {...props} />
+				{/* <User {...props} /> */}
 				<Discussion {...props} />
 			</>
 		);
@@ -32,7 +32,7 @@ const MessageInner = React.memo((props) => {
 	if (props.type === 'jitsi_call_started') {
 		return (
 			<>
-				<User {...props} />
+				{/* <User {...props} /> */}
 				<Content {...props} isInfo />
 				<CallButton {...props} />
 			</>
@@ -41,7 +41,7 @@ const MessageInner = React.memo((props) => {
 	if (props.blocks && props.blocks.length) {
 		return (
 			<>
-				<User {...props} />
+				{/* <User {...props} /> */}
 				<Blocks {...props} />
 				<Thread {...props} />
 				<Reactions {...props} />
@@ -50,7 +50,7 @@ const MessageInner = React.memo((props) => {
 	}
 	return (
 		<>
-			<User {...props} />
+			{/* <User {...props} /> */}
 			<Content {...props} />
 			<Attachments {...props} />
 			<Urls {...props} />
@@ -63,20 +63,22 @@ const MessageInner = React.memo((props) => {
 MessageInner.displayName = 'MessageInner';
 
 const Message = React.memo((props) => {
+	const isMainUser = props.user.id === props.author._id
 	if (props.isThreadReply || props.isThreadSequential || props.isInfo) {
 		const thread = props.isThreadReply ? <RepliedThread {...props} /> : null;
 		return (
 			<View style={[styles.container, props.style]}>
 				{thread}
 				<View style={[styles.flex, styles.center]}>
-					<MessageAvatar small {...props} />
+					{!isMainUser && <MessageAvatar small {...props} />}
 					<View
 						style={[
 							styles.messageContent,
+							isMainUser && { backgroundColor: themes[props.theme].messageBg },
 							props.isHeader && styles.messageContentWithHeader
 						]}
 					>
-						<Content {...props} />
+						<Content {...props} isMainUser={isMainUser} />
 					</View>
 				</View>
 			</View>
@@ -84,15 +86,16 @@ const Message = React.memo((props) => {
 	}
 	return (
 		<View style={[styles.container, props.style]}>
-			<View style={styles.flex}>
-				<MessageAvatar {...props} />
+			<View style={[styles.flex, isMainUser && styles.flexEnd]}>
+				{!isMainUser && <MessageAvatar {...props} />}
 				<View
 					style={[
 						styles.messageContent,
+						isMainUser && { backgroundColor: themes[props.theme].messageBg },
 						props.isHeader && styles.messageContentWithHeader
 					]}
 				>
-					<MessageInner {...props} />
+					<MessageInner {...props} isMainUser={isMainUser} />
 				</View>
 				<ReadReceipt
 					isReadReceiptEnabled={props.isReadReceiptEnabled}

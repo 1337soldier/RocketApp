@@ -50,20 +50,20 @@ class MessageContainer extends React.Component {
 	}
 
 	static defaultProps = {
-		getCustomEmoji: () => {},
-		onLongPress: () => {},
-		onReactionPress: () => {},
-		onDiscussionPress: () => {},
-		onThreadPress: () => {},
-		errorActionsShow: () => {},
-		replyBroadcast: () => {},
-		reactionInit: () => {},
-		fetchThreadName: () => {},
-		showAttachment: () => {},
-		onReactionLongPress: () => {},
-		navToRoomInfo: () => {},
-		callJitsi: () => {},
-		blockAction: () => {},
+		getCustomEmoji: () => { },
+		onLongPress: () => { },
+		onReactionPress: () => { },
+		onDiscussionPress: () => { },
+		onThreadPress: () => { },
+		errorActionsShow: () => { },
+		replyBroadcast: () => { },
+		reactionInit: () => { },
+		fetchThreadName: () => { },
+		showAttachment: () => { },
+		onReactionLongPress: () => { },
+		navToRoomInfo: () => { },
+		callJitsi: () => { },
+		blockAction: () => { },
 		archived: false,
 		broadcast: false,
 		theme: 'light'
@@ -256,6 +256,7 @@ class MessageContainer extends React.Component {
 				}}
 			>
 				<Message
+					user={user}
 					id={id}
 					msg={message}
 					rid={rid}

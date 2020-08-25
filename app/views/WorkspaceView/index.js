@@ -98,7 +98,7 @@ class WorkspaceView extends React.Component {
   };
 
   async componentDidMount() {
-    const text = "https://unlimited.rocket.chat/";
+    const text = "https://dongbat.rocket.chat/";
 
     const server = this.completeUrl(text);
     await this.basicAuth(server, text);
@@ -189,13 +189,13 @@ class WorkspaceView extends React.Component {
                 </Text>
               </React.Fragment>
             ) : (
-              <Progress.Pie
-                style={{ marginVertical: 80 }}
-                progress={0.2}
-                size={50}
-                indeterminate={true}
-              />
-            )}
+                <Progress.Pie
+                  style={{ marginVertical: 80 }}
+                  progress={0.2}
+                  size={50}
+                  indeterminate={true}
+                />
+              )}
           </View>
 
           <Button
