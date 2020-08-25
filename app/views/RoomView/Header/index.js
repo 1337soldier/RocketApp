@@ -17,7 +17,7 @@ class RoomHeaderView extends Component {
 		type: PropTypes.string,
 		prid: PropTypes.string,
 		tmid: PropTypes.string,
-		usersTyping: PropTypes.string,
+		usersTyping: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 		status: PropTypes.string,
 		statusText: PropTypes.string,
 		connecting: PropTypes.bool,

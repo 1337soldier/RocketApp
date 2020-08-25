@@ -45,14 +45,14 @@ const SubTitle = React.memo(({ usersTyping, subtitle, theme }) => {
 	if (usersTyping.length) {
 		let usersText;
 		if (usersTyping.length === 2) {
-			usersText = usersTyping.join(` ${ I18n.t('and') } `);
+			usersText = usersTyping.join(` ${I18n.t('and')} `);
 		} else {
 			usersText = usersTyping.join(', ');
 		}
 		return (
 			<Text style={[styles.subtitle, { color: themes[theme].auxiliaryText }]} numberOfLines={1}>
 				<Text style={styles.typingUsers}>{usersText} </Text>
-				{ usersTyping.length > 1 ? I18n.t('are_typing') : I18n.t('is_typing') }...
+				{usersTyping.length > 1 ? I18n.t('are_typing') : I18n.t('is_typing')}...
 			</Text>
 		);
 	}
@@ -72,7 +72,7 @@ const SubTitle = React.memo(({ usersTyping, subtitle, theme }) => {
 });
 
 SubTitle.propTypes = {
-	usersTyping: PropTypes.array,
+	usersTyping: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 	theme: PropTypes.string,
 	subtitle: PropTypes.string
 };
@@ -85,7 +85,7 @@ const HeaderTitle = React.memo(({
 			<Text
 				style={[styles.title, { fontSize: TITLE_SIZE * scale, color: themes[theme].headerTitleColor }]}
 				numberOfLines={1}
-				testID={`room-view-title-${ title }`}
+				testID={`room-view-title-${title}`}
 			>
 				{title}
 			</Text>
@@ -99,7 +99,7 @@ const HeaderTitle = React.memo(({
 			style={[styles.title, { fontSize: TITLE_SIZE * scale, color: themes[theme].headerTitleColor }]}
 			numberOfLines={1}
 			theme={theme}
-			testID={`room-view-title-${ title }`}
+			testID={`room-view-title-${title}`}
 		/>
 	);
 });
@@ -159,7 +159,7 @@ Header.propTypes = {
 	tmid: PropTypes.string,
 	status: PropTypes.string,
 	theme: PropTypes.string,
-	usersTyping: PropTypes.array,
+	usersTyping: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 	connecting: PropTypes.bool,
 	roomUserId: PropTypes.string,
 	goRoomActionsView: PropTypes.func
