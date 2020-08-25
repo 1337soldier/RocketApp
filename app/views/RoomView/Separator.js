@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginTop: 16,
-		marginBottom: 4,
+		marginBottom: 8,
 		marginHorizontal: 14
 	},
 	line: {
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	text: {
-		fontSize: 14,
-		...sharedStyles.textMedium
+		fontSize: 10,
+		...sharedStyles.textMedium,
 	},
 	marginLeft: {
 		marginLeft: 14
@@ -31,6 +31,15 @@ const styles = StyleSheet.create({
 	},
 	marginHorizontal: {
 		marginHorizontal: 14
+	},
+	dateBox: {
+		justifyContent: "center",
+		alignSelf: "center",
+		alignItems: "center",
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		backgroundColor: "#ccc",
+		borderRadius: 16
 	}
 });
 
@@ -49,10 +58,9 @@ const DateSeparator = React.memo(({ ts, unread, theme }) => {
 	}
 	if (ts) {
 		return (
-			<View style={styles.container}>
-				<View style={[styles.line, { backgroundColor: themes[theme].borderColor }]} />
-				<Text style={[styles.text, { color: themes[theme].auxiliaryText }, styles.marginLeft]}>{date}</Text>
-			</View>
+			<View style={[styles.container, styles.dateBox]}>
+				<Text style={[styles.text, { color: 'white' }]}>{date}</Text>
+			</View >
 		);
 	}
 	return (

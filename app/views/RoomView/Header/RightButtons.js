@@ -19,7 +19,7 @@ class RightButtonsContainer extends React.PureComponent {
 		toggleFollowThread: PropTypes.func
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			isFollowingThread: true
@@ -102,6 +102,7 @@ class RightButtonsContainer extends React.PureComponent {
 				<CustomHeaderButtons>
 					<Item
 						title='bell'
+						buttonStyle={{ color: 'white' }}
 						iconName={isFollowingThread ? 'notification' : 'notification-disabled'}
 						onPress={this.toggleFollowThread}
 						testID={isFollowingThread ? 'room-view-header-unfollow' : 'room-view-header-follow'}
@@ -114,6 +115,7 @@ class RightButtonsContainer extends React.PureComponent {
 				{threadsEnabled ? (
 					<Item
 						title='threads'
+						buttonStyle={{ color: 'white' }}
 						iconName='threads'
 						onPress={this.goThreadsView}
 						testID='room-view-header-threads'
@@ -121,6 +123,7 @@ class RightButtonsContainer extends React.PureComponent {
 				) : null}
 				<Item
 					title='search'
+					buttonStyle={{ color: 'white' }}
 					iconName='search'
 					onPress={this.goSearchView}
 					testID='room-view-search'

@@ -22,6 +22,9 @@ const mentions = {
 
 export const themes = {
 	light: {
+		bodyTextMainUser: "#fff",
+		messageBg: '#73C2FB',
+		roomBackgroundColor: '#cfdbe6',
 		backgroundColor: '#ffffff',
 		focusedBackground: '#ffffff',
 		chatComponentBackground: '#f3f4f5',
@@ -67,6 +70,9 @@ export const themes = {
 		...mentions
 	},
 	dark: {
+		bodyTextMainUser: "#fff",
+		messageBg: '#73C2FB',
+		roomBackgroundColor: '#cfdbe6',
 		backgroundColor: '#030b1b',
 		focusedBackground: '#0b182c',
 		chatComponentBackground: '#192132',
@@ -112,6 +118,9 @@ export const themes = {
 		...mentions
 	},
 	black: {
+		bodyTextMainUser: "#fff",
+		messageBg: '#73C2FB',
+		roomBackgroundColor: '#cfdbe6',
 		backgroundColor: '#000000',
 		focusedBackground: '#0d0d0d',
 		chatComponentBackground: '#16181a',

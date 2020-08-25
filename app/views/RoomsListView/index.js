@@ -339,6 +339,7 @@ class RoomsListView extends React.Component {
 				<Item
 					title='cancel'
 					iconName='close'
+					buttonStyle={{ color: "white" }}
 					onPress={this.cancelSearch}
 				/>
 			) : (<Item
@@ -355,7 +356,14 @@ class RoomsListView extends React.Component {
 				right: headerTitlePosition.right
 			},
 			headerRight: () => (searching ? null : (
-				<CustomHeaderButtons>
+				<CustomHeaderButtons >
+					<Item
+						title='phone'
+						iconName='phone'
+						buttonStyle={{ color: "white" }}
+						onPress={this.goToNewMessage}
+						testID='rooms-list-view-create-channel'
+					/>
 					<Item
 						title='add'
 						iconName='add'
@@ -363,6 +371,7 @@ class RoomsListView extends React.Component {
 						onPress={this.goToNewMessage}
 						testID='rooms-list-view-create-channel'
 					/>
+
 				</CustomHeaderButtons>
 			))
 		};

@@ -17,31 +17,32 @@ const RoomItemInner = ({
 	theme,
 	children
 }) => (
-	<View
-		style={styles.container}
-		accessibilityLabel={accessibilityLabel}
-	>
-		<Avatar
-			text={avatar}
-			size={avatarSize}
-			type={type}
-			baseUrl={baseUrl}
-			style={styles.avatar}
-			userId={userId}
-			token={token}
-		/>
 		<View
-			style={[
-				styles.centerContainer,
-				{
-					borderColor: themes[theme].separatorColor
-				}
-			]}
+			style={styles.container}
+			accessibilityLabel={accessibilityLabel}
 		>
-			{children}
+			<Avatar
+				text={avatar}
+				size={avatarSize}
+				borderRadius={avatarSize / 2}
+				type={type}
+				baseUrl={baseUrl}
+				style={styles.avatar}
+				userId={userId}
+				token={token}
+			/>
+			<View
+				style={[
+					styles.centerContainer,
+					{
+						borderColor: themes[theme].separatorColor
+					}
+				]}
+			>
+				{children}
+			</View>
 		</View>
-	</View>
-);
+	);
 
 RoomItemInner.propTypes = {
 	accessibilityLabel: PropTypes.string,
