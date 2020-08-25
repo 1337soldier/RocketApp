@@ -69,9 +69,9 @@ const Item = React.memo(({
 	let usernames = item.usernames.slice(0, 3)
 		.map(username => (username === user.username ? I18n.t('you') : username)).join(', ');
 	if (count > 3) {
-		usernames = `${ usernames } ${ I18n.t('and_more') } ${ count - 3 }`;
+		usernames = `${usernames} ${I18n.t('and_more')} ${count - 3}`;
 	} else {
-		usernames = usernames.replace(/,(?=[^,]*$)/, ` ${ I18n.t('and') }`);
+		usernames = usernames.replace(/,(?=[^,]*$)/, ` ${I18n.t('and')}`);
 	}
 	return (
 		<View style={styles.itemContainer}>
@@ -88,7 +88,7 @@ const Item = React.memo(({
 				<Text style={[styles.reactCount, { color: themes[theme].buttonText }]}>
 					{count === 1 ? I18n.t('1_person_reacted') : I18n.t('N_people_reacted', { n: count })}
 				</Text>
-				<Text style={[styles.peopleReacted, { color: themes[theme].buttonText }]}>{ usernames }</Text>
+				<Text style={[styles.peopleReacted, { color: themes[theme].buttonText }]}>{usernames}</Text>
 			</View>
 		</View>
 	);
@@ -125,29 +125,31 @@ const ModalContent = React.memo(({
 const ReactionsModal = React.memo(({
 	isVisible, onClose, theme, ...props
 }) => (
-	<Modal
-		isVisible={isVisible}
-		onBackdropPress={onClose}
-		onBackButtonPress={onClose}
-		backdropOpacity={0.8}
-		onSwipeComplete={onClose}
-		swipeDirection={['up', 'left', 'right', 'down']}
-	>
-		<ModalContent onClose={onClose} theme={theme} {...props} />
-	</Modal>
-), (prevProps, nextProps) => prevProps.isVisible === nextProps.isVisible && prevProps.theme === nextProps.theme);
+		<Modal
+			isVisible={isVisible}
+			onBackdropPress={onClose}
+			onBackButtonPress={onClose}
+			backdropOpacity={0.8}
+			onSwipeComplete={onClose}
+			swipeDirection={['up', 'left', 'right', 'down']}
+		>
+			<ModalContent onClose={onClose} theme={theme} {...props} />
+		</Modal>
+	), (prevProps, nextProps) => prevProps.isVisible === nextProps.isVisible && prevProps.theme === nextProps.theme);
 
 ReactionsModal.propTypes = {
 	isVisible: PropTypes.bool,
 	onClose: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 ReactionsModal.displayName = 'ReactionsModal';
 
 ModalContent.propTypes = {
 	message: PropTypes.object,
 	onClose: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 ModalContent.displayName = 'ReactionsModalContent';
 
@@ -156,7 +158,7 @@ Item.propTypes = {
 	user: PropTypes.object,
 	baseUrl: PropTypes.string,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 Item.displayName = 'ReactionsModalItem';
 

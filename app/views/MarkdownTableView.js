@@ -14,7 +14,8 @@ class MarkdownTableView extends React.Component {
 
 	static propTypes = {
 		route: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	render() {

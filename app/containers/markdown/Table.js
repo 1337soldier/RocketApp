@@ -58,7 +58,8 @@ const Table = React.memo(({
 Table.propTypes = {
 	children: PropTypes.node.isRequired,
 	numColumns: PropTypes.number.isRequired,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Table;

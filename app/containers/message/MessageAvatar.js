@@ -42,7 +42,8 @@ MessageAvatar.propTypes = {
 	small: PropTypes.bool,
 	navToRoomInfo: PropTypes.func,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 MessageAvatar.displayName = 'MessageAvatar';
 

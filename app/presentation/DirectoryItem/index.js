@@ -20,33 +20,33 @@ const DirectoryItemLabel = React.memo(({ text, theme }) => {
 const DirectoryItem = ({
 	title, description, avatar, onPress, testID, style, baseUrl, user, rightLabel, type, theme
 }) => (
-	<Touch
-		onPress={onPress}
-		style={{ backgroundColor: themes[theme].backgroundColor }}
-		testID={testID}
-		theme={theme}
-	>
-		<View style={[styles.directoryItemContainer, styles.directoryItemButton, style]}>
-			<Avatar
-				text={avatar}
-				size={30}
-				type={type}
-				style={styles.directoryItemAvatar}
-				baseUrl={baseUrl}
-				userId={user.id}
-				token={user.token}
-			/>
-			<View style={styles.directoryItemTextContainer}>
-				<View style={styles.directoryItemTextTitle}>
-					<RoomTypeIcon type={type} theme={theme} />
-					<Text style={[styles.directoryItemName, { color: themes[theme].titleText }]} numberOfLines={1}>{title}</Text>
+		<Touch
+			onPress={onPress}
+			style={{ backgroundColor: themes[theme].backgroundColor }}
+			testID={testID}
+			theme={theme}
+		>
+			<View style={[styles.directoryItemContainer, styles.directoryItemButton, style]}>
+				<Avatar
+					text={avatar}
+					size={30}
+					type={type}
+					style={styles.directoryItemAvatar}
+					baseUrl={baseUrl}
+					userId={user.id}
+					token={user.token}
+				/>
+				<View style={styles.directoryItemTextContainer}>
+					<View style={styles.directoryItemTextTitle}>
+						<RoomTypeIcon type={type} theme={theme} />
+						<Text style={[styles.directoryItemName, { color: themes[theme].titleText }]} numberOfLines={1}>{title}</Text>
+					</View>
+					{description ? <Text style={[styles.directoryItemUsername, { color: themes[theme].auxiliaryText }]} numberOfLines={1}>{description}</Text> : null}
 				</View>
-				{ description ? <Text style={[styles.directoryItemUsername, { color: themes[theme].auxiliaryText }]} numberOfLines={1}>{description}</Text> : null }
+				<DirectoryItemLabel text={rightLabel} theme={theme} />
 			</View>
-			<DirectoryItemLabel text={rightLabel} theme={theme} />
-		</View>
-	</Touch>
-);
+		</Touch>
+	);
 
 DirectoryItem.propTypes = {
 	title: PropTypes.string.isRequired,
@@ -62,12 +62,14 @@ DirectoryItem.propTypes = {
 	testID: PropTypes.string.isRequired,
 	style: PropTypes.any,
 	rightLabel: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 DirectoryItemLabel.propTypes = {
 	text: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default DirectoryItem;

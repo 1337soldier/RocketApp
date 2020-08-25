@@ -34,7 +34,8 @@ class AttachmentView extends React.Component {
 	static propTypes = {
 		navigation: PropTypes.object,
 		route: PropTypes.object,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		baseUrl: PropTypes.string,
 		width: PropTypes.number,
 		height: PropTypes.number,
@@ -45,7 +46,7 @@ class AttachmentView extends React.Component {
 		})
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const attachment = props.route.params?.attachment;
 		this.state = { attachment, loading: true };
@@ -89,7 +90,7 @@ class AttachmentView extends React.Component {
 
 	getVideoRef = ref => this.videoRef = ref;
 
-	handleSave = async() => {
+	handleSave = async () => {
 		const { attachment } = this.state;
 		const { user, baseUrl } = this.props;
 		const {
@@ -111,8 +112,8 @@ class AttachmentView extends React.Component {
 
 		this.setState({ loading: true });
 		try {
-			const extension = image_url ? `.${ mime.extension(image_type) || 'jpg' }` : `.${ mime.extension(video_type) || 'mp4' }`;
-			const file = `${ FileSystem.documentDirectory + SHA256(url) + extension }`;
+			const extension = image_url ? `.${mime.extension(image_type) || 'jpg'}` : `.${mime.extension(video_type) || 'mp4'}`;
+			const file = `${FileSystem.documentDirectory + SHA256(url) + extension}`;
 			const { uri } = await FileSystem.downloadAsync(mediaAttachment, file);
 			await CameraRoll.save(uri, { album: 'Rocket.Chat' });
 			EventEmitter.emit(LISTENER, { message: I18n.t('saved_to_gallery') });

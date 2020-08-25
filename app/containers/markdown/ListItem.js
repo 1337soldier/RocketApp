@@ -29,7 +29,7 @@ const ListItem = React.memo(({
 	if (_continue) {
 		bullet = '';
 	} else if (ordered) {
-		bullet = `${ index }.`;
+		bullet = `${index}.`;
 	} else if (level % 2 === 0) {
 		bullet = '◦';
 	} else {
@@ -56,7 +56,8 @@ ListItem.propTypes = {
 	level: PropTypes.number,
 	ordered: PropTypes.bool,
 	continue: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	index: PropTypes.number
 };
 

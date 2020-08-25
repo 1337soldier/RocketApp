@@ -23,7 +23,7 @@ const Separator = React.memo(({ style, theme }) => (
 
 Separator.propTypes = {
 	style: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default Separator;

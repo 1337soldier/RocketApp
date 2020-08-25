@@ -74,7 +74,8 @@ class ThemeView extends React.Component {
 	})
 
 	static propTypes = {
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		themePreferences: PropTypes.object,
 		setTheme: PropTypes.func
 	}
@@ -107,7 +108,7 @@ class ThemeView extends React.Component {
 		this.setTheme(changes);
 	}
 
-	setTheme = async(theme) => {
+	setTheme = async (theme) => {
 		const { setTheme, themePreferences } = this.props;
 		const newTheme = { ...themePreferences, ...theme };
 		setTheme(newTheme);
@@ -134,7 +135,7 @@ class ThemeView extends React.Component {
 				<ListItem
 					title={I18n.t(label)}
 					onPress={() => this.onClick(item)}
-					testID={`theme-view-${ value }`}
+					testID={`theme-view-${value}`}
 					right={this.isSelected(item) ? this.renderIcon : null}
 					theme={theme}
 				/>

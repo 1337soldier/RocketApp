@@ -11,5 +11,6 @@ export const Handle = React.memo(({ theme }) => (
 	</View>
 ));
 Handle.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

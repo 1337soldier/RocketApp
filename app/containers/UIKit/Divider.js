@@ -14,5 +14,6 @@ const styles = StyleSheet.create({
 
 export const Divider = ({ theme }) => <Separator style={styles.separator} theme={theme} />;
 Divider.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

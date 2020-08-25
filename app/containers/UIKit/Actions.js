@@ -27,5 +27,6 @@ Actions.propTypes = {
 	appId: PropTypes.string,
 	elements: PropTypes.array,
 	parser: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

@@ -77,7 +77,8 @@ Header.propTypes = {
 	onChangeSearchText: PropTypes.func,
 	initSearch: PropTypes.func,
 	cancelSearch: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Header;

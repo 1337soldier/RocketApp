@@ -52,10 +52,11 @@ class RoomActionsView extends React.Component {
 		jitsiEnabled: PropTypes.bool,
 		setLoadingInvite: PropTypes.func,
 		closeRoom: PropTypes.func,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.mounted = false;
 		const room = props.route.params?.room;
@@ -143,7 +144,7 @@ class RoomActionsView extends React.Component {
 	onPressTouchable = (item) => {
 		const { route, event, params } = item;
 		if (route) {
-			logEvent(events[`RA_GO_${ route.replace('View', '').toUpperCase() }${ params.name ? params.name.toUpperCase() : '' }`]);
+			logEvent(events[`RA_GO_${route.replace('View', '').toUpperCase()}${params.name ? params.name.toUpperCase() : ''}`]);
 			const { navigation } = this.props;
 			navigation.navigate(route, params);
 		}
@@ -153,7 +154,7 @@ class RoomActionsView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	canAddUser = async() => {
+	canAddUser = async () => {
 		const { room, joined } = this.state;
 		const { rid, t } = room;
 		let canAdd = false;
@@ -175,7 +176,7 @@ class RoomActionsView extends React.Component {
 		this.setState({ canAddUser: canAdd });
 	}
 
-	canInviteUser = async() => {
+	canInviteUser = async () => {
 		const { room } = this.state;
 		const { rid } = room;
 		const permissions = await RocketChat.hasPermission(['create-invite-links'], rid);
@@ -184,7 +185,7 @@ class RoomActionsView extends React.Component {
 		this.setState({ canInviteUser });
 	}
 
-	canViewMembers = async() => {
+	canViewMembers = async () => {
 		const { room } = this.state;
 		const { rid, t, broadcast } = room;
 		if (broadcast) {
@@ -202,7 +203,7 @@ class RoomActionsView extends React.Component {
 		return result;
 	}
 
-	canForwardGuest = async() => {
+	canForwardGuest = async () => {
 		const { room } = this.state;
 		const { rid } = room;
 		let result = true;
@@ -216,7 +217,7 @@ class RoomActionsView extends React.Component {
 		this.setState({ canForwardGuest: result });
 	}
 
-	canReturnQueue = async() => {
+	canReturnQueue = async () => {
 		try {
 			const { returnQueue } = await RocketChat.getRoutingConfig();
 			this.setState({ canReturnQueue: returnQueue });
@@ -335,7 +336,7 @@ class RoomActionsView extends React.Component {
 			sections[2].data.unshift({
 				icon: 'team',
 				name: I18n.t('Members'),
-				description: membersCount > 0 ? `${ membersCount } ${ I18n.t('members') }` : null,
+				description: membersCount > 0 ? `${membersCount} ${I18n.t('members')}` : null,
 				route: 'RoomMembersView',
 				params: { rid, room },
 				testID: 'room-actions-members'
@@ -347,7 +348,7 @@ class RoomActionsView extends React.Component {
 				data: [
 					{
 						icon: 'ban',
-						name: I18n.t(`${ blocker ? 'Unblock' : 'Block' }_user`),
+						name: I18n.t(`${blocker ? 'Unblock' : 'Block'}_user`),
 						type: 'danger',
 						event: this.toggleBlockUser,
 						testID: 'room-actions-block-user'
@@ -363,7 +364,7 @@ class RoomActionsView extends React.Component {
 				actions.push({
 					icon: 'team',
 					name: I18n.t('Members'),
-					description: membersCount > 0 ? `${ membersCount } ${ I18n.t('members') }` : null,
+					description: membersCount > 0 ? `${membersCount} ${I18n.t('members')}` : null,
 					route: 'RoomMembersView',
 					params: { rid, room },
 					testID: 'room-actions-members'
@@ -472,7 +473,7 @@ class RoomActionsView extends React.Component {
 		showConfirmationAlert({
 			message: I18n.t('Would_you_like_to_return_the_inquiry'),
 			callToAction: I18n.t('Yes'),
-			onPress: async() => {
+			onPress: async () => {
 				try {
 					await RocketChat.returnLivechat(rid);
 				} catch (e) {
@@ -482,7 +483,7 @@ class RoomActionsView extends React.Component {
 		});
 	}
 
-	updateRoomMember = async() => {
+	updateRoomMember = async () => {
 		const { room } = this.state;
 
 		try {
@@ -499,7 +500,7 @@ class RoomActionsView extends React.Component {
 		}
 	}
 
-	addUser = async() => {
+	addUser = async () => {
 		const { room } = this.state;
 		const { setLoadingInvite, navigation } = this.props;
 		const { rid } = room;
@@ -579,7 +580,7 @@ class RoomActionsView extends React.Component {
 						userId={user.id}
 						token={user.token}
 					>
-						{t === 'd' && member._id ? <Status style={sharedStyles.status} id={member._id} /> : null }
+						{t === 'd' && member._id ? <Status style={sharedStyles.status} id={member._id} /> : null}
 					</Avatar>
 					<View style={[styles.roomTitleContainer, item.disabled && styles.roomTitlePadding]}>
 						{room.t === 'd'
@@ -593,7 +594,7 @@ class RoomActionsView extends React.Component {
 						}
 						<Markdown
 							preview
-							msg={t === 'd' ? `@${ name }` : topic}
+							msg={t === 'd' ? `@${name}` : topic}
 							style={[styles.roomDescription, { color: themes[theme].auxiliaryText }]}
 							numberOfLines={1}
 							theme={theme}
@@ -631,16 +632,16 @@ class RoomActionsView extends React.Component {
 		const subview = item.type === 'danger' ? (
 			<>
 				<CustomIcon name={item.icon} size={24} style={[styles.sectionItemIcon, colorDanger]} />
-				<Text style={[styles.sectionItemName, colorDanger]}>{ item.name }</Text>
+				<Text style={[styles.sectionItemName, colorDanger]}>{item.name}</Text>
 			</>
 		) : (
-			<>
-				<CustomIcon name={item.icon} size={24} style={[styles.sectionItemIcon, { color: themes[theme].bodyText }]} />
-				<Text style={[styles.sectionItemName, { color: themes[theme].bodyText }]}>{ item.name }</Text>
-				{item.description ? <Text style={[styles.sectionItemDescription, { color: themes[theme].auxiliaryText }]}>{ item.description }</Text> : null}
-				<DisclosureIndicator theme={theme} />
-			</>
-		);
+				<>
+					<CustomIcon name={item.icon} size={24} style={[styles.sectionItemIcon, { color: themes[theme].bodyText }]} />
+					<Text style={[styles.sectionItemName, { color: themes[theme].bodyText }]}>{item.name}</Text>
+					{item.description ? <Text style={[styles.sectionItemDescription, { color: themes[theme].auxiliaryText }]}>{item.description}</Text> : null}
+					<DisclosureIndicator theme={theme} />
+				</>
+			);
 		return this.renderTouchableItem(subview, item);
 	}
 

@@ -22,11 +22,11 @@ const MentionItem = ({
 	const defineTestID = (type) => {
 		switch (type) {
 			case MENTIONS_TRACKING_TYPE_EMOJIS:
-				return `mention-item-${ item.name || item }`;
+				return `mention-item-${item.name || item}`;
 			case MENTIONS_TRACKING_TYPE_COMMANDS:
-				return `mention-item-${ item.command || item }`;
+				return `mention-item-${item.command || item}`;
 			default:
-				return `mention-item-${ item.username || item.name || item }`;
+				return `mention-item-${item.username || item.name || item}`;
 		}
 	};
 
@@ -47,7 +47,7 @@ const MentionItem = ({
 				userId={user.id}
 				token={user.token}
 			/>
-			<Text style={[styles.mentionText, { color: themes[theme].titleText }]}>{ item.username || item.name || item }</Text>
+			<Text style={[styles.mentionText, { color: themes[theme].titleText }]}>{item.username || item.name || item}</Text>
 		</>
 	);
 
@@ -55,7 +55,7 @@ const MentionItem = ({
 		content = (
 			<>
 				<MentionEmoji item={item} />
-				<Text style={[styles.mentionText, { color: themes[theme].titleText }]}>:{ item.name || item }:</Text>
+				<Text style={[styles.mentionText, { color: themes[theme].titleText }]}>:{item.name || item}:</Text>
 			</>
 		);
 	}
@@ -89,7 +89,8 @@ const MentionItem = ({
 MentionItem.propTypes = {
 	item: PropTypes.object,
 	trackingType: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default MentionItem;

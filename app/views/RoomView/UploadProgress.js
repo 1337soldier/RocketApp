@@ -57,7 +57,8 @@ class UploadProgress extends Component {
 	static propTypes = {
 		width: PropTypes.number,
 		rid: PropTypes.string,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		user: PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			username: PropTypes.string.isRequired,
@@ -66,7 +67,7 @@ class UploadProgress extends Component {
 		baseUrl: PropTypes.string.isRequired
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.mounted = false;
 		this.ranInitialUploadCheck = false;
@@ -114,11 +115,11 @@ class UploadProgress extends Component {
 	uploadCheck = () => {
 		this.ranInitialUploadCheck = true;
 		const { uploads } = this.state;
-		uploads.forEach(async(u) => {
+		uploads.forEach(async (u) => {
 			if (!RocketChat.isUploadActive(u.path)) {
 				try {
 					const db = database.active;
-					await db.action(async() => {
+					await db.action(async () => {
 						await u.update(() => {
 							u.error = true;
 						});
@@ -130,10 +131,10 @@ class UploadProgress extends Component {
 		});
 	}
 
-	deleteUpload = async(item) => {
+	deleteUpload = async (item) => {
 		try {
 			const db = database.active;
-			await db.action(async() => {
+			await db.action(async () => {
 				await item.destroyPermanently();
 			});
 		} catch (e) {
@@ -141,7 +142,7 @@ class UploadProgress extends Component {
 		}
 	}
 
-	cancelUpload = async(item) => {
+	cancelUpload = async (item) => {
 		try {
 			await RocketChat.cancelUpload(item);
 		} catch (e) {
@@ -149,12 +150,12 @@ class UploadProgress extends Component {
 		}
 	}
 
-	tryAgain = async(item) => {
+	tryAgain = async (item) => {
 		const { rid, baseUrl: server, user } = this.props;
 
 		try {
 			const db = database.active;
-			await db.action(async() => {
+			await db.action(async () => {
 				await item.update(() => {
 					item.error = false;
 				});

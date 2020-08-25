@@ -42,7 +42,8 @@ Emoji.propTypes = {
 	baseUrl: PropTypes.string,
 	customEmojis: PropTypes.bool,
 	style: PropTypes.array,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Emoji;

@@ -16,7 +16,7 @@ const EmptyRoom = React.memo(({
 	if ((length === 0 && mounted) || !rid) {
 		return (
 			<ImageBackground
-				source={{ uri: `message_empty_${ theme }` }}
+				source={{ uri: `message_empty_${theme}` }}
 				style={styles.image}
 			/>
 		);
@@ -27,7 +27,8 @@ const EmptyRoom = React.memo(({
 EmptyRoom.propTypes = {
 	length: PropTypes.number.isRequired,
 	mounted: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	rid: PropTypes.string
 };
 export default EmptyRoom;

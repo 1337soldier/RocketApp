@@ -30,13 +30,13 @@ const Hashtag = React.memo(({
 					...style]}
 				onPress={handlePress}
 			>
-				{`#${ hashtag }`}
+				{`#${hashtag}`}
 			</Text>
 		);
 	}
 	return (
 		<Text style={[styles.text, { color: themes[theme].bodyText }, ...style]}>
-			{`#${ hashtag }`}
+			{`#${hashtag}`}
 		</Text>
 	);
 });
@@ -45,7 +45,8 @@ Hashtag.propTypes = {
 	hashtag: PropTypes.string,
 	navToRoomInfo: PropTypes.func,
 	style: PropTypes.array,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	channels: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 

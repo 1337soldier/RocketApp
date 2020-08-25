@@ -32,7 +32,7 @@ const Link = React.memo(({
 			onLongPress={onLongPress}
 			style={{ ...styles.link, color: themes[theme].actionTintColor }}
 		>
-			{ childLength !== 0 ? children : link }
+			{childLength !== 0 ? children : link}
 		</Text>
 	);
 });
@@ -40,7 +40,8 @@ const Link = React.memo(({
 Link.propTypes = {
 	children: PropTypes.node,
 	link: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Link;

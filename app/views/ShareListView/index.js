@@ -41,10 +41,10 @@ class ShareListView extends React.Component {
 		server: PropTypes.string,
 		token: PropTypes.string,
 		userId: PropTypes.string,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.chats = [];
 		this.state = {
@@ -79,7 +79,7 @@ class ShareListView extends React.Component {
 				mime: mime.lookup(file.uri),
 				path: file.uri
 			}));
-			const text = data.filter(item => item.type === 'text').reduce((acc, item) => `${ item.value }\n${ acc }`, '');
+			const text = data.filter(item => item.type === 'text').reduce((acc, item) => `${item.value}\n${acc}`, '');
 			this.setState({
 				text,
 				attachments
@@ -200,15 +200,15 @@ class ShareListView extends React.Component {
 				.query(
 					...defaultWhereClause,
 					Q.or(
-						Q.where('name', Q.like(`%${ Q.sanitizeLikeString(text) }%`)),
-						Q.where('fname', Q.like(`%${ Q.sanitizeLikeString(text) }%`))
+						Q.where('name', Q.like(`%${Q.sanitizeLikeString(text)}%`)),
+						Q.where('fname', Q.like(`%${Q.sanitizeLikeString(text)}%`))
 					)
 				).fetch();
 		}
 		return db.collections.get('subscriptions').query(...defaultWhereClause).fetch();
 	}
 
-	getSubscriptions = async(server) => {
+	getSubscriptions = async (server) => {
 		const serversDB = database.servers;
 
 		if (server) {
@@ -232,7 +232,7 @@ class ShareListView extends React.Component {
 		}
 	};
 
-	askForPermission = async(data) => {
+	askForPermission = async (data) => {
 		const mediaIndex = data.findIndex(item => item.type === 'media');
 		if (mediaIndex !== -1) {
 			const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE, permission);
@@ -266,7 +266,7 @@ class ShareListView extends React.Component {
 		});
 	}
 
-	search = async(text) => {
+	search = async (text) => {
 		const result = await this.query(text);
 		this.internalSetState({
 			searchResults: result,
@@ -342,7 +342,7 @@ class ShareListView extends React.Component {
 				description={description}
 				type={item.prid ? 'discussion' : item.t}
 				onPress={() => this.shareMessage(item)}
-				testID={`share-extension-item-${ item.name }`}
+				testID={`share-extension-item-${item.name}`}
 				theme={theme}
 			/>
 		);
@@ -398,7 +398,7 @@ class ShareListView extends React.Component {
 		const { searching } = this.state;
 		return (
 			<>
-				{ !searching
+				{!searching
 					? (
 						<>
 							{this.renderSelectServer()}

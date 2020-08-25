@@ -61,12 +61,13 @@ class StatusView extends React.Component {
 			status: PropTypes.string,
 			statusText: PropTypes.string
 		}),
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		navigation: PropTypes.object,
 		isMasterDetail: PropTypes.bool
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		const { statusText } = props.user;
@@ -91,7 +92,7 @@ class StatusView extends React.Component {
 		});
 	}
 
-	submit = async() => {
+	submit = async () => {
 		logEvent(events.STATUS_DONE);
 		const { statusText } = this.state;
 		const { user } = this.props;
@@ -106,7 +107,7 @@ class StatusView extends React.Component {
 		navigation.goBack();
 	}
 
-	setCustomStatus = async() => {
+	setCustomStatus = async () => {
 		const { statusText } = this.state;
 		const { user } = this.props;
 
@@ -147,7 +148,7 @@ class StatusView extends React.Component {
 					onChangeText={text => this.setState({ statusText: text })}
 					left={(
 						<Status
-							testID={`status-view-current-${ user.status }`}
+							testID={`status-view-current-${user.status}`}
 							style={styles.inputLeft}
 							status={user.status}
 							size={12}
@@ -169,8 +170,8 @@ class StatusView extends React.Component {
 		return (
 			<ListItem
 				title={I18n.t(name)}
-				onPress={async() => {
-					logEvent(events[`STATUS_${ item.id.toUpperCase() }`]);
+				onPress={async () => {
+					logEvent(events[`STATUS_${item.id.toUpperCase()}`]);
 					if (user.status !== item.id) {
 						try {
 							const result = await RocketChat.setUserStatus(item.id, statusText);
@@ -183,7 +184,7 @@ class StatusView extends React.Component {
 						}
 					}
 				}}
-				testID={`status-view-${ id }`}
+				testID={`status-view-${id}`}
 				left={() => <Status style={styles.status} size={12} status={item.id} />}
 				theme={theme}
 			/>

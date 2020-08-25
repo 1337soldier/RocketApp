@@ -17,7 +17,8 @@ const BlockQuote = React.memo(({ children, theme }) => (
 
 BlockQuote.propTypes = {
 	children: PropTypes.node.isRequired,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default BlockQuote;

@@ -35,13 +35,14 @@ class ScreenLockConfigView extends React.Component {
 	});
 
 	static propTypes = {
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		server: PropTypes.string,
 		Force_Screen_Lock: PropTypes.string,
 		Force_Screen_Lock_After: PropTypes.string
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			autoLock: false,
@@ -81,7 +82,7 @@ class ScreenLockConfigView extends React.Component {
 		}
 	];
 
-	init = async() => {
+	init = async () => {
 		const { server } = this.props;
 		const serversDB = database.servers;
 		const serversCollection = serversDB.collections.get('servers');
@@ -113,11 +114,11 @@ class ScreenLockConfigView extends React.Component {
 		});
 	}
 
-	save = async() => {
+	save = async () => {
 		logEvent(events.SLC_SAVE_SCREEN_LOCK);
 		const { autoLock, autoLockTime, biometry } = this.state;
 		const serversDB = database.servers;
-		await serversDB.action(async() => {
+		await serversDB.action(async () => {
 			await this.serverRecord?.update((record) => {
 				record.autoLock = autoLock;
 				record.autoLockTime = autoLockTime === null ? DEFAULT_AUTO_LOCK : autoLockTime;
@@ -126,14 +127,14 @@ class ScreenLockConfigView extends React.Component {
 		});
 	}
 
-	changePasscode = async({ force }) => {
+	changePasscode = async ({ force }) => {
 		logEvent(events.SLC_CHANGE_PASSCODE);
 		await changePasscode({ force });
 	}
 
 	toggleAutoLock = () => {
 		logEvent(events.SLC_TOGGLE_AUTOLOCK);
-		this.setState(({ autoLock }) => ({ autoLock: !autoLock, autoLockTime: DEFAULT_AUTO_LOCK }), async() => {
+		this.setState(({ autoLock }) => ({ autoLock: !autoLock, autoLockTime: DEFAULT_AUTO_LOCK }), async () => {
 			const { autoLock } = this.state;
 			if (autoLock) {
 				try {
@@ -225,7 +226,7 @@ class ScreenLockConfigView extends React.Component {
 				value: Force_Screen_Lock_After,
 				disabled: true
 			}];
-		// if Force_Screen_Lock is disabled and autoLockTime is a value that isn't on our defaultOptions we'll show it
+			// if Force_Screen_Lock is disabled and autoLockTime is a value that isn't on our defaultOptions we'll show it
 		} else if (Force_Screen_Lock_After === autoLockTime && !items.find(item => item.value === autoLockTime)) {
 			items.push({
 				title: I18n.t('After_seconds_set_by_admin', { seconds: Force_Screen_Lock_After }),

@@ -26,10 +26,11 @@ export default class DirectoryOptions extends PureComponent {
 		close: PropTypes.func,
 		changeType: PropTypes.func,
 		toggleWorkspace: PropTypes.func,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.animatedValue = new Animated.Value(0);
 	}

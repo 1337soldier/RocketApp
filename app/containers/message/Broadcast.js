@@ -39,7 +39,8 @@ const Broadcast = React.memo(({
 Broadcast.propTypes = {
 	author: PropTypes.object,
 	broadcast: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Broadcast.displayName = 'MessageBroadcast';
 

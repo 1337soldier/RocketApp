@@ -22,14 +22,15 @@ const styles = StyleSheet.create({
 const Title = ({ title, theme }) => <Text style={[styles.title, { color: themes[theme].titleText }]}>{title}</Text>;
 Title.propTypes = {
 	title: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const Livechat = ({ room, roomUser, theme }) => {
 	const [department, setDepartment] = useState({});
 
 
-	const getDepartment = async(id) => {
+	const getDepartment = async (id) => {
 		if (id) {
 			const result = await RocketChat.getDepartmentInfo(id);
 			if (result.success) {
@@ -63,12 +64,12 @@ const Livechat = ({ room, roomUser, theme }) => {
 			/>
 			<Item
 				label={I18n.t('Email')}
-				content={roomUser.visitorEmails?.map(email => email.address).reduce((ret, item) => `${ ret }${ item }\n`)}
+				content={roomUser.visitorEmails?.map(email => email.address).reduce((ret, item) => `${ret}${item}\n`)}
 				theme={theme}
 			/>
 			<Item
 				label={I18n.t('Phone')}
-				content={roomUser.phone?.map(phone => phone.phoneNumber).reduce((ret, item) => `${ ret }${ item }\n`)}
+				content={roomUser.phone?.map(phone => phone.phoneNumber).reduce((ret, item) => `${ret}${item}\n`)}
 				theme={theme}
 			/>
 			<Item
@@ -134,7 +135,8 @@ const Livechat = ({ room, roomUser, theme }) => {
 Livechat.propTypes = {
 	room: PropTypes.object,
 	roomUser: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(Livechat);

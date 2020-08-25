@@ -63,13 +63,14 @@ class RegisterView extends React.Component {
     Accounts_CustomFields: PropTypes.string,
     Accounts_EmailVerification: PropTypes.bool,
     Accounts_ManuallyApproveNewUsers: PropTypes.bool,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    ,
     Site_Name: PropTypes.string,
     loginRequest: PropTypes.func,
     showLoginButton: PropTypes.bool,
   };
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     const customFields = {};
     this.parsedCustomFields = {};

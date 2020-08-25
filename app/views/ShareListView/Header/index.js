@@ -26,7 +26,8 @@ ShareListHeader.propTypes = {
 	initSearch: PropTypes.func,
 	cancelSearch: PropTypes.func,
 	search: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default ShareListHeader;

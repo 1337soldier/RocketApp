@@ -18,7 +18,8 @@ const LeftButtons = React.memo(({
 });
 
 LeftButtons.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	showMessageBoxActions: PropTypes.func.isRequired,
 	editing: PropTypes.bool,
 	editCancel: PropTypes.func.isRequired,

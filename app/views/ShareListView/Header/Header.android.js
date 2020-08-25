@@ -46,7 +46,8 @@ const Header = React.memo(({ searching, onChangeSearchText, theme }) => {
 Header.propTypes = {
 	searching: PropTypes.bool,
 	onChangeSearchText: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Header;

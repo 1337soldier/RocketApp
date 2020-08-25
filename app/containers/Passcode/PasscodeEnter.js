@@ -25,12 +25,12 @@ const PasscodeEnter = ({ theme, hasBiometry, finishProcess }) => {
 	const { getItem: getAttempts, setItem: setAttempts } = useAsyncStorage(ATTEMPTS_KEY);
 	const { setItem: setLockedUntil } = useAsyncStorage(LOCKED_OUT_TIMER_KEY);
 
-	const fetchPasscode = async() => {
+	const fetchPasscode = async () => {
 		const p = await RNUserDefaults.get(PASSCODE_KEY);
 		setPasscode(p);
 	};
 
-	const biometry = async() => {
+	const biometry = async () => {
 		if (hasBiometry && status === TYPE.ENTER) {
 			const result = await biometryAuth();
 			if (result?.success) {
@@ -39,7 +39,7 @@ const PasscodeEnter = ({ theme, hasBiometry, finishProcess }) => {
 		}
 	};
 
-	const readStorage = async() => {
+	const readStorage = async () => {
 		lockedUntil = await getLockedUntil();
 		if (lockedUntil) {
 			const diff = getDiff(lockedUntil);
@@ -98,7 +98,8 @@ const PasscodeEnter = ({ theme, hasBiometry, finishProcess }) => {
 };
 
 PasscodeEnter.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	hasBiometry: PropTypes.string,
 	finishProcess: PropTypes.func
 };

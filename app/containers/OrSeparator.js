@@ -37,7 +37,7 @@ const OrSeparator = React.memo(({ theme }) => {
 });
 
 OrSeparator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default OrSeparator;

@@ -36,7 +36,8 @@ class Touch extends React.Component {
 Touch.propTypes = {
 	children: PropTypes.node,
 	onPress: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Touch;

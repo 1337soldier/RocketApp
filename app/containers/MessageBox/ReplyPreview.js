@@ -85,7 +85,8 @@ ReplyPreview.propTypes = {
 	baseUrl: PropTypes.string.isRequired,
 	username: PropTypes.string.isRequired,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const mapStateToProps = state => ({

@@ -33,7 +33,8 @@ const CallButton = React.memo(({
 
 CallButton.propTypes = {
 	dlm: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	callJitsi: PropTypes.func
 };
 CallButton.displayName = 'CallButton';

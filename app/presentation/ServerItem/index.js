@@ -13,47 +13,48 @@ export { ROW_HEIGHT };
 const ServerItem = React.memo(({
 	server, item, onPress, hasCheck, theme
 }) => (
-	<Touch
-		onPress={onPress}
-		style={[styles.serverItem, { backgroundColor: themes[theme].backgroundColor }]}
-		testID={`rooms-list-header-server-${ item.id }`}
-		theme={theme}
-	>
-		<View style={styles.serverItemContainer}>
-			{item.iconURL
-				? (
-					<FastImage
-						source={{
-							uri: item.iconURL,
-							priority: FastImage.priority.high
-						}}
-						defaultSource={{ uri: 'logo' }}
-						style={styles.serverIcon}
-						onError={() => console.log('err_loading_server_icon')}
-					/>
-				)
-				: (
-					<FastImage
-						source={{ uri: 'logo' }}
-						style={styles.serverIcon}
-					/>
-				)
-			}
-			<View style={styles.serverTextContainer}>
-				<Text style={[styles.serverName, { color: themes[theme].titleText }]}>{item.name || item.id}</Text>
-				<Text style={[styles.serverUrl, { color: themes[theme].auxiliaryText }]}>{item.id}</Text>
+		<Touch
+			onPress={onPress}
+			style={[styles.serverItem, { backgroundColor: themes[theme].backgroundColor }]}
+			testID={`rooms-list-header-server-${item.id}`}
+			theme={theme}
+		>
+			<View style={styles.serverItemContainer}>
+				{item.iconURL
+					? (
+						<FastImage
+							source={{
+								uri: item.iconURL,
+								priority: FastImage.priority.high
+							}}
+							defaultSource={{ uri: 'logo' }}
+							style={styles.serverIcon}
+							onError={() => console.log('err_loading_server_icon')}
+						/>
+					)
+					: (
+						<FastImage
+							source={{ uri: 'logo' }}
+							style={styles.serverIcon}
+						/>
+					)
+				}
+				<View style={styles.serverTextContainer}>
+					<Text style={[styles.serverName, { color: themes[theme].titleText }]}>{item.name || item.id}</Text>
+					<Text style={[styles.serverUrl, { color: themes[theme].auxiliaryText }]}>{item.id}</Text>
+				</View>
+				{item.id === server && hasCheck ? <Check theme={theme} /> : null}
 			</View>
-			{item.id === server && hasCheck ? <Check theme={theme} /> : null}
-		</View>
-	</Touch>
-));
+		</Touch>
+	));
 
 ServerItem.propTypes = {
 	onPress: PropTypes.func.isRequired,
 	item: PropTypes.object.isRequired,
 	hasCheck: PropTypes.bool,
 	server: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default ServerItem;

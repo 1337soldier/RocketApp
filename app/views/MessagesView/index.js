@@ -24,11 +24,12 @@ class MessagesView extends React.Component {
 		navigation: PropTypes.object,
 		route: PropTypes.object,
 		customEmojis: PropTypes.object,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		showActionSheet: PropTypes.func
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			loading: false,
@@ -101,7 +102,7 @@ class MessagesView extends React.Component {
 			// Files Messages Screen
 			Files: {
 				name: I18n.t('Files'),
-				fetchFunc: async() => {
+				fetchFunc: async () => {
 					const { messages } = this.state;
 					const result = await RocketChat.getFiles(this.rid, this.t, messages.length);
 					return { ...result, messages: result.files };
@@ -194,7 +195,7 @@ class MessagesView extends React.Component {
 		}[name]);
 	}
 
-	load = async() => {
+	load = async () => {
 		const {
 			messages, total, loading
 		} = this.state;
@@ -243,7 +244,7 @@ class MessagesView extends React.Component {
 		showActionSheet({ options: [this.content.action(message)], hasCancel: true });
 	}
 
-	handleActionPress = async() => {
+	handleActionPress = async () => {
 		const { message } = this.state;
 
 		try {

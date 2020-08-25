@@ -27,7 +27,8 @@ class WorkspaceView extends React.Component {
 
   static propTypes = {
     navigation: PropTypes.object,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    ,
     Site_Name: PropTypes.string,
     Site_Url: PropTypes.string,
     server: PropTypes.string,

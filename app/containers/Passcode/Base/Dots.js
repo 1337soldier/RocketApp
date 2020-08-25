@@ -44,7 +44,8 @@ const Dots = React.memo(({ passcode, theme, length }) => (
 
 Dots.propTypes = {
 	passcode: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	length: PropTypes.string
 };
 

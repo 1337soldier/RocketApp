@@ -26,7 +26,8 @@ class List extends React.Component {
 		rid: PropTypes.string,
 		t: PropTypes.string,
 		tmid: PropTypes.string,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		loading: PropTypes.bool,
 		listRef: PropTypes.func,
 		hideSystemMessages: PropTypes.array,
@@ -43,10 +44,10 @@ class List extends React.Component {
 		return null;
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
-		console.time(`${ this.constructor.name } init`);
-		console.time(`${ this.constructor.name } mount`);
+		console.time(`${this.constructor.name} init`);
+		console.time(`${this.constructor.name} mount`);
 		this.count = 0;
 		this.needsFetch = false;
 		this.mounted = false;
@@ -65,12 +66,12 @@ class List extends React.Component {
 				this.state.animated = true;
 			}
 		});
-		console.timeEnd(`${ this.constructor.name } init`);
+		console.timeEnd(`${this.constructor.name} init`);
 	}
 
 	componentDidMount() {
 		this.mounted = true;
-		console.timeEnd(`${ this.constructor.name } mount`);
+		console.timeEnd(`${this.constructor.name} mount`);
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -109,10 +110,10 @@ class List extends React.Component {
 		if (this.unsubscribeFocus) {
 			this.unsubscribeFocus();
 		}
-		console.countReset(`${ this.constructor.name }.render calls`);
+		console.countReset(`${this.constructor.name}.render calls`);
 	}
 
-	fetchData = async() => {
+	fetchData = async () => {
 		const {
 			loading, end, messages, latest = messages[messages.length - 1]?.ts
 		} = this.state;
@@ -138,7 +139,7 @@ class List extends React.Component {
 		}
 	}
 
-	query = async() => {
+	query = async () => {
 		this.count += QUERY_SIZE;
 		const { rid, tmid } = this.props;
 		const db = database.active;
@@ -205,7 +206,7 @@ class List extends React.Component {
 		this.query();
 	}
 
-	readThreads = async() => {
+	readThreads = async () => {
 		const { tmid } = this.props;
 
 		if (tmid) {
@@ -217,7 +218,7 @@ class List extends React.Component {
 		}
 	}
 
-	onEndReached = async() => {
+	onEndReached = async () => {
 		if (this.needsFetch) {
 			this.needsFetch = false;
 			await this.fetchData();
@@ -249,7 +250,7 @@ class List extends React.Component {
 		}
 	}
 
-	onRefresh = () => this.setState({ refreshing: true }, async() => {
+	onRefresh = () => this.setState({ refreshing: true }, async () => {
 		const { messages } = this.state;
 		const { rid, tmid } = this.props;
 
@@ -307,7 +308,7 @@ class List extends React.Component {
 	}
 
 	render() {
-		console.count(`${ this.constructor.name }.render calls`);
+		console.count(`${this.constructor.name}.render calls`);
 		const { rid, listRef } = this.props;
 		const { messages, refreshing } = this.state;
 		const { theme } = this.props;

@@ -47,17 +47,18 @@ class AuthenticationWebView extends React.PureComponent {
 		server: PropTypes.string,
 		Accounts_Iframe_api_url: PropTypes.bool,
 		Accounts_Iframe_api_method: PropTypes.bool,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			logging: false,
 			loading: false
 		};
-		this.oauthRedirectRegex = new RegExp(`(?=.*(${ props.server }))(?=.*(credentialToken))(?=.*(credentialSecret))`, 'g');
-		this.iframeRedirectRegex = new RegExp(`(?=.*(${ props.server }))(?=.*(event|loginToken|token))`, 'g');
+		this.oauthRedirectRegex = new RegExp(`(?=.*(${props.server}))(?=.*(credentialToken))(?=.*(credentialSecret))`, 'g');
+		this.iframeRedirectRegex = new RegExp(`(?=.*(${props.server}))(?=.*(event|loginToken|token))`, 'g');
 	}
 
 	componentWillUnmount() {
@@ -71,7 +72,7 @@ class AuthenticationWebView extends React.PureComponent {
 		navigation.pop();
 	}
 
-	login = async(params) => {
+	login = async (params) => {
 		const { logging } = this.state;
 		if (logging) {
 			return;
@@ -91,7 +92,7 @@ class AuthenticationWebView extends React.PureComponent {
 	// eslint-disable-next-line react/sort-comp
 	debouncedLogin = debounce(params => this.login(params), 3000);
 
-	tryLogin = debounce(async() => {
+	tryLogin = debounce(async () => {
 		const { Accounts_Iframe_api_url, Accounts_Iframe_api_method } = this.props;
 		const data = await fetch(Accounts_Iframe_api_url, { method: Accounts_Iframe_api_method }).then(response => response.json());
 		const resume = data?.login || data?.loginToken;
@@ -141,7 +142,7 @@ class AuthenticationWebView extends React.PureComponent {
 						this.login({ resume: credentials.token || credentials.loginToken });
 						break;
 					default:
-						// Do nothing
+					// Do nothing
 				}
 			}
 		}
@@ -170,7 +171,7 @@ class AuthenticationWebView extends React.PureComponent {
 						this.setState({ loading: false });
 					}}
 				/>
-				{ loading ? <ActivityIndicator size='large' theme={theme} absolute /> : null }
+				{loading ? <ActivityIndicator size='large' theme={theme} absolute /> : null}
 			</>
 		);
 	}

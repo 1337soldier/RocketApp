@@ -10,19 +10,20 @@ import I18n from '../../../i18n';
 const BaseButton = React.memo(({
 	onPress, testID, accessibilityLabel, icon, theme
 }) => (
-	<BorderlessButton
-		onPress={onPress}
-		style={styles.actionButton}
-		testID={testID}
-		accessibilityLabel={I18n.t(accessibilityLabel)}
-		accessibilityTraits='button'
-	>
-		<CustomIcon name={icon} size={25} color={themes[theme].tintColor} />
-	</BorderlessButton>
-));
+		<BorderlessButton
+			onPress={onPress}
+			style={styles.actionButton}
+			testID={testID}
+			accessibilityLabel={I18n.t(accessibilityLabel)}
+			accessibilityTraits='button'
+		>
+			<CustomIcon name={icon} size={25} color={themes[theme].tintColor} />
+		</BorderlessButton>
+	));
 
 BaseButton.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	onPress: PropTypes.func.isRequired,
 	testID: PropTypes.string.isRequired,
 	accessibilityLabel: PropTypes.string.isRequired,

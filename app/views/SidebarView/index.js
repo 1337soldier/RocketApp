@@ -22,7 +22,8 @@ import SafeAreaView from '../../containers/SafeAreaView';
 
 const Separator = React.memo(({ theme }) => <View style={[styles.separator, { borderColor: themes[theme].separatorColor }]} />);
 Separator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const permissions = [
@@ -36,17 +37,18 @@ class Sidebar extends Component {
 	static propTypes = {
 		baseUrl: PropTypes.string,
 		navigation: PropTypes.object,
-		Site_Name: PropTypes.oneOfType([ PropTypes.string,PropTypes.any]),
+		Site_Name: PropTypes.oneOfType([PropTypes.string, PropTypes.any]),
 		user: PropTypes.object,
-		state: PropTypes.oneOfType([PropTypes.string,PropTypes.any]), 
-		theme: PropTypes.string,
+		state: PropTypes.oneOfType([PropTypes.string, PropTypes.any]),
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		loadingServer: PropTypes.bool,
 		useRealName: PropTypes.bool,
 		allowStatusMessage: PropTypes.bool,
 		isMasterDetail: PropTypes.bool
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			showStatus: false,
@@ -120,12 +122,12 @@ class Sidebar extends Component {
 		const { user } = this.props;
 		const { roles } = user;
 		try {
-			if	(roles) {
+			if (roles) {
 				const permissionsCollection = db.collections.get('permissions');
 				const permissionsFiltered = await permissionsCollection.query(Q.where('id', Q.oneOf(permissions))).fetch();
 				const isAdmin = permissionsFiltered.reduce((result, permission) => (
 					result || permission.roles.some(r => roles.indexOf(r) !== -1)),
-				false);
+					false);
 				this.setState({ isAdmin });
 			}
 		} catch (e) {
@@ -134,7 +136,7 @@ class Sidebar extends Component {
 	}
 
 	sidebarNavigate = (route) => {
-		logEvent(events[`SIDEBAR_GO_${ route.replace('StackNavigator', '').replace('View', '').toUpperCase() }`]);
+		logEvent(events[`SIDEBAR_GO_${route.replace('StackNavigator', '').replace('View', '').toUpperCase()}`]);
 		const { navigation } = this.props;
 		navigation.navigate(route);
 	}
@@ -254,7 +256,7 @@ class Sidebar extends Component {
 								<Text
 									style={[styles.currentServerText, { color: themes[theme].titleText }]}
 									numberOfLines={1}
-									accessibilityLabel={`Connected to ${ baseUrl }`}
+									accessibilityLabel={`Connected to ${baseUrl}`}
 								>{Site_Name}
 								</Text>
 							</View>
@@ -271,10 +273,10 @@ class Sidebar extends Component {
 							<Separator theme={theme} />
 						</>
 					) : (
-						<>
-							{this.renderAdmin()}
-						</>
-					)}
+							<>
+								{this.renderAdmin()}
+							</>
+						)}
 				</ScrollView>
 			</SafeAreaView>
 		);

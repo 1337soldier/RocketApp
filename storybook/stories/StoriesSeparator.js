@@ -29,7 +29,8 @@ const Separator = ({ title, style, theme }) => (
 
 Separator.propTypes = {
 	title: PropTypes.string.isRequired,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	style: PropTypes.object
 };
 

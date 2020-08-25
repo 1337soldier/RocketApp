@@ -15,7 +15,8 @@ const TypeIcon = React.memo(({
 });
 
 TypeIcon.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	type: PropTypes.string,
 	status: PropTypes.string,
 	prid: PropTypes.string,

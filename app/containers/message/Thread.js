@@ -21,7 +21,7 @@ const Thread = React.memo(({
 		<View style={styles.buttonContainer}>
 			<View
 				style={[styles.button, styles.smallButton, { backgroundColor: themes[theme].tintColor }]}
-				testID={`message-thread-button-${ msg }`}
+				testID={`message-thread-button-${msg}`}
 			>
 				<CustomIcon name='threads' size={20} style={[styles.buttonIcon, { color: themes[theme].buttonText }]} />
 				<Text style={[styles.buttonText, { color: themes[theme].buttonText }]}>{buttonText}</Text>
@@ -42,7 +42,8 @@ const Thread = React.memo(({
 Thread.propTypes = {
 	msg: PropTypes.string,
 	tcount: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	tlm: PropTypes.string,
 	customThreadTimeFormat: PropTypes.string,
 	isThreadRoom: PropTypes.bool

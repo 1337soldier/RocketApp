@@ -21,7 +21,8 @@ export const SortItemButton = ({ children, onPress, theme }) => (
 );
 
 SortItemButton.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	children: PropTypes.node,
 	onPress: PropTypes.func
 };
@@ -29,16 +30,17 @@ SortItemButton.propTypes = {
 export const SortItemContent = ({
 	label, icon, imageUri, checked, theme
 }) => (
-	<View style={styles.sortItemContainer}>
-		{icon && <CustomIcon style={[styles.sortIcon, { color: themes[theme].controlText }]} size={22} name={icon} />}
-		{imageUri && <Image style={[styles.sortIcon, { tintColor: themes[theme].controlText }]} source={{ uri: imageUri }} />}
-		<Text style={[styles.sortItemText, { color: themes[theme].controlText }]}>{I18n.t(label)}</Text>
-		{checked ? <Check theme={theme} /> : null}
-	</View>
-);
+		<View style={styles.sortItemContainer}>
+			{icon && <CustomIcon style={[styles.sortIcon, { color: themes[theme].controlText }]} size={22} name={icon} />}
+			{imageUri && <Image style={[styles.sortIcon, { tintColor: themes[theme].controlText }]} source={{ uri: imageUri }} />}
+			<Text style={[styles.sortItemText, { color: themes[theme].controlText }]}>{I18n.t(label)}</Text>
+			{checked ? <Check theme={theme} /> : null}
+		</View>
+	);
 
 SortItemContent.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	label: PropTypes.string,
 	icon: PropTypes.string,
 	imageUri: PropTypes.string,

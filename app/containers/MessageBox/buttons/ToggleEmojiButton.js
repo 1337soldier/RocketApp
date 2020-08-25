@@ -29,7 +29,8 @@ const ToggleEmojiButton = React.memo(({
 });
 
 ToggleEmojiButton.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	show: PropTypes.bool,
 	open: PropTypes.func.isRequired,
 	close: PropTypes.func.isRequired

@@ -58,7 +58,8 @@ LeftButtons.propTypes = {
 	token: PropTypes.string,
 	title: PropTypes.string,
 	t: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	goRoomActionsView: PropTypes.func,
 	isMasterDetail: PropTypes.bool
 };

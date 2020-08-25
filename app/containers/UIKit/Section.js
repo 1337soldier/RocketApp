@@ -43,23 +43,24 @@ const accessoriesRight = ['image', 'overflow'];
 export const Section = ({
 	blockId, appId, text, fields, accessory, parser, theme
 }) => (
-	<View
-		style={[
-			styles.content,
-			accessory && accessoriesRight.includes(accessory.type) ? styles.row : styles.column
-		]}
-	>
-		{text ? <View style={styles.text}>{parser.text(text)}</View> : null}
-		{fields ? <Fields fields={fields} theme={theme} parser={parser} /> : null}
-		{accessory ? <Accessory element={{ blockId, appId, ...accessory }} parser={parser} /> : null}
-	</View>
-);
+		<View
+			style={[
+				styles.content,
+				accessory && accessoriesRight.includes(accessory.type) ? styles.row : styles.column
+			]}
+		>
+			{text ? <View style={styles.text}>{parser.text(text)}</View> : null}
+			{fields ? <Fields fields={fields} theme={theme} parser={parser} /> : null}
+			{accessory ? <Accessory element={{ blockId, appId, ...accessory }} parser={parser} /> : null}
+		</View>
+	);
 Section.propTypes = {
 	blockId: PropTypes.string,
 	appId: PropTypes.string,
 	text: PropTypes.object,
 	fields: PropTypes.array,
 	accessory: PropTypes.any,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	parser: PropTypes.object
 };

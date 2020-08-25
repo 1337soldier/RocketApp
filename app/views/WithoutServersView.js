@@ -41,7 +41,8 @@ class WithoutServerView extends React.Component {
 	})
 
 	static propTypes = {
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	render() {

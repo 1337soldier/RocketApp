@@ -47,35 +47,77 @@ const RoomItem = ({
 	toggleRead,
 	hideChannel
 }) => (
-	<Touchable
-		onPress={onPress}
-		width={width}
-		favorite={favorite}
-		toggleFav={toggleFav}
-		isRead={isRead}
-		rid={rid}
-		toggleRead={toggleRead}
-		hideChannel={hideChannel}
-		testID={testID}
-		type={type}
-		theme={theme}
-		isFocused={isFocused}
-		swipeEnabled={swipeEnabled}
-	>
-		<Wrapper
-			accessibilityLabel={accessibilityLabel}
-			avatar={avatar}
-			avatarSize={avatarSize}
+		<Touchable
+			onPress={onPress}
+			width={width}
+			favorite={favorite}
+			toggleFav={toggleFav}
+			isRead={isRead}
+			rid={rid}
+			toggleRead={toggleRead}
+			hideChannel={hideChannel}
+			testID={testID}
 			type={type}
-			baseUrl={baseUrl}
-			userId={userId}
-			token={token}
 			theme={theme}
+			isFocused={isFocused}
+			swipeEnabled={swipeEnabled}
 		>
-			{showLastMessage
-				? (
-					<>
-						<View style={styles.titleContainer}>
+			<Wrapper
+				accessibilityLabel={accessibilityLabel}
+				avatar={avatar}
+				avatarSize={avatarSize}
+				type={type}
+				baseUrl={baseUrl}
+				userId={userId}
+				token={token}
+				theme={theme}
+			>
+				{showLastMessage
+					? (
+						<>
+							<View style={styles.titleContainer}>
+								<TypeIcon
+									type={type}
+									prid={prid}
+									status={status}
+									isGroupChat={isGroupChat}
+									theme={theme}
+								/>
+								<Title
+									name={name}
+									theme={theme}
+									hideUnreadStatus={hideUnreadStatus}
+									alert={alert}
+								/>
+								<UpdatedAt
+									roomUpdatedAt={roomUpdatedAt}
+									date={date}
+									theme={theme}
+									hideUnreadStatus={hideUnreadStatus}
+									alert={alert}
+								/>
+							</View>
+							<View style={styles.row}>
+								<LastMessage
+									lastMessage={lastMessage}
+									type={type}
+									showLastMessage={showLastMessage}
+									username={username}
+									alert={alert && !hideUnreadStatus}
+									useRealName={useRealName}
+									theme={theme}
+								/>
+								<UnreadBadge
+									unread={unread}
+									userMentions={userMentions}
+									groupMentions={groupMentions}
+									theme={theme}
+								/>
+							</View>
+						</>
+					)
+					: (
+						<View style={[styles.titleContainer, styles.flex]}>
 							<TypeIcon
 								type={type}
 								prid={prid}
@@ -89,24 +131,6 @@ const RoomItem = ({
 								hideUnreadStatus={hideUnreadStatus}
 								alert={alert}
 							/>
-							<UpdatedAt
-								roomUpdatedAt={roomUpdatedAt}
-								date={date}
-								theme={theme}
-								hideUnreadStatus={hideUnreadStatus}
-								alert={alert}
-							/>
-						</View>
-						<View style={styles.row}>
-							<LastMessage
-								lastMessage={lastMessage}
-								type={type}
-								showLastMessage={showLastMessage}
-								username={username}
-								alert={alert && !hideUnreadStatus}
-								useRealName={useRealName}
-								theme={theme}
-							/>
 							<UnreadBadge
 								unread={unread}
 								userMentions={userMentions}
@@ -114,35 +138,11 @@ const RoomItem = ({
 								theme={theme}
 							/>
 						</View>
-					</>
-				)
-				: (
-					<View style={[styles.titleContainer, styles.flex]}>
-						<TypeIcon
-							type={type}
-							prid={prid}
-							status={status}
-							isGroupChat={isGroupChat}
-							theme={theme}
-						/>
-						<Title
-							name={name}
-							theme={theme}
-							hideUnreadStatus={hideUnreadStatus}
-							alert={alert}
-						/>
-						<UnreadBadge
-							unread={unread}
-							userMentions={userMentions}
-							groupMentions={groupMentions}
-							theme={theme}
-						/>
-					</View>
-				)
-			}
-		</Wrapper>
-	</Touchable>
-);
+					)
+				}
+			</Wrapper>
+		</Touchable>
+	);
 
 RoomItem.propTypes = {
 	rid: PropTypes.string.isRequired,
@@ -160,7 +160,8 @@ RoomItem.propTypes = {
 	width: PropTypes.number,
 	status: PropTypes.string,
 	useRealName: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isFocused: PropTypes.bool,
 	isGroupChat: PropTypes.bool,
 	isRead: PropTypes.bool,

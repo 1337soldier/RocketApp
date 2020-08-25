@@ -51,7 +51,8 @@ class QueueListView extends React.Component {
 		server: PropTypes.string,
 		useRealName: PropTypes.bool,
 		navigation: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -114,7 +115,7 @@ class QueueListView extends React.Component {
 				token={token}
 				baseUrl={server}
 				onPress={this.onPressItem}
-				testID={`queue-list-view-item-${ item.name }`}
+				testID={`queue-list-view-item-${item.name}`}
 				width={isMasterDetail ? MAX_SIDEBAR_WIDTH : width}
 				useRealName={useRealName}
 				getRoomTitle={this.getRoomTitle}

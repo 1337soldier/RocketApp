@@ -74,7 +74,8 @@ const DateSeparator = React.memo(({ ts, unread, theme }) => {
 DateSeparator.propTypes = {
 	ts: PropTypes.instanceOf(Date),
 	unread: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default DateSeparator;

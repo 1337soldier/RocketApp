@@ -74,7 +74,8 @@ class NewServerView extends React.Component {
 
   static propTypes = {
     navigation: PropTypes.object,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    ,
     connecting: PropTypes.bool.isRequired,
     connectServer: PropTypes.func.isRequired,
     selectServer: PropTypes.func.isRequired,
@@ -83,7 +84,7 @@ class NewServerView extends React.Component {
     inviteLinksClear: PropTypes.func,
   };
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.setHeader();
 

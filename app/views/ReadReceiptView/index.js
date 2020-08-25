@@ -33,10 +33,11 @@ class ReadReceiptView extends React.Component {
 		Message_TimeFormat: PropTypes.string,
 		baseUrl: PropTypes.string,
 		user: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.messageId = props.route.params?.messageId;
 		this.state = {
@@ -64,7 +65,7 @@ class ReadReceiptView extends React.Component {
 		return false;
 	}
 
-	load = async() => {
+	load = async () => {
 		const { loading } = this.state;
 		if (loading) {
 			return;
@@ -119,7 +120,7 @@ class ReadReceiptView extends React.Component {
 						</Text>
 					</View>
 					<Text style={{ color: themes[theme].auxiliaryText }}>
-						{`@${ item.user.username }`}
+						{`@${item.user.username}`}
 					</Text>
 				</View>
 			</View>

@@ -28,36 +28,38 @@ const styles = StyleSheet.create({
 const Option = ({
 	option: { text, value }, onOptionPress, parser, theme
 }) => (
-	<Touchable
-		onPress={() => onOptionPress({ value })}
-		background={Touchable.Ripple(themes[theme].bannerBackground)}
-		style={styles.option}
-	>
-		<Text>{parser.text(text)}</Text>
-	</Touchable>
-);
+		<Touchable
+			onPress={() => onOptionPress({ value })}
+			background={Touchable.Ripple(themes[theme].bannerBackground)}
+			style={styles.option}
+		>
+			<Text>{parser.text(text)}</Text>
+		</Touchable>
+	);
 Option.propTypes = {
 	option: PropTypes.object,
 	onOptionPress: PropTypes.func,
 	parser: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const Options = ({
 	options, onOptionPress, parser, theme
 }) => (
-	<FlatList
-		data={options}
-		renderItem={({ item }) => <Option option={item} onOptionPress={onOptionPress} parser={parser} theme={theme} />}
-		keyExtractor={keyExtractor}
-		ItemSeparatorComponent={() => <Separator theme={theme} />}
-	/>
-);
+		<FlatList
+			data={options}
+			renderItem={({ item }) => <Option option={item} onOptionPress={onOptionPress} parser={parser} theme={theme} />}
+			keyExtractor={keyExtractor}
+			ItemSeparatorComponent={() => <Separator theme={theme} />}
+		/>
+	);
 Options.propTypes = {
 	options: PropTypes.array,
 	onOptionPress: PropTypes.func,
 	parser: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const touchable = {};
@@ -99,5 +101,6 @@ Overflow.propTypes = {
 	action: PropTypes.func,
 	loading: PropTypes.bool,
 	parser: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

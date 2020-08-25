@@ -28,7 +28,8 @@ import { CloseModalButton } from '../../containers/HeaderButton';
 
 const Separator = React.memo(({ theme }) => <View style={[styles.separator, { backgroundColor: themes[theme].separatorColor }]} />);
 Separator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const API_FETCH_COUNT = 50;
@@ -50,12 +51,13 @@ class ThreadMessagesView extends React.Component {
 		route: PropTypes.object,
 		baseUrl: PropTypes.string,
 		useRealName: PropTypes.bool,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		customEmojis: PropTypes.object,
 		isMasterDetail: PropTypes.bool
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.mounted = false;
 		this.rid = props.route.params?.rid;
@@ -76,7 +78,7 @@ class ThreadMessagesView extends React.Component {
 	}
 
 	componentWillUnmount() {
-		console.countReset(`${ this.constructor.name }.render calls`);
+		console.countReset(`${this.constructor.name}.render calls`);
 		if (this.mountInteraction && this.mountInteraction.cancel) {
 			this.mountInteraction.cancel();
 		}
@@ -92,7 +94,7 @@ class ThreadMessagesView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	subscribeData = async() => {
+	subscribeData = async () => {
 		try {
 			const db = database.active;
 			const subscription = await db.collections
@@ -141,7 +143,7 @@ class ThreadMessagesView extends React.Component {
 		}
 	}
 
-	updateThreads = async({ update, remove, lastThreadSync }) => {
+	updateThreads = async ({ update, remove, lastThreadSync }) => {
 		// if there's no subscription, manage data on this.state.messages
 		// note: sync will never be called without subscription
 		if (!this.subscription) {
@@ -180,7 +182,7 @@ class ThreadMessagesView extends React.Component {
 				threadsToDelete = threadsToDelete.map(t => t.prepareDestroyPermanently());
 			}
 
-			await db.action(async() => {
+			await db.action(async () => {
 				await db.batch(
 					...threadsToCreate,
 					...threadsToUpdate,
@@ -196,7 +198,7 @@ class ThreadMessagesView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	load = debounce(async(lastThreadSync) => {
+	load = debounce(async (lastThreadSync) => {
 		const { loading, end, messages } = this.state;
 		if (end || loading || !this.mounted) {
 			return;
@@ -222,7 +224,7 @@ class ThreadMessagesView extends React.Component {
 	}, 300)
 
 	// eslint-disable-next-line react/sort-comp
-	sync = async(updatedSince) => {
+	sync = async (updatedSince) => {
 		this.setState({ loading: true });
 
 		try {
@@ -246,7 +248,7 @@ class ThreadMessagesView extends React.Component {
 
 	formatMessage = lm => (
 		lm ? moment(lm).calendar(null, {
-			lastDay: `[${ I18n.t('Yesterday') }]`,
+			lastDay: `[${I18n.t('Yesterday')}]`,
 			sameDay: 'h:mm A',
 			lastWeek: 'dddd',
 			sameElse: 'MMM D'
@@ -325,7 +327,7 @@ class ThreadMessagesView extends React.Component {
 	}
 
 	render() {
-		console.count(`${ this.constructor.name }.render calls`);
+		console.count(`${this.constructor.name}.render calls`);
 		const { loading, messages } = this.state;
 		const { theme } = this.props;
 

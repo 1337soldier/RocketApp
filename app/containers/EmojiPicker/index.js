@@ -30,10 +30,11 @@ class EmojiPicker extends Component {
 		customEmojis: PropTypes.object,
 		onEmojiSelected: PropTypes.func,
 		tabEmojiStyle: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const customEmojis = Object.keys(props.customEmojis)
 			.filter(item => item === props.customEmojis[item].name)
@@ -80,11 +81,11 @@ class EmojiPicker extends Component {
 				this._addFrequentlyUsed({
 					content: emoji.content, extension: emoji.extension, isCustom: true
 				});
-				onEmojiSelected(`:${ emoji.content }:`);
+				onEmojiSelected(`:${emoji.content}:`);
 			} else {
 				const content = emoji;
 				this._addFrequentlyUsed({ content, isCustom: false });
-				const shortname = `:${ emoji }:`;
+				const shortname = `:${emoji}:`;
 				onEmojiSelected(shortnameToUnicode(shortname), shortname);
 			}
 		} catch (e) {
@@ -93,7 +94,7 @@ class EmojiPicker extends Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	_addFrequentlyUsed = protectedFunction(async(emoji) => {
+	_addFrequentlyUsed = protectedFunction(async (emoji) => {
 		const db = database.active;
 		const freqEmojiCollection = db.collections.get('frequently_used_emojis');
 		let freqEmojiRecord;
@@ -103,7 +104,7 @@ class EmojiPicker extends Component {
 			// Do nothing
 		}
 
-		await db.action(async() => {
+		await db.action(async () => {
 			if (freqEmojiRecord) {
 				await freqEmojiRecord.update((f) => {
 					f.count += 1;
@@ -118,7 +119,7 @@ class EmojiPicker extends Component {
 		});
 	})
 
-	updateFrequentlyUsed = async() => {
+	updateFrequentlyUsed = async () => {
 		const db = database.active;
 		const frequentlyUsedRecords = await db.collections.get('frequently_used_emojis').query().fetch();
 		let frequentlyUsed = orderBy(frequentlyUsedRecords, ['count'], ['desc']);
@@ -126,7 +127,7 @@ class EmojiPicker extends Component {
 			if (item.isCustom) {
 				return { content: item.content, extension: item.extension, isCustom: item.isCustom };
 			}
-			return shortnameToUnicode(`${ item.content }`);
+			return shortnameToUnicode(`${item.content}`);
 		});
 		this.setState({ frequentlyUsed });
 	}

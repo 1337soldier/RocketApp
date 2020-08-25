@@ -34,7 +34,8 @@ const Item = ({ item, theme }) => (
 );
 Item.propTypes = {
 	item: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const VisitorNavigationView = ({ route, theme }) => {
@@ -42,7 +43,7 @@ const VisitorNavigationView = ({ route, theme }) => {
 	let total = 0;
 	const [pages, setPages] = useState([]);
 
-	const getPages = async() => {
+	const getPages = async () => {
 		const rid = route.params?.rid;
 		if (rid) {
 			try {
@@ -88,7 +89,8 @@ const VisitorNavigationView = ({ route, theme }) => {
 	);
 };
 VisitorNavigationView.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	route: PropTypes.object
 };
 VisitorNavigationView.navigationOptions = {

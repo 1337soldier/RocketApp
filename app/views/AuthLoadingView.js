@@ -32,7 +32,7 @@ const AuthLoadingView = React.memo(({ theme, text }) => (
 		{text && (
 			<>
 				<ActivityIndicator color={themes[theme].auxiliaryText} size='large' />
-				<Text style={[styles.text, { color: themes[theme].bodyText }]}>{`${ text }\n${ I18n.t('Please_wait') }`}</Text>
+				<Text style={[styles.text, { color: themes[theme].bodyText }]}>{`${text}\n${I18n.t('Please_wait')}`}</Text>
 			</>
 		)}
 	</View>
@@ -43,7 +43,8 @@ const mapStateToProps = state => ({
 });
 
 AuthLoadingView.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	text: PropTypes.string
 };
 

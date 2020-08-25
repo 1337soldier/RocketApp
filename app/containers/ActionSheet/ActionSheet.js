@@ -204,7 +204,8 @@ const ActionSheet = React.memo(forwardRef(({ children, theme }, ref) => {
 }));
 ActionSheet.propTypes = {
 	children: PropTypes.node,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default ActionSheet;

@@ -69,8 +69,8 @@ const Header = React.memo(({
 	}
 	return (
 		<View style={styles.container}>
-			<Text style = {{color:'#ccc'}}>{I18n.t('SearchPlaceHolder')}</Text>
-		
+			<Text style={{ color: '#ccc' }}>{I18n.t('SearchPlaceHolder')}</Text>
+
 		</View>
 	);
 });
@@ -85,7 +85,8 @@ Header.propTypes = {
 	isFetching: PropTypes.bool,
 	serverName: PropTypes.string,
 	server: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 Header.defaultProps = {

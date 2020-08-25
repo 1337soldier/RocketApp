@@ -29,12 +29,13 @@ class Sort extends PureComponent {
 		showFavorites: PropTypes.bool,
 		showUnread: PropTypes.bool,
 		isMasterDetail: PropTypes.bool,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		insets: PropTypes.object,
 		setSortPreference: PropTypes.func
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.animatedValue = new Animated.Value(0);
 	}
@@ -133,11 +134,11 @@ class Sort extends PureComponent {
 			<>
 				<TouchableWithoutFeedback onPress={this.close}>
 					<Animated.View style={[styles.backdrop,
-						{
-							backgroundColor: themes[theme].backdropColor,
-							opacity: backdropOpacity,
-							top: heightDestination
-						}]}
+					{
+						backgroundColor: themes[theme].backdropColor,
+						opacity: backdropOpacity,
+						top: heightDestination
+					}]}
 					/>
 				</TouchableWithoutFeedback>
 				<Animated.View

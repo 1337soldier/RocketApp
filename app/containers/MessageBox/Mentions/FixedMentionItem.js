@@ -27,7 +27,8 @@ const FixedMentionItem = ({ item, onPress, theme }) => (
 FixedMentionItem.propTypes = {
 	item: PropTypes.object,
 	onPress: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default FixedMentionItem;

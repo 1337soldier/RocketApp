@@ -41,18 +41,19 @@ const Item = React.memo(({
 	onItemPress,
 	theme
 }) => (
-	<ListItem
-		title={I18n.t(item.label, { defaultValue: item.label, second: item?.second })}
-		right={selected && (() => <Check theme={theme} style={styles.check} />)}
-		onPress={onItemPress}
-		theme={theme}
-	/>
-));
+		<ListItem
+			title={I18n.t(item.label, { defaultValue: item.label, second: item?.second })}
+			right={selected && (() => <Check theme={theme} style={styles.check} />)}
+			onPress={onItemPress}
+			theme={theme}
+		/>
+	));
 Item.propTypes = {
 	item: PropTypes.object,
 	selected: PropTypes.bool,
 	onItemPress: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 class PickerView extends React.PureComponent {
@@ -63,10 +64,11 @@ class PickerView extends React.PureComponent {
 	static propTypes = {
 		navigation: PropTypes.object,
 		route: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const data = props.route.params?.data ?? [];
 		const value = props.route.params?.value;
@@ -78,14 +80,14 @@ class PickerView extends React.PureComponent {
 	onChangeValue = (value) => {
 		const { navigation, route } = this.props;
 		const goBack = route.params?.goBack ?? true;
-		const onChange = route.params?.onChangeValue ?? (() => {});
+		const onChange = route.params?.onChangeValue ?? (() => { });
 		onChange(value);
 		if (goBack) {
 			navigation.goBack();
 		}
 	}
 
-	onChangeText = debounce(async(text) => {
+	onChangeText = debounce(async (text) => {
 		if (this.onSearch) {
 			const data = await this.onSearch(text);
 			this.setState({ data });

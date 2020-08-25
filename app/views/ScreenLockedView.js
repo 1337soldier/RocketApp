@@ -63,7 +63,8 @@ const ScreenLockedView = ({ theme }) => {
 };
 
 ScreenLockedView.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(ScreenLockedView);

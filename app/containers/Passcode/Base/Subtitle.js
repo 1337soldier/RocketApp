@@ -16,7 +16,8 @@ const Subtitle = React.memo(({ text, theme }) => (
 
 Subtitle.propTypes = {
 	text: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Subtitle;

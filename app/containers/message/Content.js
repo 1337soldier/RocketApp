@@ -78,7 +78,8 @@ Content.propTypes = {
 	tmid: PropTypes.string,
 	isThreadRoom: PropTypes.bool,
 	msg: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isEdited: PropTypes.bool,
 	getCustomEmoji: PropTypes.func,
 	channels: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),

@@ -41,7 +41,7 @@ const Reaction = React.memo(({
 			onPress={() => onReactionPress(reaction.emoji)}
 			onLongPress={onReactionLongPress}
 			key={reaction.emoji}
-			testID={`message-reaction-${ reaction.emoji }`}
+			testID={`message-reaction-${reaction.emoji}`}
 			style={[styles.reactionButton, { backgroundColor: reacted ? themes[theme].bannerBackground : themes[theme].backgroundColor }]}
 			background={Touchable.Ripple(themes[theme].bannerBackground)}
 			hitSlop={BUTTON_HIT_SLOP}
@@ -54,7 +54,7 @@ const Reaction = React.memo(({
 					baseUrl={baseUrl}
 					getCustomEmoji={getCustomEmoji}
 				/>
-				<Text style={[styles.reactionCount, { color: themes[theme].tintColor }]}>{ reaction.usernames.length }</Text>
+				<Text style={[styles.reactionCount, { color: themes[theme].tintColor }]}>{reaction.usernames.length}</Text>
 			</View>
 		</Touchable>
 	);
@@ -84,19 +84,22 @@ const Reactions = React.memo(({
 Reaction.propTypes = {
 	reaction: PropTypes.object,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Reaction.displayName = 'MessageReaction';
 
 Reactions.propTypes = {
 	reactions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Reactions.displayName = 'MessageReactions';
 
 AddReaction.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 AddReaction.displayName = 'MessageAddReaction';
 

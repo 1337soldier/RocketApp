@@ -35,31 +35,31 @@ const styles = StyleSheet.create({
 const Content = React.memo(({
 	title, subtitle, disabled, testID, left, right, color, theme
 }) => (
-	<View style={[styles.container, disabled && styles.disabled]} testID={testID}>
-		{left ? left() : null}
-		<View style={styles.textContainer}>
-			<Text style={[styles.title, { color: color || themes[theme].titleText }]}>{title}</Text>
-			{subtitle
-				? <Text style={[styles.subtitle, { color: themes[theme].bodyText }]}>{subtitle}</Text>
-				: null
-			}
+		<View style={[styles.container, disabled && styles.disabled]} testID={testID}>
+			{left ? left() : null}
+			<View style={styles.textContainer}>
+				<Text style={[styles.title, { color: color || themes[theme].titleText }]}>{title}</Text>
+				{subtitle
+					? <Text style={[styles.subtitle, { color: themes[theme].bodyText }]}>{subtitle}</Text>
+					: null
+				}
+			</View>
+			{right ? right() : null}
 		</View>
-		{right ? right() : null}
-	</View>
-));
+	));
 
 const Button = React.memo(({
 	onPress, ...props
 }) => (
-	<Touch
-		onPress={() => onPress(props.title)}
-		style={{ backgroundColor: themes[props.theme].backgroundColor }}
-		enabled={!props.disabled}
-		theme={props.theme}
-	>
-		<Content {...props} />
-	</Touch>
-));
+		<Touch
+			onPress={() => onPress(props.title)}
+			style={{ backgroundColor: themes[props.theme].backgroundColor }}
+			enabled={!props.disabled}
+			theme={props.theme}
+		>
+			<Content {...props} />
+		</Touch>
+	));
 
 const Item = React.memo(({ ...props }) => {
 	if (props.onPress) {
@@ -74,7 +74,7 @@ const Item = React.memo(({ ...props }) => {
 
 Item.propTypes = {
 	onPress: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 Content.propTypes = {
@@ -84,7 +84,8 @@ Content.propTypes = {
 	right: PropTypes.func,
 	disabled: PropTypes.bool,
 	testID: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	color: PropTypes.string
 };
 
@@ -92,7 +93,8 @@ Button.propTypes = {
 	title: PropTypes.string,
 	onPress: PropTypes.func,
 	disabled: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 Button.defaultProps = {

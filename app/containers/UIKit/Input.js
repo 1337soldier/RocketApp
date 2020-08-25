@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
 export const Input = ({
 	element, parser, label, description, error, hint, theme
 }) => (
-	<View style={styles.container}>
-		{label ? <Text style={[styles.label, { color: error ? themes[theme].dangerColor : themes[theme].titleText }]}>{label}</Text> : null}
-		{description ? <Text style={[styles.description, { color: themes[theme].auxiliaryText }]}>{description}</Text> : null}
-		{parser.renderInputs({ ...element }, BLOCK_CONTEXT.FORM, parser)}
-		{error ? <Text style={[styles.error, { color: themes[theme].dangerColor }]}>{error}</Text> : null}
-		{hint ? <Text style={[styles.hint, { color: themes[theme].auxiliaryText }]}>{hint}</Text> : null}
-	</View>
-);
+		<View style={styles.container}>
+			{label ? <Text style={[styles.label, { color: error ? themes[theme].dangerColor : themes[theme].titleText }]}>{label}</Text> : null}
+			{description ? <Text style={[styles.description, { color: themes[theme].auxiliaryText }]}>{description}</Text> : null}
+			{parser.renderInputs({ ...element }, BLOCK_CONTEXT.FORM, parser)}
+			{error ? <Text style={[styles.error, { color: themes[theme].dangerColor }]}>{error}</Text> : null}
+			{hint ? <Text style={[styles.hint, { color: themes[theme].auxiliaryText }]}>{hint}</Text> : null}
+		</View>
+	);
 
 Input.propTypes = {
 	element: PropTypes.object,
@@ -51,5 +51,6 @@ Input.propTypes = {
 	description: PropTypes.string,
 	error: PropTypes.string,
 	hint: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

@@ -22,7 +22,8 @@ const MessageError = React.memo(({ hasError, theme }) => {
 
 MessageError.propTypes = {
 	hasError: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 MessageError.displayName = 'MessageError';
 

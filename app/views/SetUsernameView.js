@@ -40,10 +40,11 @@ class SetUsernameView extends React.Component {
 		userId: PropTypes.string,
 		loginRequest: PropTypes.func,
 		token: PropTypes.string,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			username: '',
@@ -78,7 +79,7 @@ class SetUsernameView extends React.Component {
 		return false;
 	}
 
-	submit = async() => {
+	submit = async () => {
 		const { username } = this.state;
 		const { loginRequest, token } = this.props;
 

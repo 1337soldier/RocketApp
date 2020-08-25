@@ -39,7 +39,8 @@ const Mentions = React.memo(({ mentions, trackingType, theme }) => {
 Mentions.propTypes = {
 	mentions: PropTypes.array,
 	trackingType: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Mentions;

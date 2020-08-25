@@ -38,11 +38,12 @@ class CreateChannelView extends React.Component {
 		result: PropTypes.object,
 		failure: PropTypes.bool,
 		error: PropTypes.object,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		isMasterDetail: PropTypes.bool
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const { route } = props;
 		this.channel = route.params?.channel;

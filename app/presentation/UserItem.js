@@ -44,29 +44,29 @@ const styles = StyleSheet.create({
 const UserItem = ({
 	name, username, onPress, testID, onLongPress, style, icon, baseUrl, user, theme
 }) => (
-	<Pressable
-		onPress={onPress}
-		onLongPress={onLongPress}
-		testID={testID}
-		android_ripple={{
-			color: themes[theme].bannerBackground
-		}}
-		style={({ pressed }) => ({
-			backgroundColor: isIOS && pressed
-				? themes[theme].bannerBackground
-				: 'transparent'
-		})}
-	>
-		<View style={[styles.container, styles.button, style]}>
-			<Avatar text={username} size={30} type='d' style={styles.avatar} baseUrl={baseUrl} userId={user.id} token={user.token} />
-			<View style={styles.textContainer}>
-				<Text style={[styles.name, { color: themes[theme].titleText }]} numberOfLines={1}>{name}</Text>
-				<Text style={[styles.username, { color: themes[theme].auxiliaryText }]} numberOfLines={1}>@{username}</Text>
+		<Pressable
+			onPress={onPress}
+			onLongPress={onLongPress}
+			testID={testID}
+			android_ripple={{
+				color: themes[theme].bannerBackground
+			}}
+			style={({ pressed }) => ({
+				backgroundColor: isIOS && pressed
+					? themes[theme].bannerBackground
+					: 'transparent'
+			})}
+		>
+			<View style={[styles.container, styles.button, style]}>
+				<Avatar text={username} size={30} type='d' style={styles.avatar} baseUrl={baseUrl} userId={user.id} token={user.token} />
+				<View style={styles.textContainer}>
+					<Text style={[styles.name, { color: themes[theme].titleText }]} numberOfLines={1}>{name}</Text>
+					<Text style={[styles.username, { color: themes[theme].auxiliaryText }]} numberOfLines={1}>@{username}</Text>
+				</View>
+				{icon ? <CustomIcon name={icon} size={22} style={[styles.icon, { color: themes[theme].actionTintColor }]} /> : null}
 			</View>
-			{icon ? <CustomIcon name={icon} size={22} style={[styles.icon, { color: themes[theme].actionTintColor }]} /> : null}
-		</View>
-	</Pressable>
-);
+		</Pressable>
+	);
 
 UserItem.propTypes = {
 	name: PropTypes.string.isRequired,
@@ -81,7 +81,8 @@ UserItem.propTypes = {
 	onLongPress: PropTypes.func,
 	style: PropTypes.any,
 	icon: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default UserItem;

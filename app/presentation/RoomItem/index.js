@@ -78,17 +78,17 @@ const RoomItemContainer = React.memo(({
 
 	let accessibilityLabel = name;
 	if (item.unread === 1) {
-		accessibilityLabel += `, ${ item.unread } ${ I18n.t('alert') }`;
+		accessibilityLabel += `, ${item.unread} ${I18n.t('alert')}`;
 	} else if (item.unread > 1) {
-		accessibilityLabel += `, ${ item.unread } ${ I18n.t('alerts') }`;
+		accessibilityLabel += `, ${item.unread} ${I18n.t('alerts')}`;
 	}
 
 	if (item.userMentions > 0) {
-		accessibilityLabel += `, ${ I18n.t('you_were_mentioned') }`;
+		accessibilityLabel += `, ${I18n.t('you_were_mentioned')}`;
 	}
 
 	if (date) {
-		accessibilityLabel += `, ${ I18n.t('last_message') } ${ date }`;
+		accessibilityLabel += `, ${I18n.t('last_message')} ${date}`;
 	}
 
 	return (
@@ -150,7 +150,8 @@ RoomItemContainer.propTypes = {
 	useRealName: PropTypes.bool,
 	getUserPresence: PropTypes.func,
 	connected: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isFocused: PropTypes.bool,
 	getRoomTitle: PropTypes.func,
 	getRoomAvatar: PropTypes.func,
@@ -162,7 +163,7 @@ RoomItemContainer.propTypes = {
 RoomItemContainer.defaultProps = {
 	avatarSize: 48,
 	status: 'offline',
-	getUserPresence: () => {},
+	getUserPresence: () => { },
 	getRoomTitle: () => 'title',
 	getRoomAvatar: () => '',
 	getIsGroupChat: () => false,

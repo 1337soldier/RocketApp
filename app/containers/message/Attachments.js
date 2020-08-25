@@ -35,7 +35,8 @@ Attachments.propTypes = {
 	timeFormat: PropTypes.string,
 	showAttachment: PropTypes.func,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Attachments.displayName = 'MessageAttachments';
 

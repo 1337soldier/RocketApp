@@ -37,19 +37,19 @@ const styles = StyleSheet.create({
 const IconPreview = React.memo(({
 	iconName, title, description, theme, width, height, danger
 }) => (
-	<ScrollView
-		style={{ backgroundColor: themes[theme].auxiliaryBackground }}
-		contentContainerStyle={[styles.fileContainer, { width, height }]}
-	>
-		<CustomIcon
-			name={iconName}
-			size={56}
-			color={danger ? themes[theme].dangerColor : themes[theme].tintColor}
-		/>
-		<Text style={[styles.fileName, { color: themes[theme].titleText }]}>{title}</Text>
-		{description ? <Text style={[styles.fileSize, { color: themes[theme].bodyText }]}>{description}</Text> : null}
-	</ScrollView>
-));
+		<ScrollView
+			style={{ backgroundColor: themes[theme].auxiliaryBackground }}
+			contentContainerStyle={[styles.fileContainer, { width, height }]}
+		>
+			<CustomIcon
+				name={iconName}
+				size={56}
+				color={danger ? themes[theme].dangerColor : themes[theme].tintColor}
+			/>
+			<Text style={[styles.fileName, { color: themes[theme].titleText }]}>{title}</Text>
+			{description ? <Text style={[styles.fileSize, { color: themes[theme].bodyText }]}>{description}</Text> : null}
+		</ScrollView>
+	));
 
 const Preview = React.memo(({
 	item, theme, isShareExtension, length
@@ -120,7 +120,8 @@ const Preview = React.memo(({
 });
 Preview.propTypes = {
 	item: PropTypes.object,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isShareExtension: PropTypes.bool,
 	length: PropTypes.number
 };
@@ -129,7 +130,8 @@ IconPreview.propTypes = {
 	iconName: PropTypes.string,
 	title: PropTypes.string,
 	description: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	width: PropTypes.number,
 	height: PropTypes.number,
 	danger: PropTypes.bool

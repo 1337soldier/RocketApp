@@ -73,7 +73,7 @@ const Title = React.memo(({ attachment, timeFormat, theme }) => {
 	return (
 		<View style={styles.authorContainer}>
 			{attachment.author_name ? <Text style={[styles.author, { color: themes[theme].bodyText }]}>{attachment.author_name}</Text> : null}
-			{time ? <Text style={[styles.time, { color: themes[theme].auxiliaryText }]}>{ time }</Text> : null}
+			{time ? <Text style={[styles.time, { color: themes[theme].auxiliaryText }]}>{time}</Text> : null}
 		</View>
 	);
 });
@@ -139,9 +139,9 @@ const Reply = React.memo(({
 		}
 		if (attachment.type === 'file') {
 			if (!url.startsWith('http')) {
-				url = `${ baseUrl }${ url }`;
+				url = `${baseUrl}${url}`;
 			}
-			url = `${ url }?rc_uid=${ user.id }&rc_token=${ user.token }`;
+			url = `${url}?rc_uid=${user.id}&rc_token=${user.token}`;
 		}
 		openLink(url, theme);
 	};
@@ -177,7 +177,8 @@ Reply.propTypes = {
 	attachment: PropTypes.object,
 	timeFormat: PropTypes.string,
 	index: PropTypes.number,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	getCustomEmoji: PropTypes.func
 };
 Reply.displayName = 'MessageReply';
@@ -185,20 +186,23 @@ Reply.displayName = 'MessageReply';
 Title.propTypes = {
 	attachment: PropTypes.object,
 	timeFormat: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Title.displayName = 'MessageReplyTitle';
 
 Description.propTypes = {
 	attachment: PropTypes.object,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Description.displayName = 'MessageReplyDescription';
 
 Fields.propTypes = {
 	attachment: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Fields.displayName = 'MessageReplyFields';
 

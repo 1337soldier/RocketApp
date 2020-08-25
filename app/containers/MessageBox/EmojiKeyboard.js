@@ -11,10 +11,11 @@ import { withTheme } from '../../theme';
 
 export default class EmojiKeyboard extends React.PureComponent {
 	static propTypes = {
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const state = store.getState();
 		this.baseUrl = state.share.server || state.server.server;

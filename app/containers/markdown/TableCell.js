@@ -36,7 +36,8 @@ TableCell.propTypes = {
 	align: PropTypes.oneOf(['', 'left', 'center', 'right']),
 	children: PropTypes.node,
 	isLastCell: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default TableCell;

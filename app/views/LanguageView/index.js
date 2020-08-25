@@ -66,10 +66,11 @@ class LanguageView extends React.Component {
 		user: PropTypes.object,
 		setUser: PropTypes.func,
 		appStart: PropTypes.func,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			language: props.user ? props.user.language : 'en'
@@ -96,7 +97,7 @@ class LanguageView extends React.Component {
 		return (user.language !== language);
 	}
 
-	submit = async(language) => {
+	submit = async (language) => {
 		if (!this.formIsChanged(language)) {
 			return;
 		}
@@ -111,7 +112,7 @@ class LanguageView extends React.Component {
 		await appStart({ root: ROOT_INSIDE });
 	}
 
-	changeLanguage = async(language) => {
+	changeLanguage = async (language) => {
 		logEvent(events.LANG_SET_LANGUAGE);
 		const { user, setUser } = this.props;
 
@@ -128,7 +129,7 @@ class LanguageView extends React.Component {
 
 			const serversDB = database.servers;
 			const usersCollection = serversDB.collections.get('users');
-			await serversDB.action(async() => {
+			await serversDB.action(async () => {
 				try {
 					const userRecord = await usersCollection.find(user.id);
 					await userRecord.update((record) => {
@@ -165,7 +166,7 @@ class LanguageView extends React.Component {
 			<ListItem
 				title={label}
 				onPress={() => this.submit(value)}
-				testID={`language-view-${ value }`}
+				testID={`language-view-${value}`}
 				right={isSelected ? this.renderIcon : null}
 				theme={theme}
 			/>

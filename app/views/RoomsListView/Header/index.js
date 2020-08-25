@@ -21,7 +21,8 @@ class RoomsListHeaderView extends PureComponent {
 		connecting: PropTypes.bool,
 		connected: PropTypes.bool,
 		isFetching: PropTypes.bool,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		server: PropTypes.string,
 		open: PropTypes.func,
 		close: PropTypes.func,

@@ -18,14 +18,14 @@ const ImageProgress = createImageProgress(FastImage);
 const Button = React.memo(({
 	children, onPress, theme
 }) => (
-	<Touchable
-		onPress={onPress}
-		style={styles.imageContainer}
-		background={Touchable.Ripple(themes[theme].bannerBackground)}
-	>
-		{children}
-	</Touchable>
-));
+		<Touchable
+			onPress={onPress}
+			style={styles.imageContainer}
+			background={Touchable.Ripple(themes[theme].bannerBackground)}
+		>
+			{children}
+		</Touchable>
+	));
 
 export const MessageImage = React.memo(({ img, theme }) => (
 	<ImageProgress
@@ -72,21 +72,24 @@ ImageContainer.propTypes = {
 	file: PropTypes.object,
 	imageUrl: PropTypes.string,
 	showAttachment: PropTypes.func,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	getCustomEmoji: PropTypes.func
 };
 ImageContainer.displayName = 'MessageImageContainer';
 
 MessageImage.propTypes = {
 	img: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 ImageContainer.displayName = 'MessageImage';
 
 Button.propTypes = {
 	children: PropTypes.node,
 	onPress: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 ImageContainer.displayName = 'MessageButton';
 

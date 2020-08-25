@@ -63,7 +63,7 @@ const MessageInner = React.memo((props) => {
 MessageInner.displayName = 'MessageInner';
 
 const Message = React.memo((props) => {
-	const isMainUser = props.user.id === props.author._id
+	let isMainUser = props.user.id === props.author._id
 	if (props.isThreadReply || props.isThreadSequential || props.isInfo) {
 		const thread = props.isThreadReply ? <RepliedThread {...props} /> : null;
 		return (
@@ -132,13 +132,15 @@ const MessageTouchable = React.memo((props) => {
 MessageTouchable.displayName = 'MessageTouchable';
 
 MessageTouchable.propTypes = {
+	author: PropTypes.object,
 	hasError: PropTypes.bool,
 	isInfo: PropTypes.bool,
 	isTemp: PropTypes.bool,
-	archived: PropTypes.bool
+	archived: PropTypes.bool,
 };
 
 Message.propTypes = {
+	author: PropTypes.object,
 	isThreadReply: PropTypes.bool,
 	isThreadSequential: PropTypes.bool,
 	isInfo: PropTypes.bool,
@@ -149,7 +151,8 @@ Message.propTypes = {
 	onLongPress: PropTypes.func,
 	isReadReceiptEnabled: PropTypes.bool,
 	unread: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 MessageInner.propTypes = {

@@ -24,10 +24,11 @@ class OnboardingView extends React.Component {
 	static propTypes = {
 		navigation: PropTypes.object,
 		appStart: PropTypes.func,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		if (!isTablet) {
 			Orientation.lockToPortrait();
@@ -75,7 +76,7 @@ class OnboardingView extends React.Component {
 		navigation.navigate('NewServerView');
 	}
 
-	createWorkspace = async() => {
+	createWorkspace = async () => {
 		logEvent(events.ONBOARD_CREATE_NEW_WORKSPACE);
 		try {
 			await Linking.openURL('https://cloud.rocket.chat/trial');

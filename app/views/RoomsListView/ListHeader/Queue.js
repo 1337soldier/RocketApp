@@ -43,7 +43,8 @@ Queue.propTypes = {
 	goQueue: PropTypes.func,
 	queueSize: PropTypes.number,
 	inquiryEnabled: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(Queue);

@@ -14,7 +14,8 @@ const CancelEditingButton = React.memo(({ theme, onPress }) => (
 ));
 
 CancelEditingButton.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	onPress: PropTypes.func.isRequired
 };
 

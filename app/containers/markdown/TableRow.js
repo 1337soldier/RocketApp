@@ -25,7 +25,8 @@ const TableRow = React.memo(({
 TableRow.propTypes = {
 	children: PropTypes.node,
 	isLastRow: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default TableRow;

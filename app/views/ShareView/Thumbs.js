@@ -111,39 +111,39 @@ const ThumbContent = React.memo(({ item, theme, isShareExtension }) => {
 const Thumb = ({
 	item, theme, isShareExtension, onPress, onRemove
 }) => (
-	<ThumbButton style={styles.item} onPress={() => onPress(item)} activeOpacity={0.7}>
-		<>
-			<ThumbContent
-				item={item}
-				theme={theme}
-				isShareExtension={isShareExtension}
-			/>
-			<RectButton
-				hitSlop={BUTTON_HIT_SLOP}
-				style={[styles.removeButton, { backgroundColor: themes[theme].bodyText, borderColor: themes[theme].auxiliaryBackground }]}
-				activeOpacity={1}
-				rippleColor={themes[theme].bannerBackground}
-				onPress={() => onRemove(item)}
-			>
-				<View style={[styles.removeView, { borderColor: themes[theme].auxiliaryBackground }]}>
-					<CustomIcon
-						name='close'
-						color={themes[theme].backgroundColor}
-						size={14}
-					/>
-				</View>
-			</RectButton>
-			{!item?.canUpload ? (
-				<CustomIcon
-					name='warning'
-					size={20}
-					color={themes[theme].dangerColor}
-					style={styles.dangerIcon}
+		<ThumbButton style={styles.item} onPress={() => onPress(item)} activeOpacity={0.7}>
+			<>
+				<ThumbContent
+					item={item}
+					theme={theme}
+					isShareExtension={isShareExtension}
 				/>
-			) : null}
-		</>
-	</ThumbButton>
-);
+				<RectButton
+					hitSlop={BUTTON_HIT_SLOP}
+					style={[styles.removeButton, { backgroundColor: themes[theme].bodyText, borderColor: themes[theme].auxiliaryBackground }]}
+					activeOpacity={1}
+					rippleColor={themes[theme].bannerBackground}
+					onPress={() => onRemove(item)}
+				>
+					<View style={[styles.removeView, { borderColor: themes[theme].auxiliaryBackground }]}>
+						<CustomIcon
+							name='close'
+							color={themes[theme].backgroundColor}
+							size={14}
+						/>
+					</View>
+				</RectButton>
+				{!item?.canUpload ? (
+					<CustomIcon
+						name='warning'
+						size={20}
+						color={themes[theme].dangerColor}
+						style={styles.dangerIcon}
+					/>
+				) : null}
+			</>
+		</ThumbButton>
+	);
 
 const Thumbs = React.memo(({
 	attachments, theme, isShareExtension, onPress, onRemove
@@ -170,21 +170,24 @@ const Thumbs = React.memo(({
 });
 Thumbs.propTypes = {
 	attachments: PropTypes.array,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isShareExtension: PropTypes.bool,
 	onPress: PropTypes.func,
 	onRemove: PropTypes.func
 };
 Thumb.propTypes = {
 	item: PropTypes.object,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isShareExtension: PropTypes.bool,
 	onPress: PropTypes.func,
 	onRemove: PropTypes.func
 };
 ThumbContent.propTypes = {
 	item: PropTypes.object,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isShareExtension: PropTypes.bool
 };
 

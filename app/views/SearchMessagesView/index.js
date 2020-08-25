@@ -39,10 +39,11 @@ class SearchMessagesView extends React.Component {
 		user: PropTypes.object,
 		baseUrl: PropTypes.string,
 		customEmojis: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			loading: false,
@@ -75,7 +76,7 @@ class SearchMessagesView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	search = debounce(async(searchText) => {
+	search = debounce(async (searchText) => {
 		this.setState({ searchText, loading: true, messages: [] });
 
 		try {
@@ -127,7 +128,7 @@ class SearchMessagesView extends React.Component {
 				user={user}
 				timeFormat='MMM Do YYYY, h:mm:ss a'
 				isHeader
-				showAttachment={() => {}}
+				showAttachment={() => { }}
 				getCustomEmoji={this.getCustomEmoji}
 				navToRoomInfo={this.navToRoomInfo}
 				theme={theme}

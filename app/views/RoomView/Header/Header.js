@@ -73,7 +73,8 @@ const SubTitle = React.memo(({ usersTyping, subtitle, theme }) => {
 
 SubTitle.propTypes = {
 	usersTyping: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	subtitle: PropTypes.string
 };
 
@@ -109,7 +110,8 @@ HeaderTitle.propTypes = {
 	tmid: PropTypes.string,
 	prid: PropTypes.string,
 	scale: PropTypes.number,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const Header = React.memo(({
@@ -158,7 +160,8 @@ Header.propTypes = {
 	prid: PropTypes.string,
 	tmid: PropTypes.string,
 	status: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	usersTyping: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 	connecting: PropTypes.bool,
 	roomUserId: PropTypes.string,

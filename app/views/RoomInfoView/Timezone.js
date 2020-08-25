@@ -9,14 +9,15 @@ import Item from './Item';
 const Timezone = ({ utcOffset, Message_TimeFormat, theme }) => (utcOffset ? (
 	<Item
 		label={I18n.t('Timezone')}
-		content={`${ moment().utcOffset(utcOffset).format(Message_TimeFormat) } (UTC ${ utcOffset })`}
+		content={`${moment().utcOffset(utcOffset).format(Message_TimeFormat)} (UTC ${utcOffset})`}
 		theme={theme}
 	/>
 ) : null);
 Timezone.propTypes = {
 	utcOffset: PropTypes.number,
 	Message_TimeFormat: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const mapStateToProps = state => ({

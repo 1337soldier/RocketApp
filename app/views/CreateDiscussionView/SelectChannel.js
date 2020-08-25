@@ -16,7 +16,7 @@ const SelectChannel = ({
 }) => {
 	const [channels, setChannels] = useState([]);
 
-	const getChannels = debounce(async(keyword = '') => {
+	const getChannels = debounce(async (keyword = '') => {
 		try {
 			const res = await RocketChat.search({ text: keyword, filterUsers: false });
 			setChannels(res);
@@ -45,7 +45,7 @@ const SelectChannel = ({
 					imageUrl: getAvatar(RocketChat.getRoomAvatar(channel), channel.t)
 				}))}
 				onClose={() => setChannels([])}
-				placeholder={{ text: `${ I18n.t('Select_a_Channel') }...` }}
+				placeholder={{ text: `${I18n.t('Select_a_Channel')}...` }}
 			/>
 		</>
 	);
@@ -56,7 +56,8 @@ SelectChannel.propTypes = {
 	userId: PropTypes.string,
 	initial: PropTypes.object,
 	onChannelSelect: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default SelectChannel;

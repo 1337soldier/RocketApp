@@ -44,7 +44,8 @@ export const Media = ({ element, theme }) => {
 };
 Media.propTypes = {
 	element: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const genericImage = (element, context, theme) => {

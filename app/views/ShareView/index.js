@@ -30,7 +30,7 @@ import database from '../../lib/database';
 import { canUploadFile } from '../../utils/media';
 
 class ShareView extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.messagebox = React.createRef();
 		this.files = props.route.params?.attachments ?? [];
@@ -51,14 +51,14 @@ class ShareView extends Component {
 		this.getServerInfo();
 	}
 
-	componentDidMount = async() => {
+	componentDidMount = async () => {
 		const readOnly = await this.getReadOnly();
 		const { attachments, selected } = await this.getAttachments();
 		this.setState({ readOnly, attachments, selected }, () => this.setHeader());
 	}
 
 	componentWillUnmount = () => {
-		console.countReset(`${ this.constructor.name }.render calls`);
+		console.countReset(`${this.constructor.name}.render calls`);
 	}
 
 	setHeader = () => {
@@ -96,7 +96,7 @@ class ShareView extends Component {
 	}
 
 	// fetch server info
-	getServerInfo = async() => {
+	getServerInfo = async () => {
 		const { server } = this.props;
 		const serversDB = database.servers;
 		const serversCollection = serversDB.collections.get('servers');
@@ -107,16 +107,16 @@ class ShareView extends Component {
 		}
 	}
 
-	getReadOnly = async() => {
+	getReadOnly = async () => {
 		const { room } = this.state;
 		const { user } = this.props;
 		const readOnly = await isReadOnly(room, user);
 		return readOnly;
 	}
 
-	getAttachments = async() => {
+	getAttachments = async () => {
 		const { mediaAllowList, maxFileSize } = this.state;
-		const items = await Promise.all(this.files.map(async(item) => {
+		const items = await Promise.all(this.files.map(async (item) => {
 			// Check server settings
 			const { success: canUpload, error } = canUploadFile(item, mediaAllowList, maxFileSize);
 			item.canUpload = canUpload;
@@ -144,7 +144,7 @@ class ShareView extends Component {
 		};
 	}
 
-	send = async() => {
+	send = async () => {
 		const { loading, selected } = this.state;
 		if (loading) {
 			return;
@@ -162,7 +162,7 @@ class ShareView extends Component {
 		if (this.isShareExtension) {
 			this.setState({ loading: true });
 
-		// if it's not share extension this can close
+			// if it's not share extension this can close
 		} else {
 			navigation.pop();
 		}
@@ -197,7 +197,7 @@ class ShareView extends Component {
 					return Promise.resolve();
 				}));
 
-			// Send text message
+				// Send text message
 			} else if (text.length) {
 				await RocketChat.sendMessage(room.rid, text, thread?.id, { id: user.id, token: user.token });
 			}
@@ -233,7 +233,7 @@ class ShareView extends Component {
 			// Selects the next one, if available
 			if (attachments[selectedIndex + 1]?.path) {
 				newSelected = attachments[selectedIndex + 1];
-			// If it's the last thumb, selects the previous one
+				// If it's the last thumb, selects the previous one
 			} else {
 				newSelected = attachments[selectedIndex - 1] || {};
 			}
@@ -309,7 +309,7 @@ class ShareView extends Component {
 	};
 
 	render() {
-		console.count(`${ this.constructor.name }.render calls`);
+		console.count(`${this.constructor.name}.render calls`);
 		const { readOnly, room, loading } = this.state;
 		const { theme } = this.props;
 		if (readOnly || isBlocked(room)) {
@@ -337,7 +337,8 @@ class ShareView extends Component {
 ShareView.propTypes = {
 	navigation: PropTypes.object,
 	route: PropTypes.object,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	user: PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		username: PropTypes.string.isRequired,

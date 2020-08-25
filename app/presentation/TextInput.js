@@ -16,7 +16,8 @@ const ThemedTextInput = React.forwardRef(({ style, theme, ...props }, ref) => (
 
 ThemedTextInput.propTypes = {
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  ,
 };
 
 export default ThemedTextInput;

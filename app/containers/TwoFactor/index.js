@@ -134,7 +134,8 @@ const TwoFactor = React.memo(({ theme, isMasterDetail }) => {
 	);
 });
 TwoFactor.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	isMasterDetail: PropTypes.bool
 };
 

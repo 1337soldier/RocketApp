@@ -282,11 +282,12 @@ export class ImageViewer extends React.Component {
 		uri: PropTypes.string,
 		width: PropTypes.number,
 		height: PropTypes.number,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		imageComponentType: PropTypes.string
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		// DECLARE TRANSX

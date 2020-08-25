@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 export const ModalContainer = ({ navigation, children, theme }) => (
-	<View style={[styles.root, { backgroundColor: `${ themes[theme].backdropColor }70` }]}>
+	<View style={[styles.root, { backgroundColor: `${themes[theme].backdropColor}70` }]}>
 		<TouchableWithoutFeedback onPress={() => navigation.pop()}>
 			<View style={styles.backdrop} />
 		</TouchableWithoutFeedback>
@@ -30,5 +30,6 @@ export const ModalContainer = ({ navigation, children, theme }) => (
 ModalContainer.propTypes = {
 	navigation: PropTypes.object,
 	children: PropTypes.element,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

@@ -41,11 +41,12 @@ class RoomMembersView extends React.Component {
 			token: PropTypes.string
 		}),
 		showActionSheet: PropTypes.func,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		isMasterDetail: PropTypes.bool
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.mounted = false;
 		this.MUTE_INDEX = 0;
@@ -114,7 +115,7 @@ class RoomMembersView extends React.Component {
 		this.setState({ filtering: !!text, membersFiltered });
 	})
 
-	onPressUser = async(item) => {
+	onPressUser = async (item) => {
 		try {
 			const db = database.active;
 			const subsCollection = db.collections.get('subscriptions');
@@ -150,7 +151,7 @@ class RoomMembersView extends React.Component {
 				title: I18n.t(userIsMuted ? 'Unmute' : 'Mute'),
 				onPress: () => {
 					showConfirmationAlert({
-						message: I18n.t(`The_user_${ userIsMuted ? 'will' : 'wont' }_be_able_to_type_in_roomName`, {
+						message: I18n.t(`The_user_${userIsMuted ? 'will' : 'wont'}_be_able_to_type_in_roomName`, {
 							roomName: RocketChat.getRoomTitle(room)
 						}),
 						callToAction: I18n.t(userIsMuted ? 'Unmute' : 'Mute'),
@@ -174,7 +175,7 @@ class RoomMembersView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	fetchMembers = async() => {
+	fetchMembers = async () => {
 		const {
 			rid, members, isLoading, allUsers, end
 		} = this.state;
@@ -208,7 +209,7 @@ class RoomMembersView extends React.Component {
 		goRoom({ item, isMasterDetail });
 	}
 
-	handleMute = async(user) => {
+	handleMute = async (user) => {
 		const { rid } = this.state;
 		try {
 			await RocketChat.toggleMuteUserInRoom(rid, user?.username, !user?.muted);
@@ -237,7 +238,7 @@ class RoomMembersView extends React.Component {
 				onPress={() => this.onPressUser(item)}
 				onLongPress={() => this.onLongPressUser(item)}
 				baseUrl={baseUrl}
-				testID={`room-members-view-item-${ item.username }`}
+				testID={`room-members-view-item-${item.username}`}
 				user={user}
 				theme={theme}
 			/>

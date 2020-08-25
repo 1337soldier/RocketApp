@@ -37,10 +37,11 @@ class SelectServerView extends React.Component {
 		server: PropTypes.string,
 		route: PropTypes.object,
 		navigation: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const { route } = this.props;
 		const servers = route.params?.servers ?? [];
@@ -50,7 +51,7 @@ class SelectServerView extends React.Component {
 		};
 	}
 
-	select = async(server) => {
+	select = async (server) => {
 		const {
 			server: currentServer, navigation
 		} = this.props;

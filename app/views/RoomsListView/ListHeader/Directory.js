@@ -38,7 +38,8 @@ const Directory = React.memo(({ goDirectory, theme, searching }) => {
 Directory.propTypes = {
 	searching: PropTypes.bool,
 	goDirectory: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(Directory);

@@ -63,7 +63,8 @@ Video.propTypes = {
 	file: PropTypes.object,
 	showAttachment: PropTypes.func,
 	getCustomEmoji: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Video;

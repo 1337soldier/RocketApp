@@ -49,7 +49,7 @@ const RoomTypeIcon = React.memo(({
 });
 
 RoomTypeIcon.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	type: PropTypes.string,
 	isGroupChat: PropTypes.bool,
 	status: PropTypes.string,

@@ -17,7 +17,7 @@ const SelectUsers = ({
 }) => {
 	const [users, setUsers] = useState([]);
 
-	const getUsers = debounce(async(keyword = '') => {
+	const getUsers = debounce(async (keyword = '') => {
 		try {
 			const res = await RocketChat.search({ text: keyword, filterRooms: false });
 			setUsers([...users.filter(u => selected.includes(u.name)), ...res.filter(r => !users.find(u => u.name === r.name))]);
@@ -44,7 +44,7 @@ const SelectUsers = ({
 					imageUrl: getAvatar(RocketChat.getRoomAvatar(user))
 				}))}
 				onClose={() => setUsers(users.filter(u => selected.includes(u.name)))}
-				placeholder={{ text: `${ I18n.t('Select_Users') }...` }}
+				placeholder={{ text: `${I18n.t('Select_Users')}...` }}
 				context={BLOCK_CONTEXT.FORM}
 				multiselect
 			/>
@@ -57,7 +57,8 @@ SelectUsers.propTypes = {
 	userId: PropTypes.string,
 	selected: PropTypes.array,
 	onUserSelect: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default SelectUsers;

@@ -37,8 +37,8 @@ const PERMISSION_EDIT_ROOM = 'edit-room';
 const getRoomTitle = (room, type, name, username, statusText, theme) => (type === 'd'
 	? (
 		<>
-			<Text testID='room-info-view-name' style={[styles.roomTitle, { color: themes[theme].titleText }]}>{ name }</Text>
-			{username && <Text testID='room-info-view-username' style={[styles.roomUsername, { color: themes[theme].auxiliaryText }]}>{`@${ username }`}</Text>}
+			<Text testID='room-info-view-name' style={[styles.roomTitle, { color: themes[theme].titleText }]}>{name}</Text>
+			{username && <Text testID='room-info-view-username' style={[styles.roomUsername, { color: themes[theme].auxiliaryText }]}>{`@${username}`}</Text>}
 			{!!statusText && <View testID='room-info-view-custom-status'><Markdown msg={statusText} style={[styles.roomUsername, { color: themes[theme].auxiliaryText }]} preview theme={theme} /></View>}
 		</>
 	)
@@ -60,12 +60,13 @@ class RoomInfoView extends React.Component {
 		}),
 		baseUrl: PropTypes.string,
 		rooms: PropTypes.array,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		isMasterDetail: PropTypes.bool,
 		jitsiEnabled: PropTypes.bool
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		const room = props.route.params?.room;
 		const roomUser = props.route.params?.member;
@@ -119,7 +120,7 @@ class RoomInfoView extends React.Component {
 							iconName='edit'
 							onPress={() => {
 								const isLivechat = t === 'l';
-								logEvent(events[`RI_GO_${ isLivechat ? 'LIVECHAT' : 'RI' }_EDIT`]);
+								logEvent(events[`RI_GO_${isLivechat ? 'LIVECHAT' : 'RI'}_EDIT`]);
 								navigation.navigate(isLivechat ? 'LivechatEditView' : 'RoomInfoEditView', { rid, room, roomUser });
 							}}
 							testID='room-info-view-edit-button'
@@ -140,7 +141,7 @@ class RoomInfoView extends React.Component {
 		return room.t === 'l';
 	}
 
-	getRoleDescription = async(id) => {
+	getRoleDescription = async (id) => {
 		const db = database.active;
 		try {
 			const rolesCollection = db.collections.get('roles');
@@ -154,7 +155,7 @@ class RoomInfoView extends React.Component {
 		}
 	};
 
-	loadVisitor = async() => {
+	loadVisitor = async () => {
 		const { room } = this.state;
 		try {
 			const result = await RocketChat.getVisitorInfo(room?.visitor?._id);
@@ -163,8 +164,8 @@ class RoomInfoView extends React.Component {
 				if (visitor.userAgent) {
 					const ua = new UAParser();
 					ua.setUA(visitor.userAgent);
-					visitor.os = `${ ua.getOS().name } ${ ua.getOS().version }`;
-					visitor.browser = `${ ua.getBrowser().name } ${ ua.getBrowser().version }`;
+					visitor.os = `${ua.getOS().name} ${ua.getOS().version}`;
+					visitor.browser = `${ua.getBrowser().name} ${ua.getBrowser().version}`;
 				}
 				this.setState({ roomUser: visitor }, () => this.setHeader());
 			}
@@ -173,7 +174,7 @@ class RoomInfoView extends React.Component {
 		}
 	}
 
-	loadUser = async() => {
+	loadUser = async () => {
 		const { room, roomUser } = this.state;
 
 		if (_.isEmpty(roomUser)) {
@@ -184,7 +185,7 @@ class RoomInfoView extends React.Component {
 					const { user } = result;
 					const { roles } = user;
 					if (roles && roles.length) {
-						user.parsedRoles = await Promise.all(roles.map(async(role) => {
+						user.parsedRoles = await Promise.all(roles.map(async (role) => {
 							const description = await this.getRoleDescription(role);
 							return description;
 						}));
@@ -198,7 +199,7 @@ class RoomInfoView extends React.Component {
 		}
 	}
 
-	loadRoom = async() => {
+	loadRoom = async () => {
 		const { room: roomState } = this.state;
 		const { route } = this.props;
 		let room = route.params?.room;
@@ -226,7 +227,7 @@ class RoomInfoView extends React.Component {
 		}
 	}
 
-	createDirect = () => new Promise(async(resolve, reject) => {
+	createDirect = () => new Promise(async (resolve, reject) => {
 		const { route } = this.props;
 
 		// We don't need to create a direct
@@ -307,7 +308,7 @@ class RoomInfoView extends React.Component {
 	renderButton = (onPress, iconName, text) => {
 		const { theme } = this.props;
 
-		const onActionPress = async() => {
+		const onActionPress = async () => {
 			try {
 				await this.createDirect();
 				onPress();
@@ -366,7 +367,7 @@ class RoomInfoView extends React.Component {
 				>
 					<View style={[styles.avatarContainer, this.isDirect && styles.avatarContainerDirectRoom, { backgroundColor: themes[theme].auxiliaryBackground }]}>
 						{this.renderAvatar(room, roomUser)}
-						<View style={styles.roomTitleContainer}>{ getRoomTitle(room, this.t, roomUser?.name, roomUser?.username, roomUser?.statusText, theme) }</View>
+						<View style={styles.roomTitleContainer}>{getRoomTitle(room, this.t, roomUser?.name, roomUser?.username, roomUser?.statusText, theme)}</View>
 						{this.isDirect ? this.renderButtons() : null}
 					</View>
 					{this.renderContent()}

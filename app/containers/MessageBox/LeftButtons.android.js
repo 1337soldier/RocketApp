@@ -20,7 +20,8 @@ const LeftButtons = React.memo(({
 });
 
 LeftButtons.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	showEmojiKeyboard: PropTypes.bool,
 	openEmoji: PropTypes.func.isRequired,
 	closeEmoji: PropTypes.func.isRequired,

@@ -70,24 +70,25 @@ const sliderAnimationConfig = {
 const Button = React.memo(({
 	loading, paused, onPress, theme
 }) => (
-	<Touchable
-		style={styles.playPauseButton}
-		onPress={onPress}
-		hitSlop={BUTTON_HIT_SLOP}
-		background={Touchable.SelectableBackgroundBorderless()}
-	>
-		{
-			loading
-				? <ActivityIndicator style={[styles.playPauseButton, styles.audioLoading]} theme={theme} />
-				: <CustomIcon name={paused ? 'play-filled' : 'pause-filled'} size={36} color={themes[theme].tintColor} />
-		}
-	</Touchable>
-));
+		<Touchable
+			style={styles.playPauseButton}
+			onPress={onPress}
+			hitSlop={BUTTON_HIT_SLOP}
+			background={Touchable.SelectableBackgroundBorderless()}
+		>
+			{
+				loading
+					? <ActivityIndicator style={[styles.playPauseButton, styles.audioLoading]} theme={theme} />
+					: <CustomIcon name={paused ? 'play-filled' : 'pause-filled'} size={36} color={themes[theme].tintColor} />
+			}
+		</Touchable>
+	));
 
 Button.propTypes = {
 	loading: PropTypes.bool,
 	paused: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	onPress: PropTypes.func
 };
 Button.displayName = 'MessageAudioButton';
@@ -97,12 +98,13 @@ class MessageAudio extends React.Component {
 
 	static propTypes = {
 		file: PropTypes.object.isRequired,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		getCustomEmoji: PropTypes.func,
 		scale: PropTypes.number
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			loading: false,
@@ -121,12 +123,12 @@ class MessageAudio extends React.Component {
 
 		let url = file.audio_url;
 		if (!url.startsWith('http')) {
-			url = `${ baseUrl }${ file.audio_url }`;
+			url = `${baseUrl}${file.audio_url}`;
 		}
 
 		this.setState({ loading: true });
 		try {
-			await this.sound.loadAsync({ uri: `${ url }?rc_uid=${ user.id }&rc_token=${ user.token }` });
+			await this.sound.loadAsync({ uri: `${url}?rc_uid=${user.id}&rc_token=${user.token}` });
 		} catch {
 			// Do nothing
 		}
@@ -197,7 +199,7 @@ class MessageAudio extends React.Component {
 		}
 	}
 
-	onEnd = async(data) => {
+	onEnd = async (data) => {
 		if (data.didJustFinish) {
 			try {
 				await this.sound.stopAsync();
@@ -218,7 +220,7 @@ class MessageAudio extends React.Component {
 		this.setState({ paused: !paused }, this.playPause);
 	}
 
-	playPause = async() => {
+	playPause = async () => {
 		const { paused } = this.state;
 		try {
 			if (paused) {
@@ -232,7 +234,7 @@ class MessageAudio extends React.Component {
 		}
 	}
 
-	onValueChange = async(value) => {
+	onValueChange = async (value) => {
 		try {
 			this.setState({ currentTime: value });
 			await this.sound.setPositionAsync(value * 1000);

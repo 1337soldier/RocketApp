@@ -33,7 +33,8 @@ export default class Button extends React.PureComponent {
     disabled: PropTypes.bool,
     backgroundColor: PropTypes.string,
     loading: PropTypes.bool,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    ,
     color: PropTypes.string,
     fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     style: PropTypes.any,
@@ -79,10 +80,10 @@ export default class Button extends React.PureComponent {
           backgroundColor
             ? { backgroundColor }
             : {
-                backgroundColor: isPrimary
-                  ? themes[theme].actionTintColor
-                  : themes[theme].backgroundColor,
-              },
+              backgroundColor: isPrimary
+                ? themes[theme].actionTintColor
+                : themes[theme].backgroundColor,
+            },
           disabled && styles.disabled,
           style,
         ]}
@@ -91,16 +92,16 @@ export default class Button extends React.PureComponent {
         {loading ? (
           <ActivityIndicator color={textColor} />
         ) : (
-          <Text
-            style={[
-              styles.text,
-              { color: textColor },
-              fontSize && { fontSize },
-            ]}
-          >
-            {title}
-          </Text>
-        )}
+            <Text
+              style={[
+                styles.text,
+                { color: textColor },
+                fontSize && { fontSize },
+              ]}
+            >
+              {title}
+            </Text>
+          )}
       </Touchable>
     );
   }

@@ -41,22 +41,23 @@ const RECORDING_MODE = {
 	interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
 };
 
-const formatTime = function(seconds) {
+const formatTime = function (seconds) {
 	let minutes = Math.floor(seconds / 60);
 	seconds %= 60;
-	if (minutes < 10) { minutes = `0${ minutes }`; }
-	if (seconds < 10) { seconds = `0${ seconds }`; }
-	return `${ minutes }:${ seconds }`;
+	if (minutes < 10) { minutes = `0${minutes}`; }
+	if (seconds < 10) { seconds = `0${seconds}`; }
+	return `${minutes}:${seconds}`;
 };
 
 export default class RecordAudio extends React.PureComponent {
 	static propTypes = {
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		recordingCallback: PropTypes.func,
 		onFinish: PropTypes.func
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.isRecorderBusy = false;
 		this.state = {
@@ -83,7 +84,7 @@ export default class RecordAudio extends React.PureComponent {
 		return formatTime(Math.floor(recordingDurationMillis / 1000));
 	}
 
-	isRecordingPermissionGranted = async() => {
+	isRecordingPermissionGranted = async () => {
 		try {
 			const permission = await Audio.getPermissionsAsync();
 			if (permission.status === 'granted') {
@@ -103,7 +104,7 @@ export default class RecordAudio extends React.PureComponent {
 		});
 	}
 
-	startRecordingAudio = async() => {
+	startRecordingAudio = async () => {
 		logEvent(events.ROOM_AUDIO_RECORD);
 		if (!this.isRecorderBusy) {
 			this.isRecorderBusy = true;
@@ -128,7 +129,7 @@ export default class RecordAudio extends React.PureComponent {
 		}
 	};
 
-	finishRecordingAudio = async() => {
+	finishRecordingAudio = async () => {
 		logEvent(events.ROOM_AUDIO_FINISH);
 		if (!this.isRecorderBusy) {
 			const { onFinish } = this.props;
@@ -140,7 +141,7 @@ export default class RecordAudio extends React.PureComponent {
 				const fileURI = this.recording.getURI();
 				const fileData = await getInfoAsync(fileURI);
 				const fileInfo = {
-					name: `${ Date.now() }.aac`,
+					name: `${Date.now()}.aac`,
 					mime: 'audio/aac',
 					type: 'audio/aac',
 					store: 'Uploads',
@@ -158,7 +159,7 @@ export default class RecordAudio extends React.PureComponent {
 		}
 	};
 
-	cancelRecordingAudio = async() => {
+	cancelRecordingAudio = async () => {
 		logEvent(events.ROOM_AUDIO_CANCEL);
 		if (!this.isRecorderBusy) {
 			this.isRecorderBusy = true;

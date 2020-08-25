@@ -65,7 +65,7 @@ class LoginServices extends React.PureComponent {
 		CAS_enabled: PropTypes.bool,
 		CAS_login_url: PropTypes.string,
 		separator: PropTypes.bool,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 	}
 
 	static defaultProps = {
@@ -82,23 +82,23 @@ class LoginServices extends React.PureComponent {
 		const { services, server } = this.props;
 		const { clientId } = services.facebook;
 		const endpoint = 'https://m.facebook.com/v2.9/dialog/oauth';
-		const redirect_uri = `${ server }/_oauth/facebook?close`;
+		const redirect_uri = `${server}/_oauth/facebook?close`;
 		const scope = 'email';
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&scope=${ scope }&state=${ state }&display=touch`;
-		this.openOAuth({ url: `${ endpoint }${ params }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&display=touch`;
+		this.openOAuth({ url: `${endpoint}${params}` });
 	}
 
 	onPressGithub = () => {
 		logEvent(events.ENTER_WITH_GITHUB);
 		const { services, server } = this.props;
 		const { clientId } = services.github;
-		const endpoint = `https://github.com/login?client_id=${ clientId }&return_to=${ encodeURIComponent('/login/oauth/authorize') }`;
-		const redirect_uri = `${ server }/_oauth/github?close`;
+		const endpoint = `https://github.com/login?client_id=${clientId}&return_to=${encodeURIComponent('/login/oauth/authorize')}`;
+		const redirect_uri = `${server}/_oauth/github?close`;
 		const scope = 'user:email';
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&scope=${ scope }&state=${ state }`;
-		this.openOAuth({ url: `${ endpoint }${ encodeURIComponent(params) }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}`;
+		this.openOAuth({ url: `${endpoint}${encodeURIComponent(params)}` });
 	}
 
 	onPressGitlab = () => {
@@ -106,12 +106,12 @@ class LoginServices extends React.PureComponent {
 		const { services, server, Gitlab_URL } = this.props;
 		const { clientId } = services.gitlab;
 		const baseURL = Gitlab_URL ? Gitlab_URL.trim().replace(/\/*$/, '') : 'https://gitlab.com';
-		const endpoint = `${ baseURL }/oauth/authorize`;
-		const redirect_uri = `${ server }/_oauth/gitlab?close`;
+		const endpoint = `${baseURL}/oauth/authorize`;
+		const redirect_uri = `${server}/_oauth/gitlab?close`;
 		const scope = 'read_user';
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&scope=${ scope }&state=${ state }&response_type=code`;
-		this.openOAuth({ url: `${ endpoint }${ params }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&response_type=code`;
+		this.openOAuth({ url: `${endpoint}${params}` });
 	}
 
 	onPressGoogle = () => {
@@ -119,11 +119,11 @@ class LoginServices extends React.PureComponent {
 		const { services, server } = this.props;
 		const { clientId } = services.google;
 		const endpoint = 'https://accounts.google.com/o/oauth2/auth';
-		const redirect_uri = `${ server }/_oauth/google?close`;
+		const redirect_uri = `${server}/_oauth/google?close`;
 		const scope = 'email';
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&scope=${ scope }&state=${ state }&response_type=code`;
-		this.openOAuth({ url: `${ endpoint }${ params }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&response_type=code`;
+		this.openOAuth({ url: `${endpoint}${params}` });
 	}
 
 	onPressLinkedin = () => {
@@ -131,11 +131,11 @@ class LoginServices extends React.PureComponent {
 		const { services, server } = this.props;
 		const { clientId } = services.linkedin;
 		const endpoint = 'https://www.linkedin.com/oauth/v2/authorization';
-		const redirect_uri = `${ server }/_oauth/linkedin?close`;
+		const redirect_uri = `${server}/_oauth/linkedin?close`;
 		const scope = 'r_liteprofile,r_emailaddress';
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&scope=${ scope }&state=${ state }&response_type=code`;
-		this.openOAuth({ url: `${ endpoint }${ params }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&response_type=code`;
+		this.openOAuth({ url: `${endpoint}${params}` });
 	}
 
 	onPressMeteor = () => {
@@ -143,17 +143,17 @@ class LoginServices extends React.PureComponent {
 		const { services, server } = this.props;
 		const { clientId } = services['meteor-developer'];
 		const endpoint = 'https://www.meteor.com/oauth2/authorize';
-		const redirect_uri = `${ server }/_oauth/meteor-developer`;
+		const redirect_uri = `${server}/_oauth/meteor-developer`;
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&state=${ state }&response_type=code`;
-		this.openOAuth({ url: `${ endpoint }${ params }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&state=${state}&response_type=code`;
+		this.openOAuth({ url: `${endpoint}${params}` });
 	}
 
 	onPressTwitter = () => {
 		logEvent(events.ENTER_WITH_TWITTER);
 		const { server } = this.props;
 		const state = this.getOAuthState();
-		const url = `${ server }/_oauth/twitter/?requestTokenAndRedirect=true&state=${ state }`;
+		const url = `${server}/_oauth/twitter/?requestTokenAndRedirect=true&state=${state}`;
 		this.openOAuth({ url });
 	}
 
@@ -161,12 +161,12 @@ class LoginServices extends React.PureComponent {
 		logEvent(events.ENTER_WITH_WORDPRESS);
 		const { services, server } = this.props;
 		const { clientId, serverURL } = services.wordpress;
-		const endpoint = `${ serverURL }/oauth/authorize`;
-		const redirect_uri = `${ server }/_oauth/wordpress?close`;
+		const endpoint = `${serverURL}/oauth/authorize`;
+		const redirect_uri = `${server}/_oauth/wordpress?close`;
 		const scope = 'openid';
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirect_uri }&scope=${ scope }&state=${ state }&response_type=code`;
-		this.openOAuth({ url: `${ endpoint }${ params }` });
+		const params = `?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&response_type=code`;
+		this.openOAuth({ url: `${endpoint}${params}` });
 	}
 
 	onPressCustomOAuth = (loginService) => {
@@ -175,11 +175,11 @@ class LoginServices extends React.PureComponent {
 		const {
 			serverURL, authorizePath, clientId, scope, service
 		} = loginService;
-		const redirectUri = `${ server }/_oauth/${ service }`;
+		const redirectUri = `${server}/_oauth/${service}`;
 		const state = this.getOAuthState();
-		const params = `?client_id=${ clientId }&redirect_uri=${ redirectUri }&response_type=code&state=${ state }&scope=${ scope }`;
-		const domain = `${ serverURL }`;
-		const absolutePath = `${ authorizePath }${ params }`;
+		const params = `?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&state=${state}&scope=${scope}`;
+		const domain = `${serverURL}`;
+		const absolutePath = `${authorizePath}${params}`;
 		const url = absolutePath.includes(domain) ? absolutePath : domain + absolutePath;
 		this.openOAuth({ url });
 	}
@@ -187,10 +187,10 @@ class LoginServices extends React.PureComponent {
 	onPressSaml = (loginService) => {
 		logEvent(events.ENTER_WITH_SAML);
 		const { server } = this.props;
-		const {	clientConfig } = loginService;
-		const {	provider } = clientConfig;
+		const { clientConfig } = loginService;
+		const { provider } = clientConfig;
 		const ssoToken = random(17);
-		const url = `${ server }/_saml/authorize/${ provider }/${ ssoToken }`;
+		const url = `${server}/_saml/authorize/${provider}/${ssoToken}`;
 		this.openOAuth({ url, ssoToken, authType: 'saml' });
 	}
 
@@ -198,11 +198,11 @@ class LoginServices extends React.PureComponent {
 		logEvent(events.ENTER_WITH_CAS);
 		const { server, CAS_login_url } = this.props;
 		const ssoToken = random(17);
-		const url = `${ CAS_login_url }?service=${ server }/_cas/${ ssoToken }`;
+		const url = `${CAS_login_url}?service=${server}/_cas/${ssoToken}`;
 		this.openOAuth({ url, ssoToken, authType: 'cas' });
 	}
 
-	onPressAppleLogin = async() => {
+	onPressAppleLogin = async () => {
 		logEvent(events.ENTER_WITH_APPLE);
 		try {
 			const { fullName, email, identityToken } = await AppleAuthentication.signInAsync({
@@ -296,9 +296,9 @@ class LoginServices extends React.PureComponent {
 		const { CAS_enabled, theme } = this.props;
 		let { name } = service;
 		name = name === 'meteor-developer' ? 'meteor' : name;
-		const icon = `icon_${ name }`;
+		const icon = `icon_${name}`;
 		const isSaml = service.service === 'saml';
-		let onPress = () => {};
+		let onPress = () => { };
 
 		switch (service.authType) {
 			case 'oauth': {

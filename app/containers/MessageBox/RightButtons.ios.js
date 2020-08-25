@@ -11,7 +11,8 @@ const RightButtons = React.memo(({ theme, showSend, submit }) => {
 });
 
 RightButtons.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	showSend: PropTypes.bool,
 	submit: PropTypes.func.isRequired
 };

@@ -28,14 +28,15 @@ class InviteUsersView extends React.Component {
 	static propTypes = {
 		navigation: PropTypes.object,
 		route: PropTypes.object,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		timeDateFormat: PropTypes.string,
 		invite: PropTypes.object,
 		createInviteLink: PropTypes.func,
 		clearInviteLink: PropTypes.func
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.rid = props.route.params?.rid;
 	}

@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
 const Title = ({ title, theme }) => (title ? <Text style={[styles.title, { color: themes[theme].titleText }]}>{title}</Text> : null);
 Title.propTypes = {
 	title: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const LivechatEditView = ({
@@ -48,7 +49,7 @@ const LivechatEditView = ({
 	const livechat = route.params?.room ?? {};
 	const visitor = route.params?.roomUser ?? {};
 
-	const getCustomFields = async() => {
+	const getCustomFields = async () => {
 		const result = await RocketChat.getCustomFields();
 		if (result.success && result.customFields?.length) {
 			const visitorCustomFields = result.customFields
@@ -71,7 +72,7 @@ const LivechatEditView = ({
 		setTags([...tagParam, ...availableUserTags]);
 	}, [availableUserTags]);
 
-	const getTagsList = async(agentDepartments) => {
+	const getTagsList = async (agentDepartments) => {
 		const tags = await RocketChat.getTagsList();
 		const isAdmin = ['admin', 'livechat-manager'].find(role => user.roles.includes(role));
 		const availableTags = tags
@@ -80,7 +81,7 @@ const LivechatEditView = ({
 		setAvailableUserTags(availableTags);
 	};
 
-	const getAgentDepartments = async() => {
+	const getAgentDepartments = async () => {
 		const result = await RocketChat.getAgentDepartments(visitor?._id);
 		if (result.success) {
 			const agentDepartments = result.departments.map(dept => dept.departmentId);
@@ -88,7 +89,7 @@ const LivechatEditView = ({
 		}
 	};
 
-	const submit = async() => {
+	const submit = async () => {
 		const userData = { _id: visitor?._id };
 
 		const { rid, sms } = livechat;
@@ -274,7 +275,8 @@ LivechatEditView.propTypes = {
 	user: PropTypes.object,
 	navigation: PropTypes.object,
 	route: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 LivechatEditView.navigationOptions = ({
 	title: I18n.t('Livechat_edit')

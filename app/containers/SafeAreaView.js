@@ -29,7 +29,7 @@ const SafeAreaView = React.memo(
 
 SafeAreaView.propTypes = {
   testID: PropTypes.string,
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   vertical: PropTypes.bool,
   style: PropTypes.object,
   children: PropTypes.node,

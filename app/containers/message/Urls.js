@@ -57,7 +57,7 @@ const UrlImage = React.memo(({ image }) => {
 		return null;
 	}
 	const { baseUrl, user } = useContext(MessageContext);
-	image = image.includes('http') ? image : `${ baseUrl }/${ image }?rc_uid=${ user.id }&rc_token=${ user.token }`;
+	image = image.includes('http') ? image : `${baseUrl}/${image}?rc_uid=${user.id}&rc_token=${user.token}`;
 	return <FastImage source={{ uri: image }} style={styles.image} resizeMode={FastImage.resizeMode.cover} />;
 }, (prevProps, nextProps) => prevProps.image === nextProps.image);
 
@@ -132,20 +132,23 @@ UrlImage.displayName = 'MessageUrlImage';
 UrlContent.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 UrlContent.displayName = 'MessageUrlContent';
 
 Url.propTypes = {
 	url: PropTypes.object.isRequired,
 	index: PropTypes.number,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Url.displayName = 'MessageUrl';
 
 Urls.propTypes = {
 	urls: PropTypes.array,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Urls.displayName = 'MessageUrls';
 

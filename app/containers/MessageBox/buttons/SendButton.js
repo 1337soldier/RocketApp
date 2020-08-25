@@ -14,7 +14,8 @@ const SendButton = React.memo(({ theme, onPress }) => (
 ));
 
 SendButton.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	onPress: PropTypes.func.isRequired
 };
 

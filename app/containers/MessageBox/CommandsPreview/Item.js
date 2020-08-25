@@ -18,7 +18,7 @@ const Item = ({ item, theme }) => {
 		<TouchableOpacity
 			style={styles.commandPreview}
 			onPress={() => onPressCommandPreview(item)}
-			testID={`command-preview-item${ item.id }`}
+			testID={`command-preview-item${item.id}`}
 		>
 			{item.type === 'image'
 				? (
@@ -29,7 +29,7 @@ const Item = ({ item, theme }) => {
 						onLoadStart={() => setLoading(true)}
 						onLoad={() => setLoading(false)}
 					>
-						{ loading ? <ActivityIndicator theme={theme} /> : null }
+						{loading ? <ActivityIndicator theme={theme} /> : null}
 					</FastImage>
 				)
 				: <CustomIcon name='attach' size={36} color={themes[theme].actionTintColor} />
@@ -40,7 +40,8 @@ const Item = ({ item, theme }) => {
 
 Item.propTypes = {
 	item: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Item;

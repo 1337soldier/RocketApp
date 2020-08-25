@@ -18,46 +18,48 @@ const keyExtractor = item => item.value.toString();
 const Item = ({
 	item, selected, onSelect, theme
 }) => (
-	<Touchable
-		key={item}
-		onPress={() => onSelect(item)}
-		style={[
-			styles.item,
-			{ backgroundColor: themes[theme].backgroundColor }
-		]}
-	>
-		<>
-			{item.imageUrl ? <FastImage style={styles.itemImage} source={{ uri: item.imageUrl }} /> : null}
-			<Text style={{ color: themes[theme].titleText }}>{textParser([item.text])}</Text>
-			{selected ? <Check theme={theme} /> : null}
-		</>
-	</Touchable>
-);
+		<Touchable
+			key={item}
+			onPress={() => onSelect(item)}
+			style={[
+				styles.item,
+				{ backgroundColor: themes[theme].backgroundColor }
+			]}
+		>
+			<>
+				{item.imageUrl ? <FastImage style={styles.itemImage} source={{ uri: item.imageUrl }} /> : null}
+				<Text style={{ color: themes[theme].titleText }}>{textParser([item.text])}</Text>
+				{selected ? <Check theme={theme} /> : null}
+			</>
+		</Touchable>
+	);
 Item.propTypes = {
 	item: PropTypes.object,
 	selected: PropTypes.number,
 	onSelect: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const Items = ({
 	items, selected, onSelect, theme
 }) => (
-	<FlatList
-		data={items}
-		style={[styles.items, { backgroundColor: themes[theme].backgroundColor }]}
-		contentContainerStyle={[styles.itemContent, { backgroundColor: themes[theme].backgroundColor }]}
-		keyboardShouldPersistTaps='always'
-		ItemSeparatorComponent={() => <Separator theme={theme} />}
-		keyExtractor={keyExtractor}
-		renderItem={({ item }) => <Item item={item} onSelect={onSelect} theme={theme} selected={selected.find(s => s === item.value)} />}
-	/>
-);
+		<FlatList
+			data={items}
+			style={[styles.items, { backgroundColor: themes[theme].backgroundColor }]}
+			contentContainerStyle={[styles.itemContent, { backgroundColor: themes[theme].backgroundColor }]}
+			keyboardShouldPersistTaps='always'
+			ItemSeparatorComponent={() => <Separator theme={theme} />}
+			keyExtractor={keyExtractor}
+			renderItem={({ item }) => <Item item={item} onSelect={onSelect} theme={theme} selected={selected.find(s => s === item.value)} />}
+		/>
+	);
 Items.propTypes = {
 	items: PropTypes.array,
 	selected: PropTypes.array,
 	onSelect: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Items;

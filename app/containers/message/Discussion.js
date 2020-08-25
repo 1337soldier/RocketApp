@@ -57,7 +57,8 @@ Discussion.propTypes = {
 	msg: PropTypes.string,
 	dcount: PropTypes.number,
 	dlm: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 Discussion.displayName = 'MessageDiscussion';
 

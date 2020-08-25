@@ -68,7 +68,8 @@ class ModalBlockView extends React.Component {
 	static propTypes = {
 		navigation: PropTypes.object,
 		route: PropTypes.object,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		language: PropTypes.string,
 		user: PropTypes.shape({
 			id: PropTypes.string,
@@ -76,7 +77,7 @@ class ModalBlockView extends React.Component {
 		})
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.submitting = false;
 		const data = props.route.params?.data;
@@ -160,7 +161,7 @@ class ModalBlockView extends React.Component {
 		}
 	};
 
-	cancel = async({ closeModal }) => {
+	cancel = async ({ closeModal }) => {
 		const { data } = this.state;
 		const { appId, viewId, view } = data;
 
@@ -187,7 +188,7 @@ class ModalBlockView extends React.Component {
 		}
 	}
 
-	submit = async() => {
+	submit = async () => {
 		const { data } = this.state;
 		if (this.submitting) {
 			return;
@@ -216,7 +217,7 @@ class ModalBlockView extends React.Component {
 		this.setState({ loading: false });
 	};
 
-	action = async({ actionId, value, blockId }) => {
+	action = async ({ actionId, value, blockId }) => {
 		const { data } = this.state;
 		const { mid, appId, viewId } = data;
 		await RocketChat.triggerBlockAction({

@@ -22,7 +22,8 @@ class RoomHeaderView extends Component {
 		statusText: PropTypes.string,
 		connecting: PropTypes.bool,
 		connected: PropTypes.bool,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		roomUserId: PropTypes.string,
 		widthOffset: PropTypes.number,
 		goRoomActionsView: PropTypes.func,

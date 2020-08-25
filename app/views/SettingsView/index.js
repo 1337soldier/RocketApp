@@ -50,7 +50,8 @@ const SectionSeparator = React.memo(({ theme }) => (
 	/>
 ));
 SectionSeparator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 class SettingsView extends React.Component {
@@ -63,7 +64,8 @@ class SettingsView extends React.Component {
 		server: PropTypes.object,
 		allowCrashReport: PropTypes.bool,
 		toggleCrashReport: PropTypes.func,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		isMasterDetail: PropTypes.bool,
 		logout: PropTypes.func.isRequired,
 		selectServerRequest: PropTypes.func,

@@ -42,7 +42,7 @@ const Timer = React.memo(({ time, theme, setStatus }) => {
 const Locked = React.memo(({ theme, setStatus }) => {
 	const [lockedUntil, setLockedUntil] = useState(null);
 
-	const readItemFromStorage = async() => {
+	const readItemFromStorage = async () => {
 		const l = await getLockedUntil();
 		setLockedUntil(l);
 	};
@@ -61,13 +61,15 @@ const Locked = React.memo(({ theme, setStatus }) => {
 });
 
 Locked.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	setStatus: PropTypes.func
 };
 
 Timer.propTypes = {
 	time: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	setStatus: PropTypes.func
 };
 

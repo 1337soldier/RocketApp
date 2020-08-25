@@ -129,22 +129,22 @@ export const MultiSelect = React.memo(({
 
 	let button = multiselect ? (
 		<Button
-			title={`${ selected.length } selecteds`}
+			title={`${selected.length} selecteds`}
 			onPress={onShow}
 			loading={loading}
 			theme={theme}
 		/>
 	) : (
-		<Input
-			onPress={onShow}
-			theme={theme}
-			loading={loading}
-			disabled={disabled}
-			inputStyle={inputStyle}
-		>
-			<Text style={[styles.pickerText, { color: currentValue ? themes[theme].titleText : themes[theme].auxiliaryText }]}>{currentValue || placeholder.text}</Text>
-		</Input>
-	);
+			<Input
+				onPress={onShow}
+				theme={theme}
+				loading={loading}
+				disabled={disabled}
+				inputStyle={inputStyle}
+			>
+				<Text style={[styles.pickerText, { color: currentValue ? themes[theme].titleText : themes[theme].auxiliaryText }]}>{currentValue || placeholder.text}</Text>
+			</Input>
+		);
 
 	if (context === BLOCK_CONTEXT.FORM) {
 		const items = options.filter(option => selected.includes(option.value));
@@ -197,8 +197,9 @@ MultiSelect.propTypes = {
 	inputStyle: PropTypes.object,
 	value: PropTypes.array,
 	disabled: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 MultiSelect.defaultProps = {
-	onClose: () => {}
+	onClose: () => { }
 };

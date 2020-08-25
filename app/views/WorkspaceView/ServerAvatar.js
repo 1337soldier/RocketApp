@@ -75,14 +75,16 @@ const ServerAvatar = React.memo(({ theme, url, image }) => (
 ));
 
 ServerAvatar.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  ,
   url: PropTypes.string,
   image: PropTypes.string,
 };
 ServerAvatar.displayName = "ServerAvatar";
 
 Fallback.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  ,
   initial: PropTypes.string,
 };
 

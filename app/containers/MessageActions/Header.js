@@ -49,26 +49,27 @@ const DEFAULT_EMOJIS = ['clap', '+1', 'heart_eyes', 'grinning', 'thinking_face',
 const HeaderItem = React.memo(({
 	item, onReaction, server, theme
 }) => (
-	<Button
-		testID={`message-actions-emoji-${ item.content || item }`}
-		onPress={() => onReaction({ emoji: `:${ item.content || item }:` })}
-		style={[styles.headerItem, { backgroundColor: themes[theme].auxiliaryBackground }]}
-		theme={theme}
-	>
-		{item?.isCustom ? (
-			<CustomEmoji style={styles.customEmoji} emoji={item} baseUrl={server} />
-		) : (
-			<Text style={styles.headerIcon}>
-				{shortnameToUnicode(`:${ item.content || item }:`)}
-			</Text>
-		)}
-	</Button>
-));
+		<Button
+			testID={`message-actions-emoji-${item.content || item}`}
+			onPress={() => onReaction({ emoji: `:${item.content || item}:` })}
+			style={[styles.headerItem, { backgroundColor: themes[theme].auxiliaryBackground }]}
+			theme={theme}
+		>
+			{item?.isCustom ? (
+				<CustomEmoji style={styles.customEmoji} emoji={item} baseUrl={server} />
+			) : (
+					<Text style={styles.headerIcon}>
+						{shortnameToUnicode(`:${item.content || item}:`)}
+					</Text>
+				)}
+		</Button>
+	));
 HeaderItem.propTypes = {
 	item: PropTypes.string,
 	onReaction: PropTypes.func,
 	server: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const HeaderFooter = React.memo(({ onReaction, theme }) => (
@@ -83,7 +84,8 @@ const HeaderFooter = React.memo(({ onReaction, theme }) => (
 ));
 HeaderFooter.propTypes = {
 	onReaction: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const Header = React.memo(({
@@ -92,7 +94,7 @@ const Header = React.memo(({
 	const [items, setItems] = useState([]);
 	const { width, height } = useDimensions();
 
-	const setEmojis = async() => {
+	const setEmojis = async () => {
 		try {
 			const db = database.active;
 			const freqEmojiCollection = db.collections.get('frequently_used_emojis');
@@ -139,6 +141,7 @@ Header.propTypes = {
 	server: PropTypes.string,
 	message: PropTypes.object,
 	isMasterDetail: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 export default withTheme(Header);

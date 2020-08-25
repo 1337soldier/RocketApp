@@ -22,7 +22,7 @@ export const DisclosureImage = React.memo(({ theme }) => (
 	/>
 ));
 DisclosureImage.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 const DisclosureIndicator = React.memo(({ theme }) => (
@@ -31,7 +31,8 @@ const DisclosureIndicator = React.memo(({ theme }) => (
 	</View>
 ));
 DisclosureIndicator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default DisclosureIndicator;

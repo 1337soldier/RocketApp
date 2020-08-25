@@ -10,7 +10,8 @@ class StatusContainer extends React.PureComponent {
 		style: PropTypes.any,
 		size: PropTypes.number,
 		status: PropTypes.string,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
 	static defaultProps = {

@@ -23,7 +23,7 @@ const ItemInfo = React.memo(({ info, theme }) => (
 
 ItemInfo.propTypes = {
 	info: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default ItemInfo;

@@ -66,7 +66,7 @@ export const LegalButton = React.memo(({ navigation, testID }) => (
 ));
 
 CustomHeaderButton.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 DrawerButton.propTypes = {
 	navigation: PropTypes.object.isRequired,

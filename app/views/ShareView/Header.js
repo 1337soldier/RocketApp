@@ -88,7 +88,8 @@ const Header = React.memo(({ room, thread, theme }) => {
 Header.propTypes = {
 	room: PropTypes.object,
 	thread: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(Header);

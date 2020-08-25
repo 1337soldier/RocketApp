@@ -117,7 +117,8 @@ export const RightActions = React.memo(({
 });
 
 LeftActions.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	transX: PropTypes.object,
 	isRead: PropTypes.bool,
 	width: PropTypes.number,
@@ -125,7 +126,8 @@ LeftActions.propTypes = {
 };
 
 RightActions.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	transX: PropTypes.object,
 	favorite: PropTypes.bool,
 	width: PropTypes.number,

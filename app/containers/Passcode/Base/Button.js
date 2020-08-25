@@ -39,7 +39,8 @@ const Button = React.memo(({
 Button.propTypes = {
 	text: PropTypes.string,
 	icon: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	disabled: PropTypes.bool,
 	onPress: PropTypes.func
 };

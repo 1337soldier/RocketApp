@@ -54,41 +54,41 @@ const CancelButton = (onCancelPress, theme) => (
 const SearchBox = ({
 	onChangeText, onSubmitEditing, testID, hasCancel, onCancelPress, inputRef, theme, ...props
 }) => (
-	<View
-		style={[
-			styles.container,
-			{ backgroundColor: isIOS ? themes[theme].headerBackground : themes[theme].headerSecondaryBackground }
-		]}
-	>
-		<View style={[styles.searchBox, { backgroundColor: themes[theme].searchboxBackground }]}>
-			<CustomIcon name='search' size={14} color={themes[theme].auxiliaryText} />
-			<TextInput
-				ref={inputRef}
-				autoCapitalize='none'
-				autoCorrect={false}
-				blurOnSubmit
-				clearButtonMode='while-editing'
-				placeholder={I18n.t('Search')}
-				returnKeyType='search'
-				style={styles.input}
-				testID={testID}
-				underlineColorAndroid='transparent'
-				onChangeText={onChangeText}
-				onSubmitEditing={onSubmitEditing}
-				theme={theme}
-				{...props}
-			/>
+		<View
+			style={[
+				styles.container,
+				{ backgroundColor: isIOS ? themes[theme].headerBackground : themes[theme].headerSecondaryBackground }
+			]}
+		>
+			<View style={[styles.searchBox, { backgroundColor: themes[theme].searchboxBackground }]}>
+				<CustomIcon name='search' size={14} color={themes[theme].auxiliaryText} />
+				<TextInput
+					ref={inputRef}
+					autoCapitalize='none'
+					autoCorrect={false}
+					blurOnSubmit
+					clearButtonMode='while-editing'
+					placeholder={I18n.t('Search')}
+					returnKeyType='search'
+					style={styles.input}
+					testID={testID}
+					underlineColorAndroid='transparent'
+					onChangeText={onChangeText}
+					onSubmitEditing={onSubmitEditing}
+					theme={theme}
+					{...props}
+				/>
+			</View>
+			{hasCancel ? CancelButton(onCancelPress, theme) : null}
 		</View>
-		{ hasCancel ? CancelButton(onCancelPress, theme) : null }
-	</View>
-);
+	);
 
 SearchBox.propTypes = {
 	onChangeText: PropTypes.func.isRequired,
 	onSubmitEditing: PropTypes.func,
 	hasCancel: PropTypes.bool,
 	onCancelPress: PropTypes.func,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	inputRef: PropTypes.func,
 	testID: PropTypes.string
 };

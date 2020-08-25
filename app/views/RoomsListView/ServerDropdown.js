@@ -36,7 +36,8 @@ class ServerDropdown extends Component {
 		insets: PropTypes.object,
 		closeServerDropdown: PropTypes.bool,
 		server: PropTypes.string,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		isMasterDetail: PropTypes.bool,
 		appStart: PropTypes.func,
 		toggleServerDropdown: PropTypes.func,
@@ -44,7 +45,7 @@ class ServerDropdown extends Component {
 		initAdd: PropTypes.func
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = { servers: [] };
 		this.animatedValue = new Animated.Value(0);
@@ -143,14 +144,14 @@ class ServerDropdown extends Component {
 		}, ANIMATION_DURATION);
 	}
 
-	select = async(server) => {
+	select = async (server) => {
 		const {
 			server: currentServer, selectServerRequest, isMasterDetail
 		} = this.props;
 		this.close();
 		if (currentServer !== server) {
 			logEvent(events.RL_CHANGE_SERVER);
-			const userId = await RNUserDefaults.get(`${ RocketChat.TOKEN_KEY }-${ server }`);
+			const userId = await RNUserDefaults.get(`${RocketChat.TOKEN_KEY}-${server}`);
 			if (isMasterDetail) {
 				goRoom({ item: {}, isMasterDetail });
 			}
@@ -171,7 +172,7 @@ class ServerDropdown extends Component {
 	remove = server => showConfirmationAlert({
 		message: I18n.t('This_will_remove_all_data_from_this_server'),
 		callToAction: I18n.t('Delete'),
-		onPress: async() => {
+		onPress: async () => {
 			this.close();
 			try {
 				await RocketChat.removeServer({ server });
@@ -205,7 +206,7 @@ class ServerDropdown extends Component {
 			<Pressable
 				onPress={() => this.select(item.id)}
 				onLongPress={() => (item.id === server || this.remove(item.id))}
-				testID={`rooms-list-header-server-${ item.id }`}
+				testID={`rooms-list-header-server-${item.id}`}
 				android_ripple={{
 					color: themes[theme].bannerBackground
 				}}
@@ -261,11 +262,11 @@ class ServerDropdown extends Component {
 			<>
 				<TouchableWithoutFeedback onPress={this.close}>
 					<Animated.View style={[styles.backdrop,
-						{
-							backgroundColor: themes[theme].backdropColor,
-							opacity: backdropOpacity,
-							top: heightDestination
-						}]}
+					{
+						backgroundColor: themes[theme].backdropColor,
+						opacity: backdropOpacity,
+						top: heightDestination
+					}]}
 					/>
 				</TouchableWithoutFeedback>
 				<Animated.View

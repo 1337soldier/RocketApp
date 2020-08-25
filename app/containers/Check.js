@@ -17,7 +17,7 @@ const Check = React.memo(({ theme, style }) => <CustomIcon style={[styles.icon, 
 
 Check.propTypes = {
 	style: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default Check;

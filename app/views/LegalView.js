@@ -44,13 +44,15 @@ const styles = StyleSheet.create({
 
 const Separator = ({ theme }) => <View style={[styles.separator, { backgroundColor: themes[theme].separatorColor }]} />;
 Separator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 class LegalView extends React.Component {
 	static propTypes = {
 		server: PropTypes.string,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	onPressItem = ({ route }) => {
@@ -58,7 +60,7 @@ class LegalView extends React.Component {
 		if (!server) {
 			return;
 		}
-		openLink(`${ server }/${ route }`, theme);
+		openLink(`${server}/${route}`, theme);
 	}
 
 	renderItem = ({ text, route, testID }) => {

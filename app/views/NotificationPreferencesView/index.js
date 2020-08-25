@@ -57,16 +57,19 @@ const Info = React.memo(({ info, theme }) => (
 
 SectionTitle.propTypes = {
 	title: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 SectionSeparator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 Info.propTypes = {
 	info: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const OPTIONS = {
@@ -146,10 +149,11 @@ class NotificationPreferencesView extends React.Component {
 	static propTypes = {
 		navigation: PropTypes.object,
 		route: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.mounted = false;
 		this.rid = props.route.params?.rid;
@@ -180,13 +184,13 @@ class NotificationPreferencesView extends React.Component {
 		}
 	}
 
-	saveNotificationSettings = async(key, value, params) => {
-		logEvent(events[`NP_${ key.toUpperCase() }`]);
+	saveNotificationSettings = async (key, value, params) => {
+		logEvent(events[`NP_${key.toUpperCase()}`]);
 		const { room } = this.state;
 		const db = database.active;
 
 		try {
-			await db.action(async() => {
+			await db.action(async () => {
 				await room.update(protectedFunction((r) => {
 					r[key] = value;
 				}));
@@ -201,13 +205,13 @@ class NotificationPreferencesView extends React.Component {
 				// do nothing
 			}
 
-			await db.action(async() => {
+			await db.action(async () => {
 				await room.update(protectedFunction((r) => {
 					r[key] = room[key];
 				}));
 			});
 		} catch (e) {
-			logEvent(events[`NP_${ key.toUpperCase() }_F`]);
+			logEvent(events[`NP_${key.toUpperCase()}_F`]);
 			log(e);
 		}
 	}

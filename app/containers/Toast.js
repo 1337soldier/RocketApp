@@ -24,7 +24,8 @@ export const LISTENER = 'Toast';
 
 class Toast extends React.Component {
 	static propTypes = {
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	componentDidMount() {

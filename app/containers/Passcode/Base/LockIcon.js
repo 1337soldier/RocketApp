@@ -16,7 +16,8 @@ const LockIcon = React.memo(({ theme }) => (
 ));
 
 LockIcon.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default LockIcon;

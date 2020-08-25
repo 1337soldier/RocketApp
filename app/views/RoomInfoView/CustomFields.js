@@ -25,7 +25,8 @@ const CustomFields = ({ customFields, theme }) => {
 };
 CustomFields.propTypes = {
 	customFields: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default CustomFields;

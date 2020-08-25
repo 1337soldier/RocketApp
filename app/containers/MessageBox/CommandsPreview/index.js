@@ -40,7 +40,8 @@ const CommandsPreview = React.memo(({ theme, commandPreview, showCommandPreview 
 CommandsPreview.propTypes = {
 	commandPreview: PropTypes.array,
 	showCommandPreview: PropTypes.bool,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(CommandsPreview);

@@ -67,7 +67,8 @@ export default class RCTextInput extends React.PureComponent {
     placeholder: PropTypes.string,
     left: PropTypes.element,
     onIconRightPress: PropTypes.func,
-    theme: PropTypes.string,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    ,
   };
 
   static defaultProps = {

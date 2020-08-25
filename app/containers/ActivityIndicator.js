@@ -28,7 +28,7 @@ const RCActivityIndicator = ({ theme, absolute, ...props }) => (
 );
 
 RCActivityIndicator.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	absolute: PropTypes.bool,
 	props: PropTypes.object
 };

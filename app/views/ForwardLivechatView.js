@@ -29,7 +29,7 @@ const ForwardLivechatView = ({
 
 	const rid = route.params?.rid;
 
-	const getDepartments = async() => {
+	const getDepartments = async () => {
 		try {
 			const result = await RocketChat.getDepartments();
 			if (result.success) {
@@ -40,7 +40,7 @@ const ForwardLivechatView = ({
 		}
 	};
 
-	const getUsers = async(term = '') => {
+	const getUsers = async (term = '') => {
 		try {
 			const { servedBy: { _id: agentId } = {} } = room;
 			const _id = agentId && { $ne: agentId };
@@ -56,7 +56,7 @@ const ForwardLivechatView = ({
 		return [];
 	};
 
-	const getRoom = async() => {
+	const getRoom = async () => {
 		try {
 			const result = await RocketChat.getRoomInfo(rid);
 			if (result.success) {
@@ -140,7 +140,8 @@ ForwardLivechatView.propTypes = {
 	forwardRoom: PropTypes.func,
 	navigation: PropTypes.object,
 	route: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 ForwardLivechatView.navigationOptions = {
 	title: I18n.t('Forward_Chat')

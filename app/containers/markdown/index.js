@@ -27,7 +27,7 @@ import { isValidURL } from '../../utils/url';
 // Support <http://link|Text>
 const formatText = text => text.replace(
 	new RegExp('(?:<|<)((?:https|http):\\/\\/[^\\|]+)\\|(.+?)(?=>|>)(?:>|>)', 'gm'),
-	(match, url, title) => `[${ title }](${ url })`
+	(match, url, title) => `[${title}](${url})`
 );
 
 const emojiRanges = [
@@ -80,12 +80,13 @@ class Markdown extends PureComponent {
 		mentions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 		navToRoomInfo: PropTypes.func,
 		preview: PropTypes.bool,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		testID: PropTypes.string,
 		style: PropTypes.array
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.renderer = this.createRenderer();
 	}
@@ -298,7 +299,7 @@ class Markdown extends PureComponent {
 
 	renderHeading = ({ children, level }) => {
 		const { numberOfLines, theme } = this.props;
-		const textStyle = styles[`heading${ level }Text`];
+		const textStyle = styles[`heading${level}Text`];
 		return (
 			<Text numberOfLines={numberOfLines} style={[textStyle, { color: themes[theme].bodyText }]}>
 				{children}

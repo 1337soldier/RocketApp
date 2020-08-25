@@ -10,7 +10,8 @@ export default class TabBar extends React.Component {
 		activeTab: PropTypes.number,
 		tabs: PropTypes.array,
 		tabEmojiStyle: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -37,7 +38,7 @@ export default class TabBar extends React.Component {
 						key={tab}
 						onPress={() => goToPage(i)}
 						style={styles.tab}
-						testID={`reaction-picker-${ tab }`}
+						testID={`reaction-picker-${tab}`}
 					>
 						<Text style={[styles.tabEmoji, tabEmojiStyle]}>{tab}</Text>
 						{activeTab === i ? <View style={[styles.activeTabLine, { backgroundColor: themes[theme].tintColor }]} /> : <View style={styles.tabLine} />}

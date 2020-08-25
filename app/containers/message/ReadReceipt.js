@@ -16,7 +16,7 @@ ReadReceipt.displayName = 'MessageReadReceipt';
 ReadReceipt.propTypes = {
 	isReadReceiptEnabled: PropTypes.bool,
 	unread: PropTypes.bool,
-	theme: PropTypes.bool
+	theme: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
 };
 
 export default ReadReceipt;

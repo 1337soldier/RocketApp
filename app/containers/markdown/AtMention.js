@@ -63,7 +63,7 @@ const AtMention = React.memo(({
 
 	return (
 		<Text style={[styles.text, { color: themes[theme].bodyText }, ...style]}>
-			{`@${ mention }`}
+			{`@${mention}`}
 		</Text>
 	);
 });
@@ -74,7 +74,8 @@ AtMention.propTypes = {
 	navToRoomInfo: PropTypes.func,
 	style: PropTypes.array,
 	useRealName: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	mentions: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 

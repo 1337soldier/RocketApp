@@ -21,7 +21,8 @@ class ForgotPasswordView extends React.Component {
 
 	static propTypes = {
 		navigation: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
 	state = {
@@ -56,7 +57,7 @@ class ForgotPasswordView extends React.Component {
 		this.setState({ email, invalidEmail: false });
 	}
 
-	resetPassword = async() => {
+	resetPassword = async () => {
 		logEvent(events.FP_FORGOT_PASSWORD);
 		const { email, invalidEmail } = this.state;
 		if (invalidEmail || !email) {

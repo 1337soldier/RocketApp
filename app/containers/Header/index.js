@@ -37,17 +37,18 @@ const styles = StyleSheet.create({
 const Header = ({
 	theme, headerLeft, headerTitle, headerRight
 }) => (
-	<SafeAreaView style={{ backgroundColor: themes[theme].headerBackground }} edges={['top', 'left', 'right']}>
-		<View style={[styles.container, { ...themedHeader(theme).headerStyle }]}>
-			{headerLeft ? headerLeft() : null}
-			{headerTitle ? headerTitle() : null}
-			{headerRight ? headerRight() : null}
-		</View>
-	</SafeAreaView>
-);
+		<SafeAreaView style={{ backgroundColor: themes[theme].headerBackground }} edges={['top', 'left', 'right']}>
+			<View style={[styles.container, { ...themedHeader(theme).headerStyle }]}>
+				{headerLeft ? headerLeft() : null}
+				{headerTitle ? headerTitle() : null}
+				{headerRight ? headerRight() : null}
+			</View>
+		</SafeAreaView>
+	);
 
 Header.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	headerLeft: PropTypes.element,
 	headerTitle: PropTypes.element,
 	headerRight: PropTypes.element

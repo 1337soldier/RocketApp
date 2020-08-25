@@ -61,7 +61,8 @@ const PasscodeChoose = ({ theme, finishProcess, force = false }) => {
 };
 
 PasscodeChoose.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	force: PropTypes.bool,
 	finishProcess: PropTypes.func
 };

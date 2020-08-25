@@ -37,5 +37,6 @@ Item.propTypes = {
 		onPress: PropTypes.func
 	}),
 	hide: PropTypes.func,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

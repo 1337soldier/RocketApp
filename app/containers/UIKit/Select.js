@@ -85,5 +85,6 @@ Select.propTypes = {
 	loading: PropTypes.bool,
 	disabled: PropTypes.bool,
 	value: PropTypes.array,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

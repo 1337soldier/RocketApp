@@ -90,7 +90,8 @@ class CreateChannelView extends React.Component {
 			id: PropTypes.string,
 			token: PropTypes.string
 		}),
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
 	state = {
@@ -182,7 +183,7 @@ class CreateChannelView extends React.Component {
 				<Switch
 					value={value}
 					onValueChange={onValueChange}
-					testID={`create-channel-${ id }`}
+					testID={`create-channel-${id}`}
 					trackColor={SWITCH_TRACK_COLOR}
 					disabled={disabled}
 				/>
@@ -248,7 +249,7 @@ class CreateChannelView extends React.Component {
 				name={item.fname}
 				username={item.name}
 				onPress={() => this.removeUser(item)}
-				testID={`create-channel-view-item-${ item.name }`}
+				testID={`create-channel-view-item-${item.name}`}
 				icon='check'
 				baseUrl={baseUrl}
 				user={user}

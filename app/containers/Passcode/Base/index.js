@@ -125,7 +125,8 @@ const Base = forwardRef(({
 });
 
 Base.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	type: PropTypes.string,
 	previousPasscode: PropTypes.string,
 	title: PropTypes.string,

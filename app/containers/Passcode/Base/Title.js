@@ -16,7 +16,8 @@ const Title = React.memo(({ text, theme }) => (
 
 Title.propTypes = {
 	text: PropTypes.string,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Title;

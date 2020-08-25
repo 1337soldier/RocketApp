@@ -57,7 +57,7 @@ const FormContainer = ({ children, theme, testID }) => (
 );
 
 FormContainer.propTypes = {
-  theme: PropTypes.string,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   testID: PropTypes.string,
   children: PropTypes.node,
 };

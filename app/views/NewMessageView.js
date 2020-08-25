@@ -64,11 +64,12 @@ class NewMessageView extends React.Component {
 		}),
 		createChannel: PropTypes.func,
 		maxUsers: PropTypes.number,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		isMasterDetail: PropTypes.bool
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.init();
 		this.state = {
@@ -99,7 +100,7 @@ class NewMessageView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	init = async() => {
+	init = async () => {
 		try {
 			const db = database.active;
 			const observable = await db.collections
@@ -125,7 +126,7 @@ class NewMessageView extends React.Component {
 		return navigation.pop();
 	}
 
-	search = async(text) => {
+	search = async (text) => {
 		const result = await RocketChat.search({ text, filterRooms: false });
 		this.setState({
 			search: result
@@ -236,7 +237,7 @@ class NewMessageView extends React.Component {
 				username={item.search ? item.username : item.name}
 				onPress={() => this.goRoom(item)}
 				baseUrl={baseUrl}
-				testID={`new-message-view-item-${ item.name }`}
+				testID={`new-message-view-item-${item.name}`}
 				style={style}
 				user={user}
 				theme={theme}

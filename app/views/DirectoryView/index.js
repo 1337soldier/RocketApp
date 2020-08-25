@@ -44,12 +44,13 @@ class DirectoryView extends React.Component {
 			id: PropTypes.string,
 			token: PropTypes.string
 		}),
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		directoryDefaultView: PropTypes.string,
 		isMasterDetail: PropTypes.bool
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			data: [],
@@ -71,7 +72,7 @@ class DirectoryView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	load = debounce(async({ newSearch = false }) => {
+	load = debounce(async ({ newSearch = false }) => {
 		if (newSearch) {
 			this.setState({ data: [], total: -1, loading: false });
 		}
@@ -141,7 +142,7 @@ class DirectoryView extends React.Component {
 		goRoom({ item, isMasterDetail });
 	}
 
-	onPressItem = async(item) => {
+	onPressItem = async (item) => {
 		const { type } = this.state;
 		if (type === 'users') {
 			const result = await RocketChat.createDirectMessage(item.username);
@@ -202,7 +203,7 @@ class DirectoryView extends React.Component {
 			title: item.name,
 			onPress: () => this.onPressItem(item),
 			baseUrl,
-			testID: `federation-view-item-${ item.name }`,
+			testID: `federation-view-item-${item.name}`,
 			style,
 			user,
 			theme

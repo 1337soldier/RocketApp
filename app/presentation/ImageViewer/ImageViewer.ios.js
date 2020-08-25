@@ -47,5 +47,6 @@ ImageViewer.propTypes = {
 	imageComponentType: PropTypes.string,
 	width: PropTypes.number,
 	height: PropTypes.number,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };

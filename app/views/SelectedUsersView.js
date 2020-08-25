@@ -50,10 +50,11 @@ class SelectedUsersView extends React.Component {
 		}),
 		navigation: PropTypes.object,
 		route: PropTypes.object,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.init();
 
@@ -114,7 +115,7 @@ class SelectedUsersView extends React.Component {
 		const title = route.params?.title ?? I18n.t('Select_Users');
 		const buttonText = route.params?.buttonText ?? I18n.t('Next');
 		const maxUsers = route.params?.maxUsers;
-		const nextAction = route.params?.nextAction ?? (() => {});
+		const nextAction = route.params?.nextAction ?? (() => { });
 		const options = {
 			title,
 			headerRight: () => (
@@ -129,7 +130,7 @@ class SelectedUsersView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	init = async() => {
+	init = async () => {
 		try {
 			const db = database.active;
 			const observable = await db.collections
@@ -150,7 +151,7 @@ class SelectedUsersView extends React.Component {
 		this.search(text);
 	}
 
-	search = async(text) => {
+	search = async (text) => {
 		const result = await RocketChat.search({ text, filterRooms: false });
 		this.setState({
 			search: result
@@ -238,7 +239,7 @@ class SelectedUsersView extends React.Component {
 				name={item.fname}
 				username={item.name}
 				onPress={() => this._onPressSelectedItem(item)}
-				testID={`selected-user-${ item.name }`}
+				testID={`selected-user-${item.name}`}
 				baseUrl={baseUrl}
 				style={{ paddingRight: 15 }}
 				user={user}
@@ -273,7 +274,7 @@ class SelectedUsersView extends React.Component {
 				name={name}
 				username={username}
 				onPress={() => this._onPressItem(item._id, item)}
-				testID={`select-users-view-item-${ item.name }`}
+				testID={`select-users-view-item-${item.name}`}
 				icon={this.isChecked(username) ? 'check' : null}
 				baseUrl={baseUrl}
 				style={style}

@@ -45,7 +45,8 @@ const SectionSeparator = React.memo(({ theme }) => (
 ));
 
 SectionSeparator.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 class AutoTranslateView extends React.Component {
@@ -55,11 +56,12 @@ class AutoTranslateView extends React.Component {
 
 	static propTypes = {
 		route: PropTypes.object,
-		theme: PropTypes.string,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+		,
 		navigation: PropTypes.object
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.mounted = false;
 		this.rid = props.route.params?.rid;
@@ -103,7 +105,7 @@ class AutoTranslateView extends React.Component {
 		}
 	}
 
-	toggleAutoTranslate = async() => {
+	toggleAutoTranslate = async () => {
 		logEvent(events.AT_TOGGLE_TRANSLATE);
 		const { enableAutoTranslate } = this.state;
 		try {
@@ -120,7 +122,7 @@ class AutoTranslateView extends React.Component {
 		}
 	}
 
-	saveAutoTranslateLanguage = async(language) => {
+	saveAutoTranslateLanguage = async (language) => {
 		logEvent(events.AT_SET_LANG);
 		try {
 			await RocketChat.saveAutoTranslate({
@@ -166,7 +168,7 @@ class AutoTranslateView extends React.Component {
 			<ListItem
 				title={name || language}
 				onPress={() => this.saveAutoTranslateLanguage(language)}
-				testID={`auto-translate-view-${ language }`}
+				testID={`auto-translate-view-${language}`}
 				right={isSelected ? this.renderIcon : null}
 				theme={theme}
 			/>

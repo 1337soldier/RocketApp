@@ -111,7 +111,8 @@ DatePicker.propTypes = {
 	action: PropTypes.func,
 	context: PropTypes.number,
 	loading: PropTypes.bool,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	value: PropTypes.string,
 	error: PropTypes.string
 };

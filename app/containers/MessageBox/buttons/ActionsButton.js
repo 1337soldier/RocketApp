@@ -14,7 +14,8 @@ const ActionsButton = React.memo(({ theme, onPress }) => (
 ));
 
 ActionsButton.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	onPress: PropTypes.func.isRequired
 };
 

@@ -24,7 +24,8 @@ const Roles = ({ roles, theme }) => (roles && roles.length ? (
 ) : null);
 Roles.propTypes = {
 	roles: PropTypes.array,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 const Direct = ({ roomUser, theme }) => (
@@ -36,7 +37,8 @@ const Direct = ({ roomUser, theme }) => (
 );
 Direct.propTypes = {
 	roomUser: PropTypes.object,
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default Direct;

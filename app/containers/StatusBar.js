@@ -15,7 +15,7 @@ const StatusBar = React.memo(({ theme, barStyle, backgroundColor }) => {
 });
 
 StatusBar.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	barStyle: PropTypes.string,
 	backgroundColor: PropTypes.string
 };

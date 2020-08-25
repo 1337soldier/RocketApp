@@ -56,10 +56,11 @@ class RoomInfoEditView extends React.Component {
 		route: PropTypes.object,
 		deleteRoom: PropTypes.func,
 		serverVersion: PropTypes.string,
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			room: {},
@@ -98,7 +99,7 @@ class RoomInfoEditView extends React.Component {
 	}
 
 	// eslint-disable-next-line react/sort-comp
-	loadRoom = async() => {
+	loadRoom = async () => {
 		const { route } = this.props;
 		const rid = route.params?.rid;
 		if (!rid) {
@@ -173,7 +174,7 @@ class RoomInfoEditView extends React.Component {
 		);
 	}
 
-	submit = async() => {
+	submit = async () => {
 		logEvent(events.RI_EDIT_SAVE);
 		Keyboard.dismiss();
 		const {
@@ -278,7 +279,7 @@ class RoomInfoEditView extends React.Component {
 		const { room } = this.state;
 		const { rid, archived, t } = room;
 
-		const action = I18n.t(`${ archived ? 'un' : '' }archive`);
+		const action = I18n.t(`${archived ? 'un' : ''}archive`);
 		Alert.alert(
 			I18n.t('Are_you_sure_question_mark'),
 			I18n.t('Do_you_really_want_to_key_this_room_question_mark', { key: action }),
@@ -290,7 +291,7 @@ class RoomInfoEditView extends React.Component {
 				{
 					text: I18n.t('Yes_action_it', { action }),
 					style: 'destructive',
-					onPress: async() => {
+					onPress: async () => {
 						try {
 							logEvent(events.RI_EDIT_TOGGLE_ARCHIVE);
 							await RocketChat.toggleArchiveRoom(rid, t, !archived);
@@ -540,7 +541,7 @@ class RoomInfoEditView extends React.Component {
 										{ color: dangerColor }
 									]}
 								>
-									{ archived ? I18n.t('UNARCHIVE') : I18n.t('ARCHIVE') }
+									{archived ? I18n.t('UNARCHIVE') : I18n.t('ARCHIVE')}
 								</Text>
 							</TouchableOpacity>
 						</View>

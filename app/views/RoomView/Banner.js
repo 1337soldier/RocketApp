@@ -68,7 +68,8 @@ const Banner = React.memo(({
 Banner.propTypes = {
 	text: PropTypes.string,
 	title: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	bannerClosed: PropTypes.bool,
 	closeBanner: PropTypes.func
 };

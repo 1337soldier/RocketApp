@@ -52,7 +52,8 @@ RoomItemInner.propTypes = {
 	baseUrl: PropTypes.string,
 	userId: PropTypes.string,
 	token: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	children: PropTypes.element
 };
 

@@ -92,7 +92,8 @@ const ChangePasscodeView = React.memo(({ theme }) => {
 });
 
 ChangePasscodeView.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 };
 
 export default withTheme(ChangePasscodeView);

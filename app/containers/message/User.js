@@ -61,7 +61,7 @@ const User = React.memo(({
 					</Text>
 				</TouchableOpacity>
 				<Text style={[messageStyles.time, { color: themes[theme].auxiliaryText }]}>{time}</Text>
-				{ hasError && <MessageError hasError={hasError} theme={theme} {...props} /> }
+				{hasError && <MessageError hasError={hasError} theme={theme} {...props} />}
 			</View>
 		);
 	}
@@ -76,7 +76,8 @@ User.propTypes = {
 	alias: PropTypes.string,
 	ts: PropTypes.instanceOf(Date),
 	timeFormat: PropTypes.string,
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	navToRoomInfo: PropTypes.func
 };
 User.displayName = 'MessageUser';

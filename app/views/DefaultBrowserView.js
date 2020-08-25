@@ -65,10 +65,11 @@ class DefaultBrowserView extends React.Component {
 	})
 
 	static propTypes = {
-		theme: PropTypes.string
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+
 	}
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
 			browser: null,
@@ -113,7 +114,7 @@ class DefaultBrowserView extends React.Component {
 		return browser === value;
 	}
 
-	changeDefaultBrowser = async(newBrowser) => {
+	changeDefaultBrowser = async (newBrowser) => {
 		logEvent(events.DB_CHANGE_DEFAULT_BROWSER, { browser: newBrowser });
 		try {
 			const browser = newBrowser !== 'inApp' ? newBrowser : null;
@@ -141,7 +142,7 @@ class DefaultBrowserView extends React.Component {
 			<ListItem
 				title={I18n.t(title, { defaultValue: title })}
 				onPress={() => this.changeDefaultBrowser(value)}
-				testID={`default-browser-view-${ title }`}
+				testID={`default-browser-view-${title}`}
 				right={this.isSelected(value) ? this.renderIcon : null}
 				theme={theme}
 			/>

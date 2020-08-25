@@ -31,12 +31,12 @@ const formatMsg = ({
 
 	if (isLastMessageSentByMe) {
 		prefix = I18n.t('You_colon');
-	}	else if (type !== 'd') {
+	} else if (type !== 'd') {
 		const { u: { name } } = lastMessage;
-		prefix = `${ useRealName ? name : lastMessage.u.username }: `;
+		prefix = `${useRealName ? name : lastMessage.u.username}: `;
 	}
 
-	return `${ prefix }${ lastMessage.msg }`;
+	return `${prefix}${lastMessage.msg}`;
 };
 
 const arePropsEqual = (oldProps, newProps) => _.isEqual(oldProps, newProps);
@@ -44,21 +44,22 @@ const arePropsEqual = (oldProps, newProps) => _.isEqual(oldProps, newProps);
 const LastMessage = React.memo(({
 	lastMessage, type, showLastMessage, username, alert, useRealName, theme
 }) => (
-	<Markdown
-		msg={formatMsg({
-			lastMessage, type, showLastMessage, username, useRealName
-		})}
-		style={[styles.markdownText, { color: alert ? themes[theme].bodyText : themes[theme].auxiliaryText }]}
-		customEmojis={false}
-		useRealName={useRealName}
-		numberOfLines={2}
-		preview
-		theme={theme}
-	/>
-), arePropsEqual);
+		<Markdown
+			msg={formatMsg({
+				lastMessage, type, showLastMessage, username, useRealName
+			})}
+			style={[styles.markdownText, { color: alert ? themes[theme].bodyText : themes[theme].auxiliaryText }]}
+			customEmojis={false}
+			useRealName={useRealName}
+			numberOfLines={2}
+			preview
+			theme={theme}
+		/>
+	), arePropsEqual);
 
 LastMessage.propTypes = {
-	theme: PropTypes.string,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+	,
 	lastMessage: PropTypes.object,
 	type: PropTypes.string,
 	showLastMessage: PropTypes.bool,

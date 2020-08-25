@@ -28,7 +28,7 @@ const AppVersion = React.memo(({ theme }) => (
 ));
 
 AppVersion.propTypes = {
-	theme: PropTypes.string
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default AppVersion;
