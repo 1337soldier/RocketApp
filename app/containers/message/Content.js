@@ -43,7 +43,6 @@ const Content = React.memo((props) => {
 				tmid={props.tmid}
 				useRealName={props.useRealName}
 				theme={props.theme}
-				{...props}
 			/>
 		);
 	}

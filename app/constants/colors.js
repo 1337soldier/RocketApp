@@ -23,7 +23,7 @@ const mentions = {
 export const themes = {
 	light: {
 		bodyTextMainUser: "#fff",
-		messageBg: '#73C2FB',
+		messageBg: '#b5e2ff',
 		roomBackgroundColor: '#cfdbe6',
 		backgroundColor: '#ffffff',
 		focusedBackground: '#ffffff',
@@ -71,7 +71,7 @@ export const themes = {
 	},
 	dark: {
 		bodyTextMainUser: "#fff",
-		messageBg: '#73C2FB',
+		messageBg: '#b5e2ff',
 		roomBackgroundColor: '#cfdbe6',
 		backgroundColor: '#030b1b',
 		focusedBackground: '#0b182c',
@@ -119,7 +119,7 @@ export const themes = {
 	},
 	black: {
 		bodyTextMainUser: "#fff",
-		messageBg: '#73C2FB',
+		messageBg: '#b5e2ff',
 		roomBackgroundColor: '#cfdbe6',
 		backgroundColor: '#000000',
 		focusedBackground: '#0d0d0d',

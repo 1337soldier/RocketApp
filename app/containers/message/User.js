@@ -76,8 +76,7 @@ User.propTypes = {
 	alias: PropTypes.string,
 	ts: PropTypes.instanceOf(Date),
 	timeFormat: PropTypes.string,
-	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-	,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	navToRoomInfo: PropTypes.func
 };
 User.displayName = 'MessageUser';
