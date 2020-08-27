@@ -17,7 +17,7 @@ export default StyleSheet.create({
 		marginLeft: 46,
 		backgroundColor: '#fff',
 		padding: 5,
-		borderRadius: 10
+		borderRadius: 10,
 	},
 	backgroundBlue: {
 		backgroundColor: "#73C2FB",
@@ -47,7 +47,7 @@ export default StyleSheet.create({
 		marginTop: 6,
 	},
 	reactionButton: {
-		marginRight: 6,
+		marginRight: 3,
 		marginBottom: 6,
 		borderRadius: 2,
 	},
@@ -152,12 +152,20 @@ export default StyleSheet.create({
 		...sharedStyles.textRegular,
 		fontWeight: "300",
 	},
+	repliedContainer: {
+		borderRadius: 6,
+		marginVertical: 4,
+		width: "40%"
+	},
 	repliedThread: {
 		flexDirection: "row",
-		// flex: 1,
 		alignItems: "center",
-		marginTop: 6,
-		marginBottom: 12,
+	},
+	repliedUserThread: {
+		borderLeftWidth: 4,
+		paddingLeft10,
+		marginVertical: 10,
+		justifyContent: "center",
 	},
 	repliedThreadIcon: {
 		marginRight: 10,
@@ -166,6 +174,7 @@ export default StyleSheet.create({
 	repliedThreadName: {
 		fontSize: 16,
 		flex: 1,
+		color: "gray",
 		...sharedStyles.textRegular,
 	},
 	readReceipt: {

@@ -9,9 +9,10 @@ import DisclosureIndicator from '../DisclosureIndicator';
 import styles from './styles';
 import { themes } from '../../constants/colors';
 
-const RepliedThread = React.memo(({
-	tmid, tmsg, isHeader, fetchThreadName, id, theme
-}) => {
+const RepliedThread = React.memo((props) => {
+	const {
+		tmid, tmsg, isHeader, fetchThreadName, id, theme
+	} = props
 	if (!tmid || !isHeader) {
 		return null;
 	}
@@ -26,9 +27,9 @@ const RepliedThread = React.memo(({
 
 	return (
 		<View style={styles.repliedThread} testID={`message-thread-replied-on-${msg}`}>
-			<CustomIcon name='threads' size={20} style={styles.repliedThreadIcon} color={themes[theme].tintColor} />
-			<Text style={[styles.repliedThreadName, { color: themes[theme].tintColor }]} numberOfLines={1}>{msg}</Text>
-			<DisclosureIndicator theme={theme} />
+			{/* <CustomIcon name='threads' size={20} style={styles.repliedThreadIcon} color={themes[theme].bodyTextMainUser} /> */}
+			<Text style={[styles.repliedThreadName, {}]} numberOfLines={2}>{msg}</Text>
+			{/* <DisclosureIndicator theme={theme} /> */}
 		</View>
 	);
 }, (prevProps, nextProps) => {
@@ -52,8 +53,7 @@ RepliedThread.propTypes = {
 	tmsg: PropTypes.string,
 	id: PropTypes.string,
 	isHeader: PropTypes.bool,
-	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-	,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	fetchThreadName: PropTypes.func
 };
 RepliedThread.displayName = 'MessageRepliedThread';
