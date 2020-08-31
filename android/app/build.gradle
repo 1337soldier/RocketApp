@@ -83,9 +83,11 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     bundleAssetName: "app.bundle",
-    iconFontNames: [ 'custom.ttf' ],
+    iconFontNames: [ 'custom.ttf', 'Feather.ttf' ,'AntDesign.ttf'],
     enableHermes: true,  // clean and rebuild if changing
 ]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
@@ -236,7 +238,7 @@ dependencies {
     } else {
       implementation jscFlavor
     }
-
+    implementation project(':react-native-vector-icons')
     implementation "com.google.code.gson:gson:2.8.5"
     implementation "com.github.bumptech.glide:glide:4.9.0"
     annotationProcessor "com.github.bumptech.glide:compiler:4.9.0"
