@@ -112,7 +112,7 @@ export default StyleSheet.create({
 	imageContainer: {
 		// flex: 1,
 		flexDirection: "column",
-		borderRadius: 4,
+		borderRadius: 4
 	},
 	image: {
 		width: "100%",
@@ -132,25 +132,25 @@ export default StyleSheet.create({
 	},
 	text: {
 		fontSize: 16,
-		...sharedStyles.textRegular,
+		...sharedStyles.textRegular
 	},
 	textInfo: {
 		fontStyle: "italic",
 		fontSize: 16,
-		...sharedStyles.textRegular,
+		...sharedStyles.textRegular
 	},
 	startedDiscussion: {
 		fontStyle: "italic",
 		fontSize: 16,
 		marginBottom: 6,
-		...sharedStyles.textRegular,
+		...sharedStyles.textRegular
 	},
 	time: {
 		fontSize: 12,
 		paddingLeft: 10,
 		lineHeight: 22,
 		...sharedStyles.textRegular,
-		fontWeight: "300",
+		fontWeight: "300"
 	},
 	repliedContainer: {
 		borderRadius: 6,
@@ -159,25 +159,25 @@ export default StyleSheet.create({
 	},
 	repliedThread: {
 		flexDirection: "row",
-		alignItems: "center",
+		alignItems: "center"
 	},
 	repliedUserThread: {
 		borderLeftWidth: 4,
-		paddingLeft10,
+		paddingLeft: 10,
 		marginVertical: 10,
 		justifyContent: "center",
 	},
 	repliedThreadIcon: {
 		marginRight: 10,
-		marginLeft: 16,
+		marginLeft: 16
 	},
 	repliedThreadName: {
 		fontSize: 16,
 		flex: 1,
 		color: "gray",
-		...sharedStyles.textRegular,
+		...sharedStyles.textRegular
 	},
 	readReceipt: {
-		lineHeight: 20,
+		lineHeight: 20
 	},
 });

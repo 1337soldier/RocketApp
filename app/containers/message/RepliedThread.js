@@ -4,10 +4,7 @@ import removeMarkdown from 'remove-markdown';
 import PropTypes from 'prop-types';
 
 import shortnameToUnicode from '../../utils/shortnameToUnicode';
-import { CustomIcon } from '../../lib/Icons';
-import DisclosureIndicator from '../DisclosureIndicator';
 import styles from './styles';
-import { themes } from '../../constants/colors';
 
 const RepliedThread = React.memo((props) => {
 	const {
@@ -27,9 +24,7 @@ const RepliedThread = React.memo((props) => {
 
 	return (
 		<View style={styles.repliedThread} testID={`message-thread-replied-on-${msg}`}>
-			{/* <CustomIcon name='threads' size={20} style={styles.repliedThreadIcon} color={themes[theme].bodyTextMainUser} /> */}
 			<Text style={[styles.repliedThreadName, {}]} numberOfLines={2}>{msg}</Text>
-			{/* <DisclosureIndicator theme={theme} /> */}
 		</View>
 	);
 }, (prevProps, nextProps) => {
