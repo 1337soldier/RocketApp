@@ -90,8 +90,7 @@ class RoomView extends React.Component {
 		baseUrl: PropTypes.string,
 		customEmojis: PropTypes.object,
 		isMasterDetail: PropTypes.bool,
-		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-		,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 		replyBroadcast: PropTypes.func,
 		width: PropTypes.number,
 		height: PropTypes.number,

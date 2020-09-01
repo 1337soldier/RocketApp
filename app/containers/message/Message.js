@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
@@ -20,8 +20,7 @@ import Content from './Content';
 import ReadReceipt from './ReadReceipt';
 import CallButton from './CallButton';
 import { themes } from '../../constants/colors'
-import message from '.';
-
+import database from "../../lib/database"
 
 const MessageInner = React.memo((props) => {
 
@@ -99,6 +98,20 @@ const Message = React.memo((props) => {
 	}
 
 	if (props.isThreadReply || props.isThreadSequential) {
+
+		const [repliedUser, setRepliedUser] = useState({})
+
+		const getRepliedUser = async () => {
+			const db = database.active;
+			const msgCollection = db.collections.get('messages');
+			const result = await msgCollection.find(props.tmid);
+			setRepliedUser(result.u)
+		}
+
+		useEffect(() => {
+			getRepliedUser()
+		}, [])
+
 		const thread = props.isThreadReply ? <RepliedThread  {...props} /> : null;
 		return (
 			<View style={[styles.container, props.style]}>
@@ -108,9 +121,12 @@ const Message = React.memo((props) => {
 						<View style={[styles.repliedUserThread, {
 							borderColor: themes[props.theme].tintColor,
 						}]}>
-							<Text>
-							</Text>
-							{/* {<User {...props} />} */}
+							{useMemo(() => (
+								<Text>
+									{repliedUser.username}
+								</Text>
+							), [repliedUser])}
+
 							{thread}
 						</View>
 						<Content {...props} isMainUser={isMainUser} />
