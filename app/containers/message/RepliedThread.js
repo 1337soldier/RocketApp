@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import removeMarkdown from 'remove-markdown';
 import PropTypes from 'prop-types';
 
@@ -10,9 +10,9 @@ const RepliedThread = React.memo((props) => {
 	const {
 		tmid, tmsg, isHeader, fetchThreadName, id, theme
 	} = props
-	if (!tmid || !isHeader) {
-		return null;
-	}
+	// if (!tmid || !isHeader) {
+	// 	return null;
+	// }
 
 	if (!tmsg) {
 		fetchThreadName(tmid, id);
@@ -22,10 +22,11 @@ const RepliedThread = React.memo((props) => {
 	let msg = shortnameToUnicode(tmsg);
 	msg = removeMarkdown(msg);
 
+
 	return (
-		<View style={styles.repliedThread} testID={`message-thread-replied-on-${msg}`}>
-			<Text style={[styles.repliedThreadName, {}]} numberOfLines={2}>{msg}</Text>
-		</View>
+		// <View style={styles.repliedThread} testID={`message-thread-replied-on-${msg}`}>
+		<Text style={[styles.repliedThreadName]} numberOfLines={1}>{msg}</Text>
+		// </View>
 	);
 }, (prevProps, nextProps) => {
 	if (prevProps.tmid !== nextProps.tmid) {

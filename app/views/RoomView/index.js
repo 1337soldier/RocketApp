@@ -650,6 +650,7 @@ class RoomView extends React.Component {
 	}
 
 	sendMessage = (message, tmid) => {
+		console.info(this.rid, message, this.tmid || tmid, user)
 		logEvent(events.ROOM_SEND_MESSAGE);
 		const { user } = this.props;
 		RocketChat.sendMessage(this.rid, message, this.tmid || tmid, user).then(() => {

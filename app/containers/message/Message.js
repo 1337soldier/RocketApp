@@ -75,10 +75,14 @@ const Message = React.memo((props) => {
 		backgroundColor: themes[props.theme].messageBg,
 		borderWidth: 1,
 		borderColor: "#ccc",
-		marginLeft: isReplied ? 0 : 124
+		paddingHorizontal: 10
 	} : {
-			marginRight: isReplied ? 0 : 124
+			marginLeft: 10
 		}
+
+	const flexRow = isMainUser ?
+		{ alignSelf: "flex-end", marginLeft: 48 }
+		: { alignSelf: "flex-start", marginRight: 48 }
 
 	if (props.isInfo) {
 		return (
@@ -104,29 +108,30 @@ const Message = React.memo((props) => {
 		const getRepliedUser = async () => {
 			const db = database.active;
 			const msgCollection = db.collections.get('messages');
-			const result = await msgCollection.find(props.tmid);
-			setRepliedUser(result.u)
+			const isAuthor = !props.tmid || !props.isHeader
+			let repliedUser = await msgCollection.find(isAuthor ? props.id : props.tmid)
+			setRepliedUser(repliedUser.u)
 		}
 
 		useEffect(() => {
 			getRepliedUser()
 		}, [])
 
-		const thread = props.isThreadReply ? <RepliedThread  {...props} /> : null;
+		const thread = <RepliedThread  {...props} />
 		return (
 			<View style={[styles.container, props.style]}>
-				<View style={[styles.flex, isMainUser && styles.flexEnd]}>
+				<View style={[styles.flex, flexRow]}>
 					{!isMainUser && <MessageAvatar {...props} />}
-					<View style={[styles.messageContent, mainUserBg, { marginLeft: 10 }]}>
+					<View style={[styles.messageContent, mainUserBg]}>
 						<View style={[styles.repliedUserThread, {
 							borderColor: themes[props.theme].tintColor,
-						}]}>
+						},
+						]}>
 							{useMemo(() => (
-								<Text>
+								<Text style={[isMainUser && { fontWeight: "500", fontSize: 16 }]}>
 									{repliedUser.username}
 								</Text>
 							), [repliedUser])}
-
 							{thread}
 						</View>
 						<Content {...props} isMainUser={isMainUser} />
@@ -137,14 +142,20 @@ const Message = React.memo((props) => {
 						theme={props.theme}
 					/>
 				</View>
-			</View>
+			</View >
 		);
 	}
 
 	return (
-		<View style={[styles.container, props.style]}>
-			<View style={[styles.flex, isMainUser && styles.flexEnd]}>
-				{!isMainUser && <MessageAvatar {...props} />}
+		<View style={[styles.container, props.style, !isMainUser && { flexDirection: "row" }]}>
+			{!isMainUser &&
+				(
+					<View style={{ width: 36 }} >
+						<MessageAvatar {...props} />
+					</View>)
+			}
+
+			<View style={[flexRow]}>
 				<View
 					style={[
 						styles.messageContent,
@@ -160,7 +171,7 @@ const Message = React.memo((props) => {
 					theme={props.theme}
 				/>
 			</View>
-		</View>
+		</View >
 	);
 });
 

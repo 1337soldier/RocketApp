@@ -80,8 +80,7 @@ class Markdown extends PureComponent {
 		mentions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 		navToRoomInfo: PropTypes.func,
 		preview: PropTypes.bool,
-		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-		,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 		testID: PropTypes.string,
 		style: PropTypes.array
 	};

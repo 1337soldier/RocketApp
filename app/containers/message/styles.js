@@ -14,7 +14,6 @@ export default StyleSheet.create({
 		flexDirection: "column",
 	},
 	messageContent: {
-		marginLeft: 46,
 		backgroundColor: '#fff',
 		padding: 5,
 		borderRadius: 10,
@@ -172,7 +171,7 @@ export default StyleSheet.create({
 		marginLeft: 16
 	},
 	repliedThreadName: {
-		fontSize: 16,
+		fontSize: 14,
 		flex: 1,
 		color: "gray",
 		...sharedStyles.textRegular
