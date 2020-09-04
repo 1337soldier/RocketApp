@@ -344,7 +344,7 @@ class ThreadMessagesView extends React.Component {
 					renderItem={this.renderItem}
 					style={[styles.list, { backgroundColor: themes[theme].backgroundColor }]}
 					contentContainerStyle={styles.contentContainer}
-					keyExtractor={item => item._id}
+					keyExtractor={item => item._id.toString()}
 					onEndReached={this.load}
 					onEndReachedThreshold={0.5}
 					maxToRenderPerBatch={5}

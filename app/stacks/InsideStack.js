@@ -1,13 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ThemeContext } from '../theme';
 import {
-	defaultHeader, themedHeader, ModalAnimation, StackAnimation
+	defaultHeader, themedHeader, ModalAnimation, StackAnimation, getActiveRouteName
 } from '../utils/navigation';
-import Sidebar from '../views/SidebarView';
 
 // Chats Stack
 import RoomView from '../views/RoomView';
@@ -60,13 +58,17 @@ import CreateDiscussionView from '../views/CreateDiscussionView';
 import { AntDesignIcon } from "../lib/Icons"
 import { themes } from '../../app/constants/colors'
 import I18n from '../i18n'
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 
 // ChatsStackNavigator
 const ChatsStack = createStackNavigator();
 const ChatsStackNavigator = () => {
 	const { theme } = React.useContext(ThemeContext);
+
 	return (
-		<ChatsStack.Navigator screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation }}>
+		<ChatsStack.Navigator screenOptions={{
+			...defaultHeader, ...themedHeader(theme), ...StackAnimation
+		}}>
 			<ChatsStack.Screen
 				name='RoomsListView'
 				component={RoomsListView}
@@ -244,27 +246,17 @@ const AdminPanelStackNavigator = () => {
 	);
 };
 
-// DrawerNavigator
-const Drawer = createDrawerNavigator();
-const DrawerNavigator = () => (
-	<Drawer.Navigator
-		drawerContent={({ navigation, state }) => <Sidebar navigation={navigation} state={state} />}
-		screenOptions={{ swipeEnabled: false }}
-		drawerType='back'
-	>
-		<Drawer.Screen name='ChatsStackNavigator' component={ChatsStackNavigator} />
-		<Drawer.Screen name='ProfileStackNavigator' component={ProfileStackNavigator} />
-		<Drawer.Screen name='SettingsStackNavigator' component={SettingsStackNavigator} />
-		<Drawer.Screen name='AdminPanelStackNavigator' component={AdminPanelStackNavigator} />
-	</Drawer.Navigator>
-);
-
 // BottomTabNavigator
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
+	const state = useNavigationState(state => state)
+	const currentRouteName = getActiveRouteName(state);
+	const tabBarVisible = currentRouteName === 'RoomsListView' || currentRouteName === 'DrawerNavigator'
+
 	return (
-		<Tab.Navigator >
+		<Tab.Navigator    >
 			<Tab.Screen name='ChatsStackNavigator' component={ChatsStackNavigator} options={{
+				tabBarVisible: tabBarVisible,
 				tabBarLabel: I18n.t('Message'),
 				tabBarIcon: ({ size, color }) => (
 					<AntDesignIcon name="message1" color={color} size={size} />

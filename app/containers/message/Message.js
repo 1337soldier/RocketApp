@@ -216,7 +216,6 @@ const MessageTouchable = React.memo((props) => {
 MessageTouchable.displayName = 'MessageTouchable';
 
 MessageTouchable.propTypes = {
-	author: PropTypes.object,
 	hasError: PropTypes.bool,
 	isInfo: PropTypes.bool,
 	isTemp: PropTypes.bool,
@@ -224,7 +223,6 @@ MessageTouchable.propTypes = {
 };
 
 Message.propTypes = {
-	author: PropTypes.object,
 	isThreadReply: PropTypes.bool,
 	isThreadSequential: PropTypes.bool,
 	isInfo: PropTypes.bool,

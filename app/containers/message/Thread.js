@@ -34,9 +34,9 @@ const Thread = React.memo(({
 
 Thread.propTypes = {
 	msg: PropTypes.string,
-	tcount: PropTypes.string,
+	tcount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-	tlm: PropTypes.string,
+	tlm: PropTypes.any,
 	customThreadTimeFormat: PropTypes.string,
 	isThreadRoom: PropTypes.bool
 };
