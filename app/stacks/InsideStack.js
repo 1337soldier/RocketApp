@@ -254,7 +254,7 @@ const BottomTabNavigator = () => {
 	const tabBarVisible = currentRouteName === 'RoomsListView' || currentRouteName === 'DrawerNavigator'
 
 	return (
-		<Tab.Navigator    >
+		<Tab.Navigator >
 			<Tab.Screen name='ChatsStackNavigator' component={ChatsStackNavigator} options={{
 				tabBarVisible: tabBarVisible,
 				tabBarLabel: I18n.t('Message'),
