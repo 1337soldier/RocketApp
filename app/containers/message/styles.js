@@ -15,7 +15,7 @@ export default StyleSheet.create({
 	},
 	messageContent: {
 		backgroundColor: '#fff',
-		padding: 5,
+		padding: 10,
 		borderRadius: 10,
 	},
 	backgroundBlue: {

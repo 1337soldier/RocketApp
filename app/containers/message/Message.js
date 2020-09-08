@@ -46,7 +46,6 @@ const ContentContainer = ({ children, ...props }) => {
 		: { alignSelf: "flex-start", marginRight: 48 }
 
 	return <View style={[styles.flex, flexRow]}>{children}</View>
-
 }
 
 
@@ -65,12 +64,6 @@ const MessageInnerContainer = (props) => {
 			{props.children}
 		</View>
 
-	)
-}
-
-const MessageStatus = (props) => {
-	return (
-		<View><Text>dcm</Text></View>
 	)
 }
 
@@ -126,7 +119,6 @@ const MessageInner = React.memo((props) => {
 		);
 	}
 
-
 	return (
 		<React.Fragment>
 			<Content {...props} />
@@ -175,6 +167,7 @@ const Message = React.memo((props) => {
 
 		return (
 			<Container restProps={restProps}>
+				<ReplyMessage {...props} />
 				<Content {...props} />
 			</Container>
 
