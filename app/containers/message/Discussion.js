@@ -56,7 +56,7 @@ const Discussion = React.memo(({
 Discussion.propTypes = {
 	msg: PropTypes.string,
 	dcount: PropTypes.number,
-	dlm: PropTypes.string,
+	dlm: PropTypes.any,
 	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 
 };

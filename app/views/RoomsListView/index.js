@@ -351,20 +351,13 @@ class RoomsListView extends React.Component {
 				testID='rooms-list-view-search'
 			/>)}
 			</CustomHeaderButtons>,
-			headerTitle: () => <RoomsListHeaderView />,
+			headerTitle: () => <RoomsListHeaderView initSearching={this.initSearching} />,
 			headerTitleContainerStyle: {
 				left: headerTitlePosition.left,
 				right: headerTitlePosition.right
 			},
 			headerRight: () => (searching ? null : (
 				<CustomHeaderButtons >
-					<Item
-						title='phone'
-						iconName='phone'
-						buttonStyle={{ color: "white" }}
-						onPress={this.goToNewMessage}
-						testID='rooms-list-view-create-channel'
-					/>
 					<Item
 						title='add'
 						iconName='add'

@@ -46,6 +46,7 @@ import CommandsPreview from './CommandsPreview';
 import { getUserSelector } from '../../selectors/login';
 import Navigation from '../../lib/Navigation';
 import { withActionSheet } from '../ActionSheet';
+import { CustomIcon } from "../../lib/Icons"
 
 const imagePickerConfig = {
 	cropping: true,
@@ -87,8 +88,7 @@ class MessageBox extends Component {
 		editRequest: PropTypes.func.isRequired,
 		onSubmit: PropTypes.func.isRequired,
 		typing: PropTypes.func,
-		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-		,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 		replyCancel: PropTypes.func,
 		showSend: PropTypes.bool,
 		navigation: PropTypes.object,
@@ -862,6 +862,15 @@ class MessageBox extends Component {
 			/>
 		);
 
+		const renderChooseImage = (
+			<CustomIcon
+				size={22}
+				onPress={this.chooseFromLibrary}
+				color={themes[theme].tintColor}
+				name="image" />
+		);
+
+
 		const commandsPreviewAndMentions = !recording ? (
 			<>
 				<CommandsPreview commandPreview={commandPreview} showCommandPreview={showCommandPreview} />
@@ -933,6 +942,7 @@ class MessageBox extends Component {
 					>
 						{textInputAndButtons}
 						{recordAudio}
+						{/* {renderChooseImage} */}
 					</View>
 				</View>
 				{children}
