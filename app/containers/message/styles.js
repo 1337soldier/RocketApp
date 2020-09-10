@@ -1,7 +1,9 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 import sharedStyles from "../../views/Styles";
 import { isTablet } from "../../utils/deviceInfo";
+
+const { width } = Dimensions.get('window')
 
 export default StyleSheet.create({
 	root: {
@@ -110,6 +112,7 @@ export default StyleSheet.create({
 	},
 	imageContainer: {
 		// flex: 1,
+		width: width / 1.6,
 		flexDirection: "column",
 		borderRadius: 4
 	},
