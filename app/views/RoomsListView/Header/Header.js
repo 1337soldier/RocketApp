@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 const Header = React.memo(({
-	connecting, connected, isFetching, serverName, server, showServerDropdown, showSearchHeader, theme, onSearchChangeText, onPress
+	initSearching, connecting, connected, isFetching, serverName, server, showServerDropdown, showSearchHeader, theme, onSearchChangeText, onPress
 }) => {
 	const titleColorStyle = { color: themes[theme].headerTitleColor };
 	const isLight = theme === 'light';
@@ -48,8 +48,7 @@ const Header = React.memo(({
 			<View style={styles.container}>
 				<TextInput
 					autoFocus
-					style={[styles.title, isLight && titleColorStyle, { fontSize: titleFontSize }]}
-					placeholder='Search'
+					placeholder={I18n.t('SearchPlaceHolder')}
 					onChangeText={onSearchChangeText}
 					theme={theme}
 					testID='rooms-list-view-search-input'
@@ -68,9 +67,10 @@ const Header = React.memo(({
 		subtitle = server?.replace(/(^\w+:|^)\/\//, '');
 	}
 	return (
-		<View style={styles.container}>
-			<Text style={{ color: '#ccc' }}>{I18n.t('SearchPlaceHolder')}</Text>
-
+		<View>
+			<TouchableOpacity onPress={initSearching} style={styles.container}>
+				<Text style={[titleColorStyle]}>{I18n.t('SearchPlaceHolder')}</Text>
+			</TouchableOpacity>
 		</View>
 	);
 });
