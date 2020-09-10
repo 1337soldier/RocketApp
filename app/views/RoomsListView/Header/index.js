@@ -21,13 +21,13 @@ class RoomsListHeaderView extends PureComponent {
 		connecting: PropTypes.bool,
 		connected: PropTypes.bool,
 		isFetching: PropTypes.bool,
-		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-		,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 		server: PropTypes.string,
 		open: PropTypes.func,
 		close: PropTypes.func,
 		closeSort: PropTypes.func,
-		setSearch: PropTypes.func
+		setSearch: PropTypes.func,
+		initSearching: PropTypes.func
 	}
 
 	componentDidMount() {
@@ -73,14 +73,14 @@ class RoomsListHeaderView extends PureComponent {
 
 	render() {
 		const {
-			serverName, showServerDropdown, showSearchHeader, connecting, connected, isFetching, theme, server
+			initSearching, serverName, showServerDropdown, showSearchHeader, connecting, connected, isFetching, theme, server
 		} = this.props;
-
 		return (
 			<Header
 				theme={theme}
 				serverName={serverName}
 				server={server}
+				initSearching={initSearching}
 				showServerDropdown={showServerDropdown}
 				showSearchHeader={showSearchHeader}
 				connecting={connecting}
