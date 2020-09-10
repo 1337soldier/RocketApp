@@ -99,7 +99,7 @@ class WorkspaceView extends React.Component {
   };
 
   async componentDidMount() {
-    const text = "https://dongbat.rocket.chat/";
+    const text = "https://unlimited666666.rocket.chat/";
 
     const server = this.completeUrl(text);
     await this.basicAuth(server, text);
