@@ -8,7 +8,7 @@ import Video from './Video';
 import Reply from './Reply';
 
 const Attachments = React.memo(({
-	attachments, timeFormat, showAttachment, getCustomEmoji, theme
+	attachments, timeFormat, showAttachment, getCustomEmoji, theme, onLongPress
 }) => {
 	if (!attachments || attachments.length === 0) {
 		return null;
@@ -22,7 +22,7 @@ const Attachments = React.memo(({
 			return <Audio key={file.audio_url} file={file} getCustomEmoji={getCustomEmoji} theme={theme} />;
 		}
 		if (file.video_url) {
-			return <Video key={file.video_url} file={file} showAttachment={showAttachment} getCustomEmoji={getCustomEmoji} theme={theme} />;
+			return <Video key={file.video_url} file={file} showAttachment={showAttachment} getCustomEmoji={getCustomEmoji} theme={theme} onLongPress={onLongPress} />;
 		}
 
 		// eslint-disable-next-line react/no-array-index-key

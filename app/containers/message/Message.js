@@ -56,11 +56,14 @@ const MessageInnerContainer = (props) => {
 		borderColor: "#ccc",
 		paddingHorizontal: 10
 	} : {
+			backgroundColor: '#fff',
 			marginTop: 8,
 			marginLeft: 10
 		}
+
+	const isAttachment = props.attachments && props.attachments.length === 0
 	return (
-		<View style={[styles.messageContent, authorStyle]}>
+		<View style={[styles.messageContent, authorStyle, !isAttachment && { backgroundColor: "transparent", borderColor: "transparent" }]}>
 			{props.children}
 		</View>
 
@@ -188,20 +191,18 @@ Message.displayName = 'Message';
 const MessageTouchable = React.memo((props) => {
 	if (props.hasError) {
 		return (
-			<View>
-				<Message {...props} />
-			</View>
-
+			<Message {...props} />
 		);
 	}
 
 	const { onLongPress } = useContext(MessageContext);
+	const restProps = { ...props, onLongPress }
 	return (
 		<Touchable
 			onLongPress={onLongPress}
 			disabled={props.isInfo || props.archived || props.isTemp}
 		>
-			<Message {...props} />
+			<Message {...restProps} />
 		</Touchable>
 
 	);

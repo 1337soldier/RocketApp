@@ -21,6 +21,7 @@ import RegisterView from "../views/RegisterView";
 import LegalView from "../views/LegalView";
 import AuthenticationWebView from "../views/AuthenticationWebView";
 import { ROOT_OUTSIDE } from "../actions/app";
+import OTPView from "../views/OTPView";
 
 // Outside
 const Outside = createStackNavigator();
@@ -52,6 +53,11 @@ const _OutsideStack = ({ root }) => {
         component={WorkspaceView}
         options={WorkspaceView.navigationOptions}
       />
+      {/* <Outside.Screen
+        name="OTP"
+        component={OTPView}
+        options={WorkspaceView.navigationOptions}
+      /> */}
       <Outside.Screen
         name="LoginView"
         component={LoginView}

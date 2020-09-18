@@ -27,8 +27,7 @@ class WorkspaceView extends React.Component {
 
   static propTypes = {
     navigation: PropTypes.object,
-    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-    ,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     Site_Name: PropTypes.string,
     Site_Url: PropTypes.string,
     server: PropTypes.string,
@@ -99,7 +98,7 @@ class WorkspaceView extends React.Component {
   };
 
   async componentDidMount() {
-    const text = "https://unlimited666666.rocket.chat/";
+    const text = "http://localhost:3000";
 
     const server = this.completeUrl(text);
     await this.basicAuth(server, text);
@@ -168,9 +167,6 @@ class WorkspaceView extends React.Component {
                 <ServerAvatar
                   theme={theme}
                   url={server}
-                  image={
-                    Assets_favicon_512?.url ?? Assets_favicon_512?.defaultUrl
-                  }
                 />
                 <Text
                   style={[
@@ -191,30 +187,31 @@ class WorkspaceView extends React.Component {
               </React.Fragment>
             ) : (
                 <Progress.Pie
-                  style={{ marginVertical: 80 }}
+                  style={{ marginVertical: 80, alignSelf: "center" }}
                   progress={0.2}
                   size={50}
                   indeterminate={true}
                 />
               )}
+            <Button
+              disabled={!server}
+              title={I18n.t("Login")}
+              type="primary"
+              onPress={this.login}
+              theme={theme}
+              testID="workspace-view-login"
+            />
+            <Button
+              title={I18n.t("Create_account")}
+              type="secondary"
+              backgroundColor={themes[theme].chatComponentBackground}
+              onPress={this.register}
+              theme={theme}
+              testID="workspace-view-register"
+            />
           </View>
 
-          <Button
-            disabled={!server}
-            title={I18n.t("Login")}
-            type="primary"
-            onPress={this.login}
-            theme={theme}
-            testID="workspace-view-login"
-          />
-          <Button
-            title={I18n.t("Create_account")}
-            type="secondary"
-            backgroundColor={themes[theme].chatComponentBackground}
-            onPress={this.register}
-            theme={theme}
-            testID="workspace-view-register"
-          />
+
         </FormContainerInner>
       </FormContainer>
     );

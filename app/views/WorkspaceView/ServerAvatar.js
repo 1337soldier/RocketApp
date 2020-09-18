@@ -59,7 +59,6 @@ const Fallback = ({ theme, initial }) => (
 
 const ServerAvatar = React.memo(({ theme, url, image }) => (
   <View style={styles.container}>
-    {/* {image && ( */}
     <ImageProgress
       style={[styles.image, { borderColor: themes[theme].borderColor }]}
       source={{ uri: `${url}/${image}` }}
@@ -70,21 +69,18 @@ const ServerAvatar = React.memo(({ theme, url, image }) => (
       }}
       renderError={() => <Fallback theme={theme} initial={getInitial(url)} />}
     />
-    {/* )} */}
   </View>
 ));
 
 ServerAvatar.propTypes = {
-  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-  ,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   url: PropTypes.string,
   image: PropTypes.string,
 };
 ServerAvatar.displayName = "ServerAvatar";
 
 Fallback.propTypes = {
-  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-  ,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   initial: PropTypes.string,
 };
 

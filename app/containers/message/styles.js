@@ -16,7 +16,6 @@ export default StyleSheet.create({
 		flexDirection: "column",
 	},
 	messageContent: {
-		backgroundColor: '#fff',
 		padding: 10,
 		borderRadius: 10,
 	},

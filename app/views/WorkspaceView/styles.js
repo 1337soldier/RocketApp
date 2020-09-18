@@ -6,12 +6,14 @@ export default StyleSheet.create({
 	serverName: {
 		...sharedStyles.textSemibold,
 		fontSize: 16,
-		marginBottom: 4
+		marginBottom: 4,
+		alignSelf: "center"
 	},
 	serverUrl: {
 		...sharedStyles.textRegular,
 		fontSize: 14,
-		marginBottom: 24
+		marginBottom: 24,
+		alignSelf: "center"
 	},
 	registrationText: {
 		fontSize: 14,
@@ -19,6 +21,8 @@ export default StyleSheet.create({
 		...sharedStyles.textRegular
 	},
 	alignItemsCenter: {
-		alignItems: 'center'
+		justifyContent: "center",
+		marginLeft: 30,
+		marginRight: 30
 	}
 });

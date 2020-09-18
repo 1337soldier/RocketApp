@@ -66,8 +66,7 @@ class LoginView extends React.Component {
 		isFetching: PropTypes.bool,
 		error: PropTypes.object,
 		failure: PropTypes.bool,
-		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-		,
+		theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 		loginRequest: PropTypes.func,
 		inviteLinkToken: PropTypes.string
 	}
