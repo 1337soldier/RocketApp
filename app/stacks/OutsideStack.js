@@ -2,7 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
 import { ThemeContext } from "../theme";
 import {
   defaultHeader,
@@ -15,10 +14,11 @@ import {
 import OnboardingView from "../views/OnboardingView";
 import NewServerView from "../views/NewServerView";
 import WorkspaceView from "../views/WorkspaceView";
-import LoginView from "../views/LoginView";
+import GetOTPView from "../views/GetOTPView";
 import ForgotPasswordView from "../views/ForgotPasswordView";
 import RegisterView from "../views/RegisterView";
 import LegalView from "../views/LegalView";
+import LoginView from "../views/LoginView"
 import AuthenticationWebView from "../views/AuthenticationWebView";
 import { ROOT_OUTSIDE } from "../actions/app";
 import OTPView from "../views/OTPView";
@@ -53,11 +53,17 @@ const _OutsideStack = ({ root }) => {
         component={WorkspaceView}
         options={WorkspaceView.navigationOptions}
       />
-      {/* <Outside.Screen
-        name="OTP"
+      <Outside.Screen
+        name="GetOTPView"
+        component={GetOTPView}
+        options={{ title: 'Login' }}
+      />
+      <Outside.Screen
+        name="OTPView"
         component={OTPView}
-        options={WorkspaceView.navigationOptions}
-      /> */}
+        options={{ title: "OTP" }}
+      />
+
       <Outside.Screen
         name="LoginView"
         component={LoginView}

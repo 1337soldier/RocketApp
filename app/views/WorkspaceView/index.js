@@ -123,7 +123,7 @@ class WorkspaceView extends React.Component {
       });
       return;
     }
-    navigation.navigate("LoginView", { title: Site_Name });
+    navigation.navigate("GetOTPView", { title: Site_Name });
   };
 
   register = () => {
