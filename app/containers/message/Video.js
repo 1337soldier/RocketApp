@@ -38,7 +38,6 @@ const Video = React.memo(({
 	}
 
 	const onPress = () => {
-		console.info(file)
 		if (isTypeSupported(file.video_type)) {
 			return showAttachment(file);
 		}
