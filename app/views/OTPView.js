@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native'
-import { withTheme } from "../../theme"
-import FormContainer, { FormContainerInner } from '../../containers/FormContainer';
-import I18n from '../../i18n';
+import { withTheme } from "../theme"
+import FormContainer, { FormContainerInner } from '../containers/FormContainer';
+import I18n from '../i18n';
 import OTPInputView from "@twotalltotems/react-native-otp-input"
-import { themes } from '../../constants/colors';
-import { getOTP, verifyOTP } from "../../lib/api"
+import { themes } from '../constants/colors';
+import { getOTP, verifyOTP } from "../lib/api"
 import { connect } from 'react-redux'
-import { loginRequest as loginRequestAction } from '../../actions/login';
+import { loginRequest as loginRequestAction } from '../actions/login';
 
 const styles = StyleSheet.create({
   loading: {
@@ -48,15 +48,17 @@ const OTPView = ({ theme, route, navigation, loginRequest }) => {
 
   const onCodeFilled = async (code) => {
     setLoading(true)
-    const result = await verifyOTP({ phone, otp: code })
-    if (result?.data) {
-      const { name } = result?.data?.user
-      try {
-        await loginRequest({ user: `${name}@gmail.com`, password: name });
-      } catch (error) {
+
+    try {
+      const result = await verifyOTP({ phone, otp: code })
+      if (result?.data?.verify) {
         setLoading(false)
-        console.info(error)
+        navigation.navigate('RegisterPasswordView', { phone })
       }
+    } catch (error) {
+      console.info(error)
+      setLoading(false)
+
     }
 
   }

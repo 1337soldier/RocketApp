@@ -71,7 +71,7 @@ class LoginView extends React.Component {
 		inviteLinkToken: PropTypes.string
 	}
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			user: '',
@@ -115,11 +115,10 @@ class LoginView extends React.Component {
 		if (!this.valid()) {
 			return;
 		}
-
 		const { user, password } = this.state;
 		const { loginRequest } = this.props;
 		Keyboard.dismiss();
-		loginRequest({ user, password });
+		loginRequest({ user: `${user}@gmail.com`, password });
 	}
 
 	renderUserForm = () => {
@@ -135,10 +134,10 @@ class LoginView extends React.Component {
 			<>
 				<Text style={[styles.title, sharedStyles.textBold, { color: themes[theme].titleText }]}>{I18n.t('Login')}</Text>
 				<TextInput
-					label='Email or username'
+					label='Phone number: '
 					containerStyle={styles.inputContainer}
-					placeholder={Accounts_EmailOrUsernamePlaceholder || I18n.t('Username_or_email')}
-					keyboardType='email-address'
+					placeholder={Accounts_EmailOrUsernamePlaceholder || I18n.t('PhoneNumber')}
+					keyboardType='number-pad'
 					returnKeyType='next'
 					onChangeText={value => this.setState({ user: value })}
 					onSubmitEditing={() => { this.passwordInput.focus(); }}
@@ -148,7 +147,7 @@ class LoginView extends React.Component {
 					theme={theme}
 				/>
 				<TextInput
-					label='Password'
+					label='Password: '
 					containerStyle={styles.inputContainer}
 					inputRef={(e) => { this.passwordInput = e; }}
 					placeholder={Accounts_PasswordPlaceholder || I18n.t('Password')}

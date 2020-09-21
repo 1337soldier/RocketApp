@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native'
-import { withTheme } from "../../theme"
-import FormContainer, { FormContainerInner } from '../../containers/FormContainer';
-import I18n from '../../i18n';
-import TextInput from '../../containers/TextInput';
-import Button from '../../containers/Button';
+import { withTheme } from "../theme"
+import FormContainer, { FormContainerInner } from '../containers/FormContainer';
+import I18n from '../i18n';
+import TextInput from '../containers/TextInput';
+import Button from '../containers/Button';
 
 const styles = StyleSheet.create({
   inputContainer: {
