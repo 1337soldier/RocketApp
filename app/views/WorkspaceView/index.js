@@ -19,6 +19,7 @@ import { Base64 } from "js-base64";
 import parse from "url-parse";
 import { serverRequest } from "../../actions/server";
 import * as Progress from "react-native-progress";
+import config from "../../../config";
 
 class WorkspaceView extends React.Component {
   static navigationOptions = () => ({
@@ -98,7 +99,7 @@ class WorkspaceView extends React.Component {
   };
 
   async componentDidMount() {
-    const text = "http://localhost:3000";
+    const text = config.ROCKET_CHAT_SERVER;
 
     const server = this.completeUrl(text);
     await this.basicAuth(server, text);
@@ -164,10 +165,7 @@ class WorkspaceView extends React.Component {
           <View style={styles.alignItemsCenter}>
             {server ? (
               <React.Fragment>
-                <ServerAvatar
-                  theme={theme}
-                  url={server}
-                />
+                <ServerAvatar theme={theme} url={server} />
                 <Text
                   style={[
                     styles.serverName,
@@ -186,13 +184,13 @@ class WorkspaceView extends React.Component {
                 </Text>
               </React.Fragment>
             ) : (
-                <Progress.Pie
-                  style={{ marginVertical: 80, alignSelf: "center" }}
-                  progress={0.2}
-                  size={50}
-                  indeterminate={true}
-                />
-              )}
+              <Progress.Pie
+                style={{ marginVertical: 80, alignSelf: "center" }}
+                progress={0.2}
+                size={50}
+                indeterminate={true}
+              />
+            )}
             <Button
               disabled={!server}
               title={I18n.t("Login")}
@@ -210,8 +208,6 @@ class WorkspaceView extends React.Component {
               testID="workspace-view-register"
             />
           </View>
-
-
         </FormContainerInner>
       </FormContainer>
     );

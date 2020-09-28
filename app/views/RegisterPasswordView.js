@@ -5,7 +5,7 @@ import { withTheme } from '../theme'
 import TextInput from '../containers/TextInput';
 import I18n from "../i18n"
 import sharedStyles from './Styles';
-import { themes } from '../constants/colors';
+// import { themes } from '../constants/colors';
 import Button from '../containers/Button';
 import { createUser } from '../lib/api'
 import { connect } from 'react-redux'
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
 const RegisterPasswordView = ({ theme, loginRequest, route }) => {
     const { phone } = route.params;
     const [password, setPassword] = useState()
+    const [username, setUsername] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
     const [loading, setLoading] = useState(false)
 
@@ -52,8 +53,8 @@ const RegisterPasswordView = ({ theme, loginRequest, route }) => {
         if (confirmPassword === password) {
             setLoading(true)
             try {
-                const result = await createUser({ phone, password })
-                if (result?.data?.created) {
+                const result = await createUser({ phone, username, password })
+                if (result) {
                     const param = {
                         user: `${phone}@gmail.com`,
                         password
@@ -77,6 +78,18 @@ const RegisterPasswordView = ({ theme, loginRequest, route }) => {
     return (
         <FormContainer theme={theme}>
             <FormContainerInner>
+                <TextInput
+                    label='Username: '
+                    containerStyle={styles.inputContainer}
+                    placeholder={I18n.t('Username')}
+                    returnKeyType='next'
+                    onChangeText={value => setUsername(value)}
+                    onSubmitEditing={() => { this.newPassword.focus(); }}
+                    testID='login-view-username'
+                    textContentType='username'
+                    autoCompleteType='username'
+                    theme={theme}
+                />
                 <TextInput
                     label='New Password:'
                     containerStyle={styles.inputContainer}

@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
 const GetOTPView = ({ theme, navigation }) => {
   const [phone, setPhone] = useState()
 
-
   return (
     <FormContainer theme={theme} testID='otp-view'>
       <FormContainerInner>
