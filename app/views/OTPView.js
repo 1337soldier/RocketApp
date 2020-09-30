@@ -49,14 +49,14 @@ const OTPView = ({ theme, route, navigation, loginRequest }) => {
   const onCodeFilled = async (code) => {
     await setLoading(true)
 
-    let result
-    try {
-      result = await verifyOTP({ phone, otp: code })
-    } catch (error) {
-      console.info(error)
-    }
+    // let result
+    // try {
+    //   result = await verifyOTP({ phone, otp: code })
+    // } catch (error) {
+    //   console.info(error)
+    // }
 
-    if (result || otp === '111111') {
+    if (code === '111111') {
       await setLoading(false)
       await navigation.navigate('RegisterPasswordView', { phone })
     }

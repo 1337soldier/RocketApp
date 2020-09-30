@@ -87,7 +87,7 @@ class ForgotPasswordView extends React.Component {
 			<FormContainer theme={theme} testID='forgot-password-view'>
 				<FormContainerInner>
 					<Text style={[sharedStyles.loginTitle, sharedStyles.textBold, { color: themes[theme].titleText }]}>{I18n.t('Forgot_password')}</Text>
-					<TextInput
+					{/* <TextInput
 						autoFocus
 						placeholder={I18n.t('Email')}
 						keyboardType='email-address'
@@ -97,7 +97,7 @@ class ForgotPasswordView extends React.Component {
 						testID='forgot-password-view-email'
 						containerStyle={sharedStyles.inputLastChild}
 						theme={theme}
-					/>
+					/> */}
 					<Button
 						title={I18n.t('Reset_password')}
 						type='primary'

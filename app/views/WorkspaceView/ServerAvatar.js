@@ -48,11 +48,11 @@ const Fallback = ({ theme, initial }) => (
     style={[
       styles.container,
       styles.fallback,
-      { backgroundColor: themes[theme].dangerColor },
+      { backgroundColor: themes[theme].tintColor },
     ]}
   >
     <Text style={[styles.initial, { color: themes[theme].buttonText }]}>
-      {initial}
+      CDC
     </Text>
   </View>
 );

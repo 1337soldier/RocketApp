@@ -164,33 +164,15 @@ class WorkspaceView extends React.Component {
         <FormContainerInner>
           <View style={styles.alignItemsCenter}>
             {server ? (
-              <React.Fragment>
-                <ServerAvatar theme={theme} url={server} />
-                <Text
-                  style={[
-                    styles.serverName,
-                    { color: themes[theme].titleText },
-                  ]}
-                >
-                  {Site_Name}
-                </Text>
-                <Text
-                  style={[
-                    styles.serverUrl,
-                    { color: themes[theme].auxiliaryText },
-                  ]}
-                >
-                  {Site_Url}
-                </Text>
-              </React.Fragment>
+              <ServerAvatar theme={theme} url={server} />
             ) : (
-              <Progress.Pie
-                style={{ marginVertical: 80, alignSelf: "center" }}
-                progress={0.2}
-                size={50}
-                indeterminate={true}
-              />
-            )}
+                <Progress.Pie
+                  style={{ marginVertical: 80, alignSelf: "center" }}
+                  progress={0.2}
+                  size={50}
+                  indeterminate={true}
+                />
+              )}
             <Button
               disabled={!server}
               title={I18n.t("Login")}

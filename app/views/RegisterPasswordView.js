@@ -46,29 +46,39 @@ const RegisterPasswordView = ({ theme, loginRequest, route }) => {
     const { phone } = route.params;
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
-    const [confirmPassword, setConfirmPassword] = useState()
+    const [confirmPassword, setConfirmPassword] = useState(null)
     const [loading, setLoading] = useState(false)
 
     const onSubmit = async () => {
+        if (!username || !password || !confirmPassword) {
+            alert('Missing field required')
+            return
+        }
+
         if (confirmPassword === password) {
-            setLoading(true)
+
             try {
+                setLoading(true)
                 const result = await createUser({ phone, username, password })
+                console.info(result)
                 if (result) {
                     const param = {
                         user: `${phone}@gmail.com`,
                         password
                     }
-                    const result = await loginRequest(param)
-                    if (result) {
+                    const login = await loginRequest(param)
+                    console.info(login)
+                    if (login) {
                         setLoading(false)
                     }
                 }
 
             } catch (error) {
                 console.info(error)
-                setLoading(false)
             }
+            setLoading(false)
+
+
         }
         else {
             alert("The password confirmation does not match.")
