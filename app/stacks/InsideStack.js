@@ -34,6 +34,10 @@ import QueueListView from '../views/QueueListView';
 // Profile Stack
 import ProfileView from '../views/ProfileView';
 
+
+//Contact Stack 
+import ContacView from "../views/ContacView"
+
 // Settings Stack
 import SettingsView from '../views/SettingsView';
 import LanguageView from '../views/LanguageView';
@@ -194,6 +198,23 @@ const ProfileStackNavigator = () => {
 	);
 };
 
+
+// ProfileStackNavigator
+const ContactStack = createStackNavigator();
+const ContactStackNavigator = () => {
+	const { theme } = React.useContext(ThemeContext);
+	return (
+		<ContactStack.Navigator screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation }}>
+			<ProfileStack.Screen
+				name='ProfileView'
+				component={ContacView}
+				options={ContacView.navigationOptions}
+			/>
+		</ContactStack.Navigator>
+	);
+};
+
+
 // SettingsStackNavigator
 const SettingsStack = createStackNavigator();
 const SettingsStackNavigator = () => {
@@ -260,6 +281,12 @@ const BottomTabNavigator = () => {
 				tabBarLabel: I18n.t('Message'),
 				tabBarIcon: ({ size, color }) => (
 					<AntDesignIcon name="message1" color={color} size={size} />
+				),
+			}} />
+			<Tab.Screen name='ContactStackNavigator' component={ContactStackNavigator} options={{
+				tabBarLabel: I18n.t('Contact'),
+				tabBarIcon: ({ size, color }) => (
+					<AntDesignIcon name="contacts" color={color} size={size} />
 				),
 			}} />
 			<Tab.Screen name='ProfileStackNavigator' component={ProfileStackNavigator} options={{

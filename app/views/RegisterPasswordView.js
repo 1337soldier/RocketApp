@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     inputContainer: {
-        marginVertical: 16
+        marginVertical: 16,
     },
     bottomContainer: {
         flexDirection: 'column',
@@ -43,20 +43,30 @@ const styles = StyleSheet.create({
 });
 
 const RegisterPasswordView = ({ theme, loginRequest, route }) => {
+    const errorInitital = { username: {}, password: {}, confirmPassword: {} }
     const { phone } = route.params;
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
     const [confirmPassword, setConfirmPassword] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(errorInitital)
 
     const onSubmit = async () => {
         if (!username || !password || !confirmPassword) {
-            alert('Missing field required')
+            const errParams = { error: true, reason: "Missing field required" }
+            setError({ username: errParams, password: errParams, confirmPassword: errParams })
+            // alert('Missing field required')
             return
         }
 
-        if (confirmPassword === password) {
+        else if (confirmPassword !== password) {
+            const errParams = { error: true, reason: "The password confirmation does not match." }
+            setError(err => ({ ...err, password: errParams, confirmPassword: errParams }))
+            // alert("The password confirmation does not match.")
+        }
 
+        else if (confirmPassword === password) {
+            setError(errorInitital)
             try {
                 setLoading(true)
                 const result = await createUser({ phone, username, password })
@@ -78,19 +88,18 @@ const RegisterPasswordView = ({ theme, loginRequest, route }) => {
             }
             setLoading(false)
 
+        }
 
-        }
-        else {
-            alert("The password confirmation does not match.")
-        }
     }
 
+    const containerStyle = [styles.inputContainer, { borderColor: "red" }]
     return (
         <FormContainer theme={theme}>
             <FormContainerInner>
                 <TextInput
+                    error={error.username}
                     label='Username: '
-                    containerStyle={styles.inputContainer}
+                    containerStyle={[containerStyle, {}]}
                     placeholder={I18n.t('Username')}
                     returnKeyType='next'
                     onChangeText={value => setUsername(value)}
@@ -101,8 +110,9 @@ const RegisterPasswordView = ({ theme, loginRequest, route }) => {
                     theme={theme}
                 />
                 <TextInput
+                    error={error.password}
                     label='New Password:'
-                    containerStyle={styles.inputContainer}
+                    containerStyle={containerStyle}
                     inputRef={(e) => { this.newPassword = e; }}
                     placeholder={I18n.t('Password')}
                     returnKeyType='send'
@@ -115,8 +125,9 @@ const RegisterPasswordView = ({ theme, loginRequest, route }) => {
                     theme={theme}
                 />
                 <TextInput
+                    error={error.confirmPassword}
                     label='Confirm Password:'
-                    containerStyle={styles.inputContainer}
+                    containerStyle={containerStyle}
                     inputRef={(e) => { this.confirmPassword = e; }}
                     placeholder={I18n.t('Password')}
                     returnKeyType='send'

@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
 const OTPView = ({ theme, route, navigation, loginRequest }) => {
   const { phone } = route.params;
   const [loading, setLoading] = useState(false)
+  const [inValidCode, setValidCode] = useState(false)
+
   const reSend = async () => {
     try {
       await getOTP()
@@ -47,7 +49,7 @@ const OTPView = ({ theme, route, navigation, loginRequest }) => {
   }
 
   const onCodeFilled = async (code) => {
-    await setLoading(true)
+    setLoading(true)
 
     // let result
     // try {
@@ -57,10 +59,14 @@ const OTPView = ({ theme, route, navigation, loginRequest }) => {
     // }
 
     if (code === '111111') {
-      await setLoading(false)
+      setLoading(true)
+      setValidCode(false)
       await navigation.navigate('RegisterPasswordView', { phone })
     }
-
+    if (code !== '111111') {
+      setValidCode(true)
+      setLoading(false)
+    }
   }
 
   const LoadingView = () => {
@@ -92,6 +98,11 @@ const OTPView = ({ theme, route, navigation, loginRequest }) => {
           codeInputHighlightStyle={styles.underlineStyleHighLighted}
           onCodeFilled={onCodeFilled}
         />
+        {inValidCode && <Text style={{
+          textAlign: "center",
+          paddingBottom: 24,
+          color: "red"
+        }}>Invalid Code</Text>}
         {loading ? <LoadingView /> : <ResendButton />}
       </FormContainerInner>
     </FormContainer>

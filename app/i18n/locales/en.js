@@ -78,6 +78,7 @@ export default {
 	'error-user-registration-disabled': 'User registration is disabled',
 	'error-user-registration-secret': 'User registration is only allowed via Secret URL',
 	'error-you-are-last-owner': 'You are the last owner. Please set new owner before leaving the room.',
+	Contact: "Contact",
 	Username: "Username",
 	PhoneNumber: "Phone number",
 	otpDescription: "We have sent an OTP to {{phone}}. \n Please, enter it below.",
