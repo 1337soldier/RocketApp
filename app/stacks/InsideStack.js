@@ -206,7 +206,7 @@ const ContactStackNavigator = () => {
 	return (
 		<ContactStack.Navigator screenOptions={{ ...defaultHeader, ...themedHeader(theme), ...StackAnimation }}>
 			<ProfileStack.Screen
-				name='ProfileView'
+				name='ContactView'
 				component={ContacView}
 				options={ContacView.navigationOptions}
 			/>

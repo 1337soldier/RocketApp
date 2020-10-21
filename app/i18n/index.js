@@ -27,7 +27,7 @@ i18n.translations = {
 	nl,
 	it,
 	ja,
-	vi
+	// vi
 };
 i18n.fallbacks = true;
 

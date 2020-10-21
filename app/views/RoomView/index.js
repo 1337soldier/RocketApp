@@ -97,7 +97,7 @@ class RoomView extends React.Component {
 		insets: PropTypes.object
 	};
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		console.time(`${this.constructor.name} init`);
 		console.time(`${this.constructor.name} mount`);
@@ -351,6 +351,7 @@ class RoomView extends React.Component {
 					t={t}
 					navigation={navigation}
 					toggleFollowThread={this.toggleFollowThread}
+					goRoomActionsView={this.goRoomActionsView}
 				/>
 			)
 		});

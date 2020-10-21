@@ -7,7 +7,7 @@ AntDesignIcon.loadFont();
 
 import icoMoonConfig from './selection.json';
 
-const CustomIcon = createIconSetFromIcoMoon(
+let CustomIcon = createIconSetFromIcoMoon(
 	icoMoonConfig,
 	'custom',
 	'custom.ttf'

@@ -8,7 +8,7 @@ const getOTP = async ({ }) => await server.post('/get-otp')
 
 const adminLogin = async () => {
     try {
-        const result = await rocketchat.post(`/api/v1/login`, { user: "6969vietnam@gmail.com", password: "abc12345" })
+        const result = await rocketchat.post(`/api/v1/login`, { user: "huyhomie66@gmail.com", password: "Huykevil58" })
         return result?.data?.data
     } catch (error) {
         console.info(error)
@@ -16,7 +16,6 @@ const adminLogin = async () => {
 }
 
 const create = async ({ name, email, password, username, userId, authToken }) => {
-    console.info('cai dcmafnas')
     try {
 
         const headers = {

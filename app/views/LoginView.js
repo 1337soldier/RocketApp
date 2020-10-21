@@ -118,7 +118,7 @@ class LoginView extends React.Component {
 		const { user, password } = this.state;
 		const { loginRequest } = this.props;
 		Keyboard.dismiss();
-		loginRequest({ user: `${user}@gmail.com`, password });
+		loginRequest({ user, password });
 	}
 
 	renderUserForm = () => {
@@ -131,13 +131,11 @@ class LoginView extends React.Component {
 		}
 
 		return (
-			<>
-				<Text style={[styles.title, sharedStyles.textBold, { color: themes[theme].titleText }]}>{I18n.t('Login')}</Text>
+			<React.Fragment>
 				<TextInput
-					label='Phone number: '
+					label={`${I18n.t('Username')}:`}
 					containerStyle={styles.inputContainer}
-					placeholder={Accounts_EmailOrUsernamePlaceholder || I18n.t('PhoneNumber')}
-					keyboardType='number-pad'
+					placeholder={I18n.t('Username')}
 					returnKeyType='next'
 					onChangeText={value => this.setState({ user: value })}
 					onSubmitEditing={() => { this.passwordInput.focus(); }}
@@ -192,7 +190,7 @@ class LoginView extends React.Component {
 						</Text>
 					</View>
 				) : (<Text style={[styles.registerDisabled, { color: themes[theme].auxiliaryText }]}>{Accounts_RegistrationForm_LinkReplacementText}</Text>)}
-			</>
+			</React.Fragment>
 		);
 	}
 

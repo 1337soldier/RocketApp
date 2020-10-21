@@ -56,7 +56,7 @@ class RoomActionsView extends React.Component {
 
 	}
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		this.mounted = false;
 		const room = props.route.params?.room;
@@ -272,9 +272,6 @@ class RoomActionsView extends React.Component {
 				testID: 'room-actions-info'
 			}],
 			renderItem: this.renderRoomInfo
-		}, {
-			data: jitsiActions,
-			renderItem: this.renderItem
 		}, {
 			data: [
 				{

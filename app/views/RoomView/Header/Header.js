@@ -160,8 +160,7 @@ Header.propTypes = {
 	prid: PropTypes.string,
 	tmid: PropTypes.string,
 	status: PropTypes.string,
-	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-	,
+	theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	usersTyping: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 	connecting: PropTypes.bool,
 	roomUserId: PropTypes.string,

@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { CustomHeaderButtons, Item } from '../../../containers/HeaderButton';
+import { FeatherIcon } from '../../../lib/Icons'
 import database from '../../../lib/database';
 import { getUserSelector } from '../../../selectors/login';
 import { logEvent, events } from '../../../utils/log';
+import RocketChat from "../../../lib/rocketchat"
 
 class RightButtonsContainer extends React.PureComponent {
 	static propTypes = {
@@ -16,10 +18,11 @@ class RightButtonsContainer extends React.PureComponent {
 		tmid: PropTypes.string,
 		navigation: PropTypes.object,
 		isMasterDetail: PropTypes.bool,
-		toggleFollowThread: PropTypes.func
+		toggleFollowThread: PropTypes.func,
+		goRoomActionsView: PropTypes.func
 	};
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			isFollowingThread: true
@@ -70,6 +73,10 @@ class RightButtonsContainer extends React.PureComponent {
 		}
 	}
 
+	goVideoCall = () => RocketChat.callJitsi(this.props.rid)
+
+	goAudioCall = () => RocketChat.callJitsi(this.props.rid, true)
+
 	goSearchView = () => {
 		logEvent(events.ROOM_GO_SEARCH);
 		const {
@@ -111,8 +118,9 @@ class RightButtonsContainer extends React.PureComponent {
 			);
 		}
 		return (
-			<CustomHeaderButtons>
-				{threadsEnabled ? (
+			<CustomHeaderButtons
+			>
+				{/* {threadsEnabled ? (
 					<Item
 						title='threads'
 						buttonStyle={{ color: 'white' }}
@@ -120,14 +128,36 @@ class RightButtonsContainer extends React.PureComponent {
 						onPress={this.goThreadsView}
 						testID='room-view-header-threads'
 					/>
-				) : null}
+				) : null} */}
 				<Item
+					title='audio call'
+					buttonStyle={{ color: 'white' }}
+					iconName='phone'
+					onPress={this.goAudioCall}
+					testID='room-view-audio-call'
+				/>
+				<Item
+					title='video call'
+					buttonStyle={{ color: 'white' }}
+					iconName='camera'
+					onPress={this.goVideoCall}
+					testID='room-view-video-call'
+				/>
+				{/* <Item
 					title='search'
 					buttonStyle={{ color: 'white' }}
 					iconName='search'
 					onPress={this.goSearchView}
 					testID='room-view-search'
+				/> */}
+				<Item
+					title='menu'
+					buttonStyle={{ color: 'white' }}
+					iconName='hamburguer'
+					onPress={this.props.goRoomActionsView}
+					testID='room-view-menu'
 				/>
+
 			</CustomHeaderButtons>
 		);
 	}
