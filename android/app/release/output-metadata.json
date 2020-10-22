@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "chat.rocket.reactnative",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 999999999,
+      "versionName": "4.11.0",
+      "enabled": true,
+      "outputFile": "app-release.apk"
+    }
+  ]
+}
